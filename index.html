@@ -109,19 +109,30 @@
     .screen.active { display: flex; flex-direction: column; align-items: center; }
 
     /* ========= START SCREEN ========= */
-    .start-icon {
-      margin-bottom: 24px;
-      animation: bounce 2s ease-in-out infinite;
-      color: var(--lime);
+    .start-meme {
+      position: relative;
+      width: clamp(200px, 60vw, 300px);
+      margin-bottom: 28px;
+      border-radius: 12px;
+      overflow: hidden;
+      border: 2px solid rgba(170,249,82,0.3);
+      box-shadow: 0 0 40px rgba(170,249,82,0.15), 0 8px 32px rgba(0,0,0,0.4);
     }
-    .start-icon svg {
-      width: 72px;
-      height: 72px;
-      stroke-width: 1.5;
+    .start-meme img {
+      width: 100%;
+      display: block;
     }
-    @keyframes bounce {
-      0%, 100% { transform: translateY(0); }
-      50% { transform: translateY(-16px); }
+    .start-meme-label {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      background: linear-gradient(transparent, rgba(0,0,0,0.85));
+      padding: 20px 12px 10px;
+      font-size: clamp(11px, 2.2vw, 14px);
+      color: rgba(255,255,255,0.8);
+      text-align: center;
+      letter-spacing: 0.05em;
     }
 
     .start-title {
@@ -129,39 +140,34 @@
       font-size: clamp(16px, 4vw, 28px);
       line-height: 2;
       color: var(--white);
-      margin-bottom: 12px;
+      margin-bottom: 8px;
     }
     .start-title .accent { color: var(--lime); }
     .start-title .accent-teal { color: var(--teal); }
 
-    .start-desc {
-      font-size: clamp(14px, 2.5vw, 17px);
-      color: rgba(255,255,255,0.6);
-      line-height: 1.8;
-      max-width: 480px;
-      margin-bottom: 40px;
-    }
-
-    .start-stats {
+    .start-tags {
       display: flex;
-      gap: 32px;
-      margin-bottom: 40px;
+      gap: 8px;
       flex-wrap: wrap;
       justify-content: center;
+      margin-bottom: 24px;
     }
-    .start-stat {
-      text-align: center;
-    }
-    .start-stat-num {
-      font-family: 'Press Start 2P', monospace;
-      font-size: clamp(18px, 3vw, 26px);
-      color: var(--lime);
-      display: block;
-      margin-bottom: 4px;
-    }
-    .start-stat-label {
+    .start-tag {
+      background: rgba(170,249,82,0.1);
+      border: 1px solid rgba(170,249,82,0.25);
+      border-radius: 20px;
+      padding: 4px 12px;
       font-size: 12px;
-      color: rgba(255,255,255,0.5);
+      color: var(--lime);
+      letter-spacing: 0.05em;
+    }
+
+    .start-desc {
+      font-size: clamp(13px, 2.5vw, 16px);
+      color: rgba(255,255,255,0.55);
+      line-height: 1.8;
+      max-width: 440px;
+      margin-bottom: 32px;
     }
 
     .btn-start {
@@ -190,7 +196,7 @@
     }
 
     .brand-tag {
-      margin-top: 40px;
+      margin-top: 32px;
       display: inline-flex;
       align-items: center;
       gap: 8px;
@@ -703,7 +709,7 @@
       .option-btn { padding: 12px 14px; font-size: 14px; }
       .result-score-box { padding: 16px 20px; }
       .result-buttons { flex-direction: column; align-items: center; }
-      .start-stats { gap: 20px; }
+      .start-tags { gap: 6px; }
       .fill-wrap { flex-direction: column; }
       .btn-submit { width: 100%; }
     }
@@ -738,13 +744,21 @@
 
     <!-- ===== START SCREEN ===== -->
     <div class="screen active" id="startScreen">
-      <div class="start-icon"><i data-lucide="mic" ></i></div>
+      <div class="start-meme">
+        <img src="meme.jpg" alt="七里香經典畫面" />
+        <div class="start-meme-label">「哥練的不是琴，是寂寞」</div>
+      </div>
       <h1 class="start-title">
         <span class="accent">周杰倫</span><br>
         <span class="accent-teal">粉絲大調查</span>
       </h1>
+      <div class="start-tags">
+        <span class="start-tag">#空耳歌詞</span>
+        <span class="start-tag">#奶茶冷知識</span>
+        <span class="start-tag">#NFT事件</span>
+        <span class="start-tag">#歌詞填空</span>
+      </div>
       <p class="start-desc">
-        空耳歌詞、奶茶冷知識、NFT 被盜事件、比特幣風波⋯⋯<br>
         37 道題目，測測你是真杰迷還是路人甲！
       </p>
       <button class="btn-start" onclick="startQuiz()">開始測驗 <i data-lucide="arrow-right" style="width:20px;height:20px"></i></button>
