@@ -1634,13 +1634,13 @@
       // Draw IG icon (rounded rect + circle + dot)
       const ix = startX + leftW;
       const iy = brandY - igSize/2;
-      const r = 5;
+      const br = 5;
       ctx.strokeStyle = 'rgba(255,255,255,0.4)'; ctx.lineWidth = 2;
       ctx.beginPath();
-      ctx.moveTo(ix+r, iy); ctx.lineTo(ix+igSize-r, iy); ctx.quadraticCurveTo(ix+igSize, iy, ix+igSize, iy+r);
-      ctx.lineTo(ix+igSize, iy+igSize-r); ctx.quadraticCurveTo(ix+igSize, iy+igSize, ix+igSize-r, iy+igSize);
-      ctx.lineTo(ix+r, iy+igSize); ctx.quadraticCurveTo(ix, iy+igSize, ix, iy+igSize-r);
-      ctx.lineTo(ix, iy+r); ctx.quadraticCurveTo(ix, iy, ix+r, iy);
+      ctx.moveTo(ix+br, iy); ctx.lineTo(ix+igSize-br, iy); ctx.quadraticCurveTo(ix+igSize, iy, ix+igSize, iy+br);
+      ctx.lineTo(ix+igSize, iy+igSize-br); ctx.quadraticCurveTo(ix+igSize, iy+igSize, ix+igSize-br, iy+igSize);
+      ctx.lineTo(ix+br, iy+igSize); ctx.quadraticCurveTo(ix, iy+igSize, ix, iy+igSize-br);
+      ctx.lineTo(ix, iy+br); ctx.quadraticCurveTo(ix, iy, ix+br, iy);
       ctx.closePath(); ctx.stroke();
       ctx.beginPath(); ctx.arc(ix+igSize/2, iy+igSize/2, igSize*0.3, 0, Math.PI*2); ctx.stroke();
       ctx.beginPath(); ctx.arc(ix+igSize*0.75, iy+igSize*0.25, 2, 0, Math.PI*2); ctx.fillStyle = 'rgba(255,255,255,0.4)'; ctx.fill();
