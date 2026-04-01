@@ -1,0 +1,49 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 300 330" width="300" height="330">
+  <!-- Tiny feet -->
+  <ellipse cx="122" cy="290" rx="17" ry="9" fill="rgba(255,255,255,0.15)"/>
+  <ellipse cx="178" cy="290" rx="17" ry="9" fill="rgba(255,255,255,0.15)"/>
+
+  <!-- Round face -->
+  <circle cx="150" cy="198" r="68" fill="rgba(255,255,255,0.15)"/>
+
+  <!-- Crown body (soft curves) -->
+  <path d="M63,140 L63,112 Q80,128 95,105 Q115,140 150,60 Q185,140 205,105 Q220,128 237,112 L237,140 Z" fill="#FFD700"/>
+
+  <!-- Crown base band -->
+  <rect x="60" y="133" width="180" height="20" rx="4" fill="#FFD700"/>
+
+  <!-- Main jewel -->
+  <circle cx="150" cy="118" r="11" fill="#FF4466"/>
+  <circle cx="153" cy="115" r="4" fill="rgba(255,255,255,0.5)"/>
+
+  <!-- Side jewels -->
+  <circle cx="106" cy="133" r="8" fill="#66BBFF"/>
+  <circle cx="194" cy="133" r="8" fill="#66BBFF"/>
+
+  <!-- Eyes - whites -->
+  <circle cx="130" cy="198" r="14" fill="#FFF"/>
+  <circle cx="170" cy="198" r="14" fill="#FFF"/>
+
+  <!-- Eyes - pupils -->
+  <circle cx="130" cy="199" r="11" fill="#1a1a2e"/>
+  <circle cx="170" cy="199" r="11" fill="#1a1a2e"/>
+
+  <!-- Eyes - big highlight -->
+  <circle cx="134" cy="196" r="5" fill="#FFF"/>
+  <circle cx="174" cy="196" r="5" fill="#FFF"/>
+
+  <!-- Eyes - small highlight -->
+  <circle cx="127" cy="202" r="2.2" fill="#FFF"/>
+  <circle cx="167" cy="202" r="2.2" fill="#FFF"/>
+
+  <!-- Blush -->
+  <ellipse cx="110" cy="210" rx="11" ry="7" fill="rgba(255,200,100,0.4)"/>
+  <ellipse cx="190" cy="210" rx="11" ry="7" fill="rgba(255,200,100,0.4)"/>
+
+  <!-- Cute mouth -->
+  <path d="M137,230 A13,12 0 0,0 163,230 Z" fill="#1a1a2e"/>
+
+  <!-- Sparkles -->
+  <text x="230" y="72" font-size="20" fill="rgba(255,255,255,0.5)">&#10024;</text>
+  <text x="60" y="68" font-size="20" fill="rgba(255,255,255,0.5)">&#10024;</text>
+</svg>

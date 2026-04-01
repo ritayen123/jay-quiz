@@ -1,0 +1,53 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 300 320" width="300" height="320">
+  <!-- Stem -->
+  <rect x="138" y="210" width="24" height="42" rx="5" fill="#AAF952"/>
+
+  <!-- Base -->
+  <rect x="107" y="248" width="86" height="16" rx="8" fill="#AAF952"/>
+
+  <!-- Cup body -->
+  <circle cx="150" cy="140" r="68" fill="#AAF952"/>
+
+  <!-- Inner glow -->
+  <circle cx="133" cy="118" r="35" fill="rgba(255,255,255,0.12)"/>
+
+  <!-- Handle ears - left -->
+  <circle cx="66" cy="140" r="23" fill="#AAF952"/>
+  <circle cx="66" cy="140" r="14" fill="rgba(255,255,255,0.15)"/>
+
+  <!-- Handle ears - right -->
+  <circle cx="234" cy="140" r="23" fill="#AAF952"/>
+  <circle cx="234" cy="140" r="14" fill="rgba(255,255,255,0.15)"/>
+
+  <!-- Star on forehead -->
+  <text x="150" y="103" font-size="38" text-anchor="middle" dominant-baseline="middle">&#11088;</text>
+
+  <!-- Eyes - whites -->
+  <circle cx="130" cy="140" r="13" fill="#FFF"/>
+  <circle cx="170" cy="140" r="13" fill="#FFF"/>
+
+  <!-- Eyes - pupils -->
+  <circle cx="130" cy="141" r="10" fill="#1a1a2e"/>
+  <circle cx="170" cy="141" r="10" fill="#1a1a2e"/>
+
+  <!-- Eyes - big highlight -->
+  <circle cx="134" cy="138" r="5" fill="#FFF"/>
+  <circle cx="174" cy="138" r="5" fill="#FFF"/>
+
+  <!-- Eyes - small highlight -->
+  <circle cx="127" cy="144" r="2" fill="#FFF"/>
+  <circle cx="167" cy="144" r="2" fill="#FFF"/>
+
+  <!-- Blush -->
+  <ellipse cx="113" cy="152" rx="10" ry="6" fill="rgba(170,255,100,0.35)"/>
+  <ellipse cx="187" cy="152" rx="10" ry="6" fill="rgba(170,255,100,0.35)"/>
+
+  <!-- Big happy mouth -->
+  <path d="M134,163 A16,16 0 0,0 166,163 Z" fill="#1a1a2e"/>
+  <path d="M140,170 A10,7 0 0,0 160,170 Z" fill="#FF8899"/>
+
+  <!-- Sparkles -->
+  <text x="72" y="80" font-size="22" fill="rgba(255,255,255,0.5)">&#10024;</text>
+  <text x="232" y="85" font-size="22" fill="rgba(255,255,255,0.5)">&#10024;</text>
+  <text x="205" y="220" font-size="22" fill="rgba(255,255,255,0.5)">&#10024;</text>
+</svg>

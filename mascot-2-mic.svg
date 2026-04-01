@@ -1,0 +1,43 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 300 340" width="300" height="340">
+  <!-- Handle -->
+  <rect x="133" y="205" width="34" height="75" rx="12" fill="rgba(255,255,255,0.2)" stroke="#F1B9E1" stroke-width="4"/>
+
+  <!-- Mic head -->
+  <circle cx="150" cy="138" r="75" fill="#F1B9E1"/>
+
+  <!-- Inner glow -->
+  <circle cx="133" cy="115" r="40" fill="rgba(255,255,255,0.15)"/>
+
+  <!-- Eyes - whites -->
+  <circle cx="129" cy="128" r="13" fill="#FFF"/>
+  <circle cx="171" cy="128" r="13" fill="#FFF"/>
+
+  <!-- Eyes - pupils -->
+  <circle cx="129" cy="129" r="11" fill="#1a1a2e"/>
+  <circle cx="171" cy="129" r="11" fill="#1a1a2e"/>
+
+  <!-- Eyes - big highlight -->
+  <circle cx="133" cy="126" r="5" fill="#FFF"/>
+  <circle cx="175" cy="126" r="5" fill="#FFF"/>
+
+  <!-- Eyes - small highlight -->
+  <circle cx="126" cy="132" r="2.2" fill="#FFF"/>
+  <circle cx="168" cy="132" r="2.2" fill="#FFF"/>
+
+  <!-- Blush -->
+  <ellipse cx="111" cy="140" rx="10" ry="7" fill="rgba(255,180,200,0.45)"/>
+  <ellipse cx="189" cy="140" rx="10" ry="7" fill="rgba(255,180,200,0.45)"/>
+
+  <!-- Happy open mouth -->
+  <path d="M134,155 A16,16 0 0,0 166,155 Z" fill="#1a1a2e"/>
+
+  <!-- Tongue -->
+  <path d="M140,162 A10,8 0 0,0 160,162 Z" fill="#FF8899"/>
+
+  <!-- Music notes -->
+  <text x="200" y="88" font-size="32" fill="rgba(255,255,255,0.5)">&#9834;</text>
+  <text x="220" y="118" font-size="24" fill="rgba(255,255,255,0.35)">&#9835;</text>
+
+  <!-- Sparkle -->
+  <text x="80" y="95" font-size="22" fill="#FFF">&#10024;</text>
+</svg>
