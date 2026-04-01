@@ -1,0 +1,1296 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>周杰倫粉絲大調查 | 韭點開始</title>
+  <meta name="description" content="你是真杰迷還是路人甲？13 題趣味測驗，空耳歌詞、奶茶冷知識、NFT 事件通通考！由韭點開始製作。" />
+  <meta property="og:title" content="周杰倫粉絲大調查 | 韭點開始" />
+  <meta property="og:description" content="你是真杰迷還是路人甲？13 題趣味測驗立刻挑戰！" />
+  <meta property="og:type" content="website" />
+  <meta property="og:locale" content="zh_TW" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🎤</text></svg>" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=Noto+Sans+TC:wght@400;500;700;900&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --teal: #84D2DD;
+      --lime: #AAF952;
+      --green: #01A94D;
+      --pink: #F1B9E1;
+      --black: #0A0A0A;
+      --white: #FFFFFF;
+      --correct: #01A94D;
+      --wrong: #E74C3C;
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'Noto Sans TC', sans-serif;
+      background: var(--black);
+      color: var(--white);
+      overflow-x: hidden;
+      min-height: 100vh;
+    }
+
+    ::-webkit-scrollbar { width: 6px; }
+    ::-webkit-scrollbar-track { background: var(--black); }
+    ::-webkit-scrollbar-thumb { background: var(--lime); border-radius: 3px; }
+
+    /* ========= BACKGROUND ========= */
+    .bg-grid {
+      position: fixed;
+      inset: 0;
+      background-image:
+        linear-gradient(rgba(170,249,82,0.04) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(170,249,82,0.04) 1px, transparent 1px);
+      background-size: 48px 48px;
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    .bg-glow {
+      position: fixed;
+      width: 500px; height: 500px;
+      background: radial-gradient(circle, rgba(132,210,221,0.12) 0%, transparent 70%);
+      top: 30%; left: 50%;
+      transform: translate(-50%, -50%);
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    .pixel-bg {
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      overflow: hidden;
+      z-index: 0;
+    }
+    .pixel-block {
+      position: absolute;
+      background: var(--lime);
+      opacity: 0.05;
+      animation: floatBlock linear infinite;
+    }
+    @keyframes floatBlock {
+      0% { transform: translateY(100vh) rotate(0deg); opacity: 0; }
+      10% { opacity: 0.05; }
+      90% { opacity: 0.05; }
+      100% { transform: translateY(-120px) rotate(360deg); opacity: 0; }
+    }
+
+    /* ========= LAYOUT ========= */
+    .container {
+      position: relative;
+      z-index: 1;
+      max-width: 680px;
+      margin: 0 auto;
+      padding: 24px;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+    }
+
+    /* ========= SCREENS ========= */
+    .screen { display: none; width: 100%; text-align: center; }
+    .screen.active { display: flex; flex-direction: column; align-items: center; }
+
+    /* ========= START SCREEN ========= */
+    .start-emoji {
+      font-size: 72px;
+      margin-bottom: 24px;
+      animation: bounce 2s ease-in-out infinite;
+    }
+    @keyframes bounce {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-16px); }
+    }
+
+    .start-title {
+      font-family: 'Press Start 2P', monospace;
+      font-size: clamp(16px, 4vw, 28px);
+      line-height: 2;
+      color: var(--white);
+      margin-bottom: 12px;
+    }
+    .start-title .accent { color: var(--lime); }
+    .start-title .accent-teal { color: var(--teal); }
+
+    .start-desc {
+      font-size: clamp(14px, 2.5vw, 17px);
+      color: rgba(255,255,255,0.6);
+      line-height: 1.8;
+      max-width: 480px;
+      margin-bottom: 40px;
+    }
+
+    .start-stats {
+      display: flex;
+      gap: 32px;
+      margin-bottom: 40px;
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+    .start-stat {
+      text-align: center;
+    }
+    .start-stat-num {
+      font-family: 'Press Start 2P', monospace;
+      font-size: clamp(18px, 3vw, 26px);
+      color: var(--lime);
+      display: block;
+      margin-bottom: 4px;
+    }
+    .start-stat-label {
+      font-size: 12px;
+      color: rgba(255,255,255,0.5);
+    }
+
+    .btn-start {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      background: var(--lime);
+      color: var(--black);
+      border: none;
+      padding: 16px 48px;
+      font-family: 'Noto Sans TC', sans-serif;
+      font-size: 18px;
+      font-weight: 700;
+      border-radius: 2px;
+      cursor: pointer;
+      transition: transform 0.15s, box-shadow 0.15s;
+      letter-spacing: 0.1em;
+    }
+    .btn-start:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 6px 24px rgba(170,249,82,0.4);
+    }
+
+    .brand-tag {
+      margin-top: 40px;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: rgba(170,249,82,0.08);
+      border: 1px solid rgba(170,249,82,0.2);
+      border-radius: 2px;
+      padding: 6px 14px;
+      font-size: 11px;
+      color: rgba(255,255,255,0.4);
+      letter-spacing: 0.1em;
+    }
+    .brand-tag a {
+      color: var(--lime);
+      text-decoration: none;
+    }
+    .brand-tag a:hover { text-decoration: underline; }
+
+    /* ========= QUIZ SCREEN ========= */
+    .progress-bar-wrap {
+      width: 100%;
+      max-width: 580px;
+      margin-bottom: 32px;
+    }
+    .progress-info {
+      display: flex;
+      justify-content: space-between;
+      margin-bottom: 8px;
+      font-size: 13px;
+      color: rgba(255,255,255,0.5);
+    }
+    .progress-info .current {
+      font-family: 'Press Start 2P', monospace;
+      font-size: 11px;
+      color: var(--lime);
+    }
+    .progress-track {
+      width: 100%;
+      height: 4px;
+      background: rgba(255,255,255,0.1);
+      border-radius: 2px;
+      overflow: hidden;
+    }
+    .progress-fill {
+      height: 100%;
+      background: var(--lime);
+      border-radius: 2px;
+      transition: width 0.4s ease;
+    }
+
+    .question-card {
+      width: 100%;
+      max-width: 580px;
+      background: rgba(255,255,255,0.03);
+      border: 1px solid rgba(255,255,255,0.08);
+      border-radius: 4px;
+      padding: 32px 28px;
+    }
+
+    .question-number {
+      font-family: 'Press Start 2P', monospace;
+      font-size: 11px;
+      color: var(--teal);
+      margin-bottom: 16px;
+      letter-spacing: 0.1em;
+    }
+
+    .question-text {
+      font-size: clamp(16px, 2.5vw, 20px);
+      font-weight: 700;
+      line-height: 1.7;
+      margin-bottom: 28px;
+      color: var(--white);
+      text-align: left;
+    }
+
+    .options {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .option-btn {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      width: 100%;
+      background: rgba(255,255,255,0.04);
+      border: 1px solid rgba(255,255,255,0.1);
+      border-radius: 3px;
+      padding: 14px 18px;
+      color: var(--white);
+      font-family: 'Noto Sans TC', sans-serif;
+      font-size: 15px;
+      font-weight: 500;
+      cursor: pointer;
+      transition: all 0.2s;
+      text-align: left;
+      line-height: 1.5;
+    }
+    .option-btn:hover:not(.disabled) {
+      background: rgba(170,249,82,0.08);
+      border-color: rgba(170,249,82,0.3);
+    }
+    .option-btn .option-letter {
+      flex-shrink: 0;
+      width: 28px; height: 28px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: rgba(255,255,255,0.06);
+      border-radius: 2px;
+      font-family: 'Press Start 2P', monospace;
+      font-size: 10px;
+      color: rgba(255,255,255,0.5);
+      transition: all 0.2s;
+    }
+    .option-btn:hover:not(.disabled) .option-letter {
+      background: rgba(170,249,82,0.15);
+      color: var(--lime);
+    }
+
+    /* ========= IMAGE QUESTION ========= */
+    .options.image-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+    }
+    .option-img-btn {
+      position: relative;
+      background: rgba(255,255,255,0.04);
+      border: 2px solid rgba(255,255,255,0.1);
+      border-radius: 4px;
+      cursor: pointer;
+      transition: all 0.2s;
+      overflow: hidden;
+      aspect-ratio: 1;
+    }
+    .option-img-btn:hover:not(.disabled) {
+      border-color: rgba(170,249,82,0.5);
+      transform: scale(1.02);
+    }
+    .option-img-btn img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+    .option-img-btn .img-letter {
+      position: absolute;
+      top: 8px; left: 8px;
+      width: 28px; height: 28px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: rgba(0,0,0,0.7);
+      border-radius: 2px;
+      font-family: 'Press Start 2P', monospace;
+      font-size: 10px;
+      color: var(--white);
+      z-index: 2;
+    }
+    .option-img-btn .img-label {
+      position: absolute;
+      bottom: 0; left: 0; right: 0;
+      padding: 8px;
+      background: linear-gradient(transparent, rgba(0,0,0,0.8));
+      font-size: 12px;
+      color: rgba(255,255,255,0.8);
+      text-align: center;
+    }
+    .option-img-btn.correct {
+      border-color: var(--correct);
+      box-shadow: 0 0 16px rgba(1,169,77,0.4);
+    }
+    .option-img-btn.correct .img-letter {
+      background: var(--correct);
+    }
+    .option-img-btn.wrong {
+      border-color: var(--wrong);
+      box-shadow: 0 0 16px rgba(231,76,60,0.3);
+    }
+    .option-img-btn.wrong .img-letter {
+      background: var(--wrong);
+    }
+    .option-img-btn.disabled {
+      cursor: default;
+      opacity: 0.45;
+    }
+    .option-img-btn.correct.disabled { opacity: 1; }
+
+    @media (max-width: 600px) {
+      .options.image-grid { gap: 8px; }
+    }
+
+    .option-btn.correct {
+      background: rgba(1,169,77,0.15);
+      border-color: var(--correct);
+    }
+    .option-btn.correct .option-letter {
+      background: var(--correct);
+      color: var(--white);
+    }
+    .option-btn.wrong {
+      background: rgba(231,76,60,0.12);
+      border-color: var(--wrong);
+    }
+    .option-btn.wrong .option-letter {
+      background: var(--wrong);
+      color: var(--white);
+    }
+    .option-btn.disabled {
+      cursor: default;
+      opacity: 0.5;
+    }
+    .option-btn.correct.disabled { opacity: 1; }
+
+    .explanation {
+      display: none;
+      margin-top: 20px;
+      padding: 16px 18px;
+      background: rgba(132,210,221,0.08);
+      border-left: 3px solid var(--teal);
+      border-radius: 0 3px 3px 0;
+      font-size: 14px;
+      line-height: 1.7;
+      color: rgba(255,255,255,0.75);
+      text-align: left;
+    }
+    .explanation.show { display: block; }
+
+    .btn-next {
+      display: none;
+      margin-top: 24px;
+      background: var(--lime);
+      color: var(--black);
+      border: none;
+      padding: 12px 36px;
+      font-family: 'Noto Sans TC', sans-serif;
+      font-size: 16px;
+      font-weight: 700;
+      border-radius: 2px;
+      cursor: pointer;
+      transition: transform 0.15s, box-shadow 0.15s;
+    }
+    .btn-next.show { display: inline-flex; }
+    .btn-next:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 4px 16px rgba(170,249,82,0.4);
+    }
+
+    /* ========= RESULT SCREEN ========= */
+    .share-preview-wrap {
+      width: 100%;
+      max-width: 360px;
+      margin-bottom: 16px;
+      border-radius: 8px;
+      overflow: hidden;
+      border: 2px solid rgba(255,255,255,0.1);
+      box-shadow: 0 8px 40px rgba(0,0,0,0.5);
+    }
+    .share-preview-wrap img {
+      width: 100%;
+      display: block;
+    }
+    .share-hint {
+      font-size: 13px;
+      color: rgba(255,255,255,0.35);
+      margin-bottom: 24px;
+    }
+
+
+    .result-buttons {
+      display: flex;
+      gap: 12px;
+      flex-wrap: wrap;
+      justify-content: center;
+      margin-bottom: 32px;
+    }
+
+    .btn-share {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: var(--pink);
+      color: var(--black);
+      border: none;
+      padding: 12px 28px;
+      font-family: 'Noto Sans TC', sans-serif;
+      font-size: 15px;
+      font-weight: 700;
+      border-radius: 2px;
+      cursor: pointer;
+      transition: transform 0.15s, box-shadow 0.15s;
+    }
+    .btn-share:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 4px 16px rgba(241,185,225,0.4);
+    }
+
+    .btn-retry {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: transparent;
+      color: var(--white);
+      border: 1px solid rgba(255,255,255,0.2);
+      padding: 12px 28px;
+      font-family: 'Noto Sans TC', sans-serif;
+      font-size: 15px;
+      font-weight: 500;
+      border-radius: 2px;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+    .btn-retry:hover {
+      border-color: var(--lime);
+      color: var(--lime);
+    }
+
+    .btn-ig {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: var(--lime);
+      color: var(--black);
+      text-decoration: none;
+      padding: 12px 28px;
+      font-family: 'Noto Sans TC', sans-serif;
+      font-size: 15px;
+      font-weight: 700;
+      border-radius: 2px;
+      transition: transform 0.15s, box-shadow 0.15s;
+    }
+    .btn-ig:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 6px 24px rgba(170,249,82,0.4);
+    }
+
+    .result-brand {
+      margin-top: 16px;
+      font-size: 12px;
+      color: rgba(255,255,255,0.3);
+    }
+    .result-brand a {
+      color: var(--lime);
+      text-decoration: none;
+    }
+    .result-brand a:hover { text-decoration: underline; }
+
+    /* ========= TEST PANEL (remove before deploy) ========= */
+    .test-panel {
+      margin-top: 40px;
+      padding: 20px;
+      border: 1px dashed rgba(241,185,225,0.3);
+      border-radius: 4px;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      width: 100%;
+      max-width: 380px;
+    }
+    .test-label {
+      font-size: 12px;
+      color: var(--pink);
+      text-align: center;
+      margin-bottom: 4px;
+    }
+    .test-btn {
+      background: rgba(241,185,225,0.1);
+      border: 1px solid rgba(241,185,225,0.25);
+      color: var(--white);
+      padding: 12px 16px;
+      border-radius: 3px;
+      font-family: 'Noto Sans TC', sans-serif;
+      font-size: 14px;
+      cursor: pointer;
+      transition: all 0.2s;
+      text-align: left;
+    }
+    .test-btn:hover {
+      background: rgba(241,185,225,0.2);
+      border-color: var(--pink);
+    }
+
+    /* ========= TOAST ========= */
+    .toast {
+      position: fixed;
+      bottom: 32px;
+      left: 50%;
+      transform: translateX(-50%) translateY(80px);
+      background: var(--lime);
+      color: var(--black);
+      padding: 12px 24px;
+      border-radius: 3px;
+      font-size: 14px;
+      font-weight: 600;
+      opacity: 0;
+      transition: all 0.3s ease;
+      z-index: 100;
+      pointer-events: none;
+    }
+    .toast.show {
+      transform: translateX(-50%) translateY(0);
+      opacity: 1;
+    }
+
+    /* ========= RESPONSIVE ========= */
+    @media (max-width: 600px) {
+      .container { padding: 16px; }
+      .question-card { padding: 24px 18px; }
+      .option-btn { padding: 12px 14px; font-size: 14px; }
+      .result-score-box { padding: 16px 20px; }
+      .result-buttons { flex-direction: column; align-items: center; }
+      .start-stats { gap: 20px; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Background effects -->
+  <div class="bg-grid"></div>
+  <div class="bg-glow"></div>
+  <div class="pixel-bg" id="pixelBg"></div>
+
+  <div class="container">
+
+    <!-- ===== START SCREEN ===== -->
+    <div class="screen active" id="startScreen">
+      <div class="start-emoji">🎤</div>
+      <h1 class="start-title">
+        <span class="accent">周杰倫</span><br>
+        <span class="accent-teal">粉絲大調查</span>
+      </h1>
+      <p class="start-desc">
+        空耳歌詞、奶茶冷知識、NFT 被盜事件、比特幣風波⋯⋯<br>
+        14 道題目，測測你是真杰迷還是路人甲！
+      </p>
+      <div class="start-stats">
+        <div class="start-stat">
+          <span class="start-stat-num">14</span>
+          <span class="start-stat-label">題目</span>
+        </div>
+        <div class="start-stat">
+          <span class="start-stat-num">3min</span>
+          <span class="start-stat-label">預估時間</span>
+        </div>
+        <div class="start-stat">
+          <span class="start-stat-num">5</span>
+          <span class="start-stat-label">等級稱號</span>
+        </div>
+      </div>
+      <button class="btn-start" onclick="startQuiz()">開始測驗 →</button>
+      <div class="brand-tag">
+        Made by <a href="https://www.instagram.com/from_nine_on" target="_blank" rel="noopener">@韭點開始</a>
+      </div>
+      <!-- TEST: Preview all 5 result levels (remove before deploy) -->
+      <div class="test-panel">
+        <div class="test-label">🔧 測試模式：預覽五種結果</div>
+        <button class="test-btn" onclick="previewResult(2)">😅 路人甲 (0-3)</button>
+        <button class="test-btn" onclick="previewResult(5)">🎙️ KTV 點歌王 (4-6)</button>
+        <button class="test-btn" onclick="previewResult(8)">🧋 資深杰迷 (7-10)</button>
+        <button class="test-btn" onclick="previewResult(11)">👑 周杰倫本人？(11-12)</button>
+        <button class="test-btn" onclick="previewResult(14)">🏆 比周杰倫還懂 (13-14)</button>
+      </div>
+    </div>
+
+    <!-- ===== QUIZ SCREEN ===== -->
+    <div class="screen" id="quizScreen">
+      <div class="progress-bar-wrap">
+        <div class="progress-info">
+          <span class="current" id="progressText">Q1 / 13</span>
+          <span id="scoreText">答對 0 題</span>
+        </div>
+        <div class="progress-track">
+          <div class="progress-fill" id="progressFill" style="width: 0%"></div>
+        </div>
+      </div>
+      <div class="question-card">
+        <div class="question-number" id="questionNumber">QUESTION 01</div>
+        <div class="question-text" id="questionText"></div>
+        <div class="options" id="optionsWrap"></div>
+        <div class="explanation" id="explanation"></div>
+      </div>
+      <button class="btn-next" id="btnNext" onclick="nextQuestion()">下一題 →</button>
+    </div>
+
+    <!-- ===== RESULT SCREEN ===== -->
+    <div class="screen" id="resultScreen">
+      <!-- Poster image (auto-generated) -->
+      <canvas id="shareCanvas" style="display:none"></canvas>
+      <div id="sharePreview" class="share-preview-wrap">
+        <img id="shareImg" alt="分享圖片" />
+      </div>
+      <div class="share-hint">長按圖片可儲存 📱</div>
+      <div class="result-buttons">
+        <button class="btn-share" onclick="downloadShareImage()">💾 下載圖片</button>
+        <button class="btn-share" style="background:var(--teal)" onclick="shareText()">📋 複製文字分享</button>
+        <button class="btn-retry" onclick="retryQuiz()">🔄 再測一次</button>
+        <a class="btn-ig" href="https://www.instagram.com/from_nine_on" target="_blank" rel="noopener">追蹤韭點開始 IG</a>
+      </div>
+      <div class="result-brand">
+        一個關於周杰倫的粉絲測驗 by <a href="https://fromnineon.com" target="_blank" rel="noopener">韭點開始 fromnineon</a>
+      </div>
+    </div>
+
+  </div>
+
+  <div class="toast" id="toast">已複製到剪貼簿！</div>
+
+  <script>
+    // ===== PIXEL BACKGROUND =====
+    (function() {
+      const bg = document.getElementById('pixelBg');
+      for (let i = 0; i < 15; i++) {
+        const el = document.createElement('div');
+        el.className = 'pixel-block';
+        const size = Math.random() * 12 + 4;
+        el.style.width = size + 'px';
+        el.style.height = size + 'px';
+        el.style.left = Math.random() * 100 + '%';
+        el.style.animationDuration = (Math.random() * 15 + 10) + 's';
+        el.style.animationDelay = (Math.random() * 10) + 's';
+        bg.appendChild(el);
+      }
+    })();
+
+    // ===== QUIZ DATA =====
+    const questions = [
+      {
+        q: '「再給我兩份蔥，讓我把雞翼煎成餅」原本是哪首歌的歌詞？',
+        options: ['七里香', '擱淺', '借口', '安靜'],
+        answer: 2,
+        explain: '原歌詞是〈借口〉的「再給我兩分鐘，讓我把記憶結成冰」，但周杰倫的咬字讓它聽起來像烹飪教學。'
+      },
+      {
+        q: '「你是我的那碗麵」其實是哪首歌？',
+        options: ['簡單愛', '愛在西元前', '龍捲風', '晴天'],
+        answer: 1,
+        explain: '出自〈愛在西元前〉的「凝視我的那畫面」，被網友空耳成肚子餓版本。'
+      },
+      {
+        q: '周杰倫自己投資的奶茶店叫什麼？',
+        options: ['珍煮丹', 'machi machi', '五十嵐', '迷客夏'],
+        answer: 1,
+        explain: 'machi machi 是周杰倫所屬的手搖飲料品牌，〈說好不哭〉MV 場景就在日本原宿店拍的。'
+      },
+      {
+        q: '周杰倫帶哪位歌手喝奶茶，還說「跟著哥不會錯」，結果對方粉絲暴怒說「注意你的六塊肌」？',
+        options: ['蕭敬騰', '林俊傑', '陳奕迅', '五月天阿信'],
+        answer: 1,
+        explain: '周杰倫帶林俊傑 JJ 去喝珍奶並發 IG，JJ 粉絲擔心他的體重管理，登上微博熱搜。'
+      },
+      {
+        q: '導演劉偉強第一次聽周杰倫的歌，反應是什麼？',
+        options: ['太好聽了', '聽不懂他在唱什麼', '馬上決定用他', '覺得他應該去當 DJ'],
+        answer: 1,
+        explain: '劉偉強拍《頭文字D》時，別人推薦周杰倫很紅，但他根本聽不懂歌詞在唱什麼。後來周杰倫靠做功課的飄移手勢保住了男一。'
+      },
+      {
+        q: '周杰倫當初為什麼要開 Instagram？原因超好笑——',
+        options: ['經紀公司要求的', '因為綠巨人 @ 到假帳號', '看到林俊傑有所以也想開', '昆凌幫他開的'],
+        answer: 1,
+        explain: '「乾爹」浩克在社群 @ 了一個冒牌帳號，周杰倫才發現需要開設真正的 IG 來跟國際友人聯繫。2025 年追蹤突破 1,000 萬。'
+      },
+      {
+        q: '《妳聽得到》2 分 47 秒那段超詭異的歌詞，到底是怎麼回事？',
+        options: ['錄音師不小心倒帶', '周杰倫把歌詞倒著唱', '方文山寫了火星文', '混音時音軌放反了'],
+        answer: 1,
+        explain: '周杰倫真的把「只有妳能聽得到」倒著唱了，粉絲等了 12 年才破解這個彩蛋。'
+      },
+      {
+        q: '2022 年愚人節，周杰倫的什麼東西被偷了？',
+        options: ['演唱會門票', '無聊猿 NFT', '一箱奶茶', '限量球鞋'],
+        answer: 1,
+        explain: '周杰倫的 BAYC #3738 無聊猿 NFT 被釣魚攻擊盜走，價值超過千萬台幣。偏偏發生在愚人節，所以沒人相信。'
+      },
+      {
+        q: '周杰倫的 NFT 被偷後，他第一時間說了什麼？',
+        options: ['哈哈愚人節快樂', '不是愚人節玩笑，是真的沒了', '我早就賣掉了', '無所謂，再買一個'],
+        answer: 1,
+        explain: '因為偏偏是 4/1，連黃立成都問是不是在開玩笑。周杰倫無奈發文：「能再給我一隻嗎？」'
+      },
+      {
+        q: '2025 年，周杰倫和魔術師好友蔡威澤決裂，原因是什麼？',
+        options: ['蔡威澤抄襲他的魔術', '蔡威澤代操比特幣，把約 2 億搞消失了', '蔡威澤在演唱會上出包', '蔡威澤偷了他的歌'],
+        answer: 1,
+        explain: '蔡威澤曾是《周遊記》常駐嘉賓，周杰倫基於信任交付上億元代操比特幣，結果蔡威澤疑似爆倉後人間蒸發。'
+      },
+      {
+        q: '周杰倫對蔡威澤事件的反應，被媒體形容為什麼？',
+        options: ['默默原諒', '祭出「華人世界通緝令」', '寫了一首歌罵他', '在 IG 取消追蹤就算了'],
+        answer: 1,
+        explain: '周杰倫罕見動怒，透過社群和法律途徑追查，媒體稱之為「華人世界通緝令」。'
+      },
+      {
+        q: '天上真的有一顆「周杰倫星」！它的小行星編號是多少？',
+        options: ['520', '110', '257248', '19790118'],
+        answer: 2,
+        explain: '小行星 257248 號在 2011 年被命名為「周杰倫星」，是台灣第一顆以藝人命名的小行星，直徑約 3 公里。'
+      },
+      {
+        q: '發現周杰倫星的天文學家們，在望遠鏡前找小行星時都在幹嘛？',
+        options: ['喝咖啡提神', '邊找邊聽周杰倫的歌', '打籃球休息', '吃泡麵'],
+        answer: 1,
+        explain: '發現者蔡元生說他們三人都是杰迷，找小行星的過程很無聊，就邊找邊聽周杰倫的歌，所以決定用他的名字命名。'
+      },
+      {
+        q: '以下四張照片，哪一個才是真正的周杰倫？',
+        type: 'image',
+        options: [
+          { img: 'face-a.jpg', label: 'A' },
+          { img: 'face-b.jpg', label: 'B' },
+          { img: 'face-c.jpg', label: 'C' },
+          { img: 'face-d.jpg', label: 'D' }
+        ],
+        answer: 0,
+        noShuffle: true,
+        explain: '周杰倫本人說過：「你們講到我都懷疑自己是真假了。」網友笑稱周杰倫在模仿大賽只拿第三名，因為長得像他的人多到可以申請少數民族。'
+      }
+    ];
+
+    // ===== RESULTS =====
+    const results = [
+      { min: 0,  max: 3,  emoji: '😅', title: '路人甲', subtitle: '你確定聽過周杰倫嗎？建議先從《晴天》聽起，不然連空耳都沒資格。' },
+      { min: 4,  max: 6,  emoji: '🎙️', title: 'KTV 點歌王', subtitle: '至少知道幾首主打歌，但冷知識這塊⋯⋯你可能只是在 KTV 亂唱的等級。' },
+      { min: 7,  max: 10, emoji: '🧋', title: '資深杰迷', subtitle: '不錯喔，真的有在聽！奶茶知識和空耳都難不倒你，周董應該會請你喝一杯 machi machi。' },
+      { min: 11, max: 12, emoji: '👑', title: '周杰倫本人？', subtitle: '你是不是住在周杰倫家隔壁？連 NFT 被偷和比特幣風波都瞭若指掌。' },
+      { min: 13, max: 14, emoji: '🏆', title: '比周杰倫還懂周杰倫', subtitle: '請問方文山是你嗎？這種程度已經可以出書了。建議直接應徵杰威爾音樂。' }
+    ];
+
+    // ===== STATE =====
+    let currentQ = 0;
+    let score = 0;
+    let answered = false;
+
+    // ===== SHUFFLE OPTIONS =====
+    function shuffleQuestions() {
+      questions.forEach(q => {
+        if (q.noShuffle) return;
+        const correctText = q.type === 'image' ? q.options[q.answer].img : q.options[q.answer];
+        for (let i = q.options.length - 1; i > 0; i--) {
+          const j = Math.floor(Math.random() * (i + 1));
+          [q.options[i], q.options[j]] = [q.options[j], q.options[i]];
+        }
+        q.answer = q.options.findIndex(o => q.type === 'image' ? o.img === correctText : o === correctText);
+      });
+    }
+
+    // ===== FUNCTIONS =====
+    function showScreen(id) {
+      document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
+      document.getElementById(id).classList.add('active');
+    }
+
+    function startQuiz() {
+      currentQ = 0;
+      score = 0;
+      shuffleQuestions();
+      showScreen('quizScreen');
+      renderQuestion();
+    }
+
+    function renderQuestion() {
+      answered = false;
+      const q = questions[currentQ];
+      const letters = ['A', 'B', 'C', 'D'];
+
+      document.getElementById('progressText').textContent = `Q${currentQ + 1} / ${questions.length}`;
+      document.getElementById('scoreText').textContent = `答對 ${score} 題`;
+      document.getElementById('progressFill').style.width = ((currentQ) / questions.length * 100) + '%';
+      document.getElementById('questionNumber').textContent = `QUESTION ${String(currentQ + 1).padStart(2, '0')}`;
+      document.getElementById('questionText').textContent = q.q;
+
+      const wrap = document.getElementById('optionsWrap');
+      wrap.innerHTML = '';
+
+      if (q.type === 'image') {
+        wrap.className = 'options image-grid';
+        q.options.forEach((opt, i) => {
+          const btn = document.createElement('div');
+          btn.className = 'option-img-btn';
+          btn.innerHTML = `<span class="img-letter">${letters[i]}</span><img src="${opt.img}" alt="選項 ${letters[i]}" onerror="this.style.display='none';this.parentElement.style.background='rgba(255,255,255,0.06)';this.insertAdjacentHTML('afterend','<span style=\\'display:flex;align-items:center;justify-content:center;height:100%;font-size:48px;\\'>🤔</span>')"><span class="img-label">${opt.label}</span>`;
+          btn.onclick = () => selectAnswer(i);
+          wrap.appendChild(btn);
+        });
+      } else {
+        wrap.className = 'options';
+        q.options.forEach((opt, i) => {
+          const btn = document.createElement('button');
+          btn.className = 'option-btn';
+          btn.innerHTML = `<span class="option-letter">${letters[i]}</span><span>${opt}</span>`;
+          btn.onclick = () => selectAnswer(i);
+          wrap.appendChild(btn);
+        });
+      }
+
+      document.getElementById('explanation').className = 'explanation';
+      document.getElementById('explanation').textContent = '';
+      document.getElementById('btnNext').className = 'btn-next';
+    }
+
+    function selectAnswer(idx) {
+      if (answered) return;
+      answered = true;
+
+      const q = questions[currentQ];
+      const isImage = q.type === 'image';
+      const btnClass = isImage ? '.option-img-btn' : '.option-btn';
+      const btns = document.querySelectorAll(btnClass);
+
+      btns.forEach((btn, i) => {
+        btn.classList.add('disabled');
+        if (i === q.answer) btn.classList.add('correct');
+        if (i === idx && idx !== q.answer) btn.classList.add('wrong');
+      });
+
+      if (idx === q.answer) score++;
+
+      document.getElementById('scoreText').textContent = `答對 ${score} 題`;
+
+      const exp = document.getElementById('explanation');
+      exp.textContent = (idx === q.answer ? '✅ 答對了！' : '❌ 答錯了！') + ' ' + q.explain;
+      exp.className = 'explanation show';
+
+      const btnNext = document.getElementById('btnNext');
+      btnNext.textContent = currentQ < questions.length - 1 ? '下一題 →' : '看結果 🎉';
+      btnNext.className = 'btn-next show';
+    }
+
+    function nextQuestion() {
+      currentQ++;
+      if (currentQ < questions.length) {
+        renderQuestion();
+      } else {
+        showResult();
+      }
+    }
+
+    function showResult() {
+      document.getElementById('progressFill').style.width = '100%';
+      showScreen('resultScreen');
+      // Auto-generate poster image
+      setTimeout(() => generateShareImage(), 100);
+    }
+
+    function retryQuiz() {
+      startQuiz();
+    }
+
+    // ===== POSTER DATA PER LEVEL =====
+    const posterData = [
+      { // 0-3 路人甲
+        bg: '#2A2A3E', accent: '#8888AA', highlight: '#FFFFFF',
+        bigWord: 'BEGINNER', bigWordCN: '路人甲',
+        tags: ['#聽歌從不看詞', '#只會唱副歌', '#以為方文山是山名', '#空耳免疫體質'],
+        traits: ['KTV永遠點別人的歌', '覺得雙截棍是武器', 'machi machi？沒聽過', '聽到前奏完全沒反應'],
+        deco: ['WALKING', 'STRANGER', '???'],
+        mascotFn: drawMascotConfused
+      },
+      { // 4-6 KTV 點歌王
+        bg: '#1A0840', accent: '#F1B9E1', highlight: '#FFFFFF',
+        bigWord: 'KARAOKE', bigWordCN: 'KTV點歌王',
+        tags: ['#七里香亂背', '#副歌達人', '#偶爾走音', '#奶茶只喝五十嵐'],
+        traits: ['KTV必點告白氣球', '頭文字D忘了劇情', '覺得周杰倫沒出新歌', '歌詞全靠體感'],
+        deco: ['SINGING', 'PARTY', 'DANCE'],
+        mascotFn: drawMascotMic
+      },
+      { // 7-10 資深杰迷
+        bg: '#002B7A', accent: '#5CE1FF', highlight: '#FFFFFF',
+        bigWord: 'SUPER FAN', bigWordCN: '資深杰迷',
+        tags: ['#空耳倒背如流', '#machi常客', '#演唱會必到', '#方文山精神導師'],
+        traits: ['手機鈴聲是周杰倫', '0.5秒辨識前奏', '能認出所有撞臉分身', '新專輯聽不懂但很愛'],
+        deco: ['SO HAPPY', 'COME ON', 'DANCE'],
+        mascotFn: drawMascotBubbleTea
+      },
+      { // 11-12 周杰倫本人？
+        bg: '#1A0A3E', accent: '#FFD700', highlight: '#FFFFFF',
+        bigWord: 'JAY CHOU?!', bigWordCN: '周杰倫本人？',
+        tags: ['#NFT被盜都知道', '#比特幣風波追蹤', '#場次如數家珍', '#小行星編號背得出'],
+        traits: ['IG每篇都按讚', '辨識所有空耳版本', '朋友都叫你周董', '夢想進杰威爾'],
+        deco: ['AMAZING', 'RESPECT', 'WOW'],
+        mascotFn: drawMascotCrown
+      },
+      { // 13-14 比周杰倫還懂
+        bg: '#003D14', accent: '#AAF952', highlight: '#FFFFFF',
+        bigWord: '#LEGEND', bigWordCN: '比周杰倫還懂',
+        tags: ['#方文山本人', '#歌詞正反都能唱', '#活字典', '#周杰倫宇宙'],
+        traits: ['能寫完整維基百科', '模仿大賽穩拿第一', '連天文學家都知道', '周杰倫見你會緊張'],
+        deco: ['GRAFFITI', 'PARTY', 'ISLAND'],
+        mascotFn: drawMascotTrophy
+      }
+    ];
+
+    function getPosterData(s) {
+      if (s <= 3) return posterData[0];
+      if (s <= 6) return posterData[1];
+      if (s <= 10) return posterData[2];
+      if (s <= 12) return posterData[3];
+      return posterData[4];
+    }
+
+    // ===== MASCOT DRAWING FUNCTIONS =====
+    function drawMascotConfused(ctx, cx, cy, size, color) {
+      // Question mark blob
+      ctx.fillStyle = color;
+      ctx.beginPath(); ctx.arc(cx, cy, size, 0, Math.PI * 2); ctx.fill();
+      // Eyes
+      ctx.fillStyle = '#000'; ctx.beginPath(); ctx.arc(cx - size*0.25, cy - size*0.1, size*0.12, 0, Math.PI*2); ctx.fill();
+      ctx.beginPath(); ctx.arc(cx + size*0.25, cy - size*0.1, size*0.12, 0, Math.PI*2); ctx.fill();
+      // Eye whites
+      ctx.fillStyle = '#FFF'; ctx.beginPath(); ctx.arc(cx - size*0.22, cy - size*0.14, size*0.05, 0, Math.PI*2); ctx.fill();
+      ctx.beginPath(); ctx.arc(cx + size*0.28, cy - size*0.14, size*0.05, 0, Math.PI*2); ctx.fill();
+      // Mouth - confused squiggle
+      ctx.strokeStyle = '#000'; ctx.lineWidth = size * 0.06; ctx.lineCap = 'round';
+      ctx.beginPath(); ctx.moveTo(cx - size*0.15, cy + size*0.3); ctx.lineTo(cx + size*0.15, cy + size*0.25); ctx.stroke();
+      // ? mark on top
+      ctx.font = `bold ${size}px "Noto Sans TC", sans-serif`; ctx.fillStyle = '#FFF'; ctx.textAlign = 'center'; ctx.textBaseline = 'middle';
+      ctx.fillText('?', cx, cy - size * 1.2);
+    }
+    function drawMascotMic(ctx, cx, cy, size, color) {
+      // Mic body (rounded rect)
+      ctx.fillStyle = color;
+      ctx.beginPath(); ctx.roundRect(cx - size*0.5, cy - size*0.8, size, size*1.3, size*0.4); ctx.fill();
+      // Mic grid lines
+      ctx.strokeStyle = 'rgba(0,0,0,0.15)'; ctx.lineWidth = 3;
+      for (let i = -3; i <= 3; i++) { ctx.beginPath(); ctx.moveTo(cx - size*0.35, cy - size*0.5 + i*size*0.13); ctx.lineTo(cx + size*0.35, cy - size*0.5 + i*size*0.13); ctx.stroke(); }
+      // Eyes
+      ctx.fillStyle = '#000'; ctx.beginPath(); ctx.arc(cx - size*0.2, cy - size*0.25, size*0.1, 0, Math.PI*2); ctx.fill();
+      ctx.beginPath(); ctx.arc(cx + size*0.2, cy - size*0.25, size*0.1, 0, Math.PI*2); ctx.fill();
+      ctx.fillStyle = '#FFF'; ctx.beginPath(); ctx.arc(cx - size*0.17, cy - size*0.29, size*0.04, 0, Math.PI*2); ctx.fill();
+      ctx.beginPath(); ctx.arc(cx + size*0.23, cy - size*0.29, size*0.04, 0, Math.PI*2); ctx.fill();
+      // Mouth
+      ctx.fillStyle = '#000'; ctx.beginPath(); ctx.arc(cx, cy + size*0.1, size*0.12, 0, Math.PI); ctx.fill();
+      // Handle
+      ctx.fillStyle = '#555'; ctx.fillRect(cx - size*0.1, cy + size*0.5, size*0.2, size*0.6);
+    }
+    function drawMascotBubbleTea(ctx, cx, cy, size, color) {
+      // Cup body
+      ctx.fillStyle = color;
+      ctx.beginPath();
+      ctx.moveTo(cx - size*0.55, cy - size*0.5); ctx.lineTo(cx - size*0.4, cy + size*0.9);
+      ctx.lineTo(cx + size*0.4, cy + size*0.9); ctx.lineTo(cx + size*0.55, cy - size*0.5); ctx.closePath(); ctx.fill();
+      // Lid
+      ctx.fillStyle = '#FFF'; ctx.beginPath(); ctx.roundRect(cx - size*0.65, cy - size*0.7, size*1.3, size*0.3, 8); ctx.fill();
+      // Straw
+      ctx.fillStyle = color; ctx.save(); ctx.translate(cx + size*0.15, cy - size*0.7); ctx.rotate(-0.15);
+      ctx.fillRect(-size*0.05, -size*0.6, size*0.1, size*0.7); ctx.restore();
+      // Bubbles (boba)
+      ctx.fillStyle = '#222';
+      const bobas = [[-0.2,0.4],[-0.05,0.6],[0.2,0.5],[-0.15,0.75],[0.1,0.8],[0.25,0.7]];
+      bobas.forEach(([bx,by]) => { ctx.beginPath(); ctx.arc(cx+size*bx, cy+size*by, size*0.09, 0, Math.PI*2); ctx.fill(); });
+      // Eyes on cup
+      ctx.fillStyle = '#000'; ctx.beginPath(); ctx.arc(cx - size*0.2, cy, size*0.1, 0, Math.PI*2); ctx.fill();
+      ctx.beginPath(); ctx.arc(cx + size*0.2, cy, size*0.1, 0, Math.PI*2); ctx.fill();
+      ctx.fillStyle = '#FFF'; ctx.beginPath(); ctx.arc(cx - size*0.17, cy - size*0.04, size*0.04, 0, Math.PI*2); ctx.fill();
+      ctx.beginPath(); ctx.arc(cx + size*0.23, cy - size*0.04, size*0.04, 0, Math.PI*2); ctx.fill();
+      // Smile
+      ctx.strokeStyle = '#000'; ctx.lineWidth = size*0.05; ctx.lineCap = 'round';
+      ctx.beginPath(); ctx.arc(cx, cy + size*0.15, size*0.12, 0.1, Math.PI - 0.1); ctx.stroke();
+    }
+    function drawMascotCrown(ctx, cx, cy, size, color) {
+      // Crown body
+      ctx.fillStyle = color;
+      ctx.beginPath();
+      ctx.moveTo(cx - size*0.7, cy + size*0.3); ctx.lineTo(cx - size*0.7, cy - size*0.3);
+      ctx.lineTo(cx - size*0.35, cy); ctx.lineTo(cx, cy - size*0.7);
+      ctx.lineTo(cx + size*0.35, cy); ctx.lineTo(cx + size*0.7, cy - size*0.3);
+      ctx.lineTo(cx + size*0.7, cy + size*0.3); ctx.closePath(); ctx.fill();
+      // Base
+      ctx.fillStyle = color; ctx.beginPath(); ctx.roundRect(cx - size*0.75, cy + size*0.3, size*1.5, size*0.35, 6); ctx.fill();
+      // Gems
+      ctx.fillStyle = '#FF4444'; ctx.beginPath(); ctx.arc(cx, cy + size*0.05, size*0.1, 0, Math.PI*2); ctx.fill();
+      ctx.fillStyle = '#4444FF'; ctx.beginPath(); ctx.arc(cx - size*0.4, cy + size*0.15, size*0.07, 0, Math.PI*2); ctx.fill();
+      ctx.beginPath(); ctx.arc(cx + size*0.4, cy + size*0.15, size*0.07, 0, Math.PI*2); ctx.fill();
+      // Eyes
+      ctx.fillStyle = '#000'; ctx.beginPath(); ctx.arc(cx - size*0.25, cy + size*0.5, size*0.08, 0, Math.PI*2); ctx.fill();
+      ctx.beginPath(); ctx.arc(cx + size*0.25, cy + size*0.5, size*0.08, 0, Math.PI*2); ctx.fill();
+      ctx.fillStyle = '#FFF'; ctx.beginPath(); ctx.arc(cx - size*0.22, cy + size*0.47, size*0.03, 0, Math.PI*2); ctx.fill();
+      ctx.beginPath(); ctx.arc(cx + size*0.28, cy + size*0.47, size*0.03, 0, Math.PI*2); ctx.fill();
+    }
+    function drawMascotTrophy(ctx, cx, cy, size, color) {
+      // Cup
+      ctx.fillStyle = color;
+      ctx.beginPath(); ctx.arc(cx, cy - size*0.1, size*0.6, Math.PI, 0); ctx.lineTo(cx + size*0.35, cy + size*0.4);
+      ctx.lineTo(cx - size*0.35, cy + size*0.4); ctx.closePath(); ctx.fill();
+      // Handles
+      ctx.strokeStyle = color; ctx.lineWidth = size*0.12; ctx.lineCap = 'round';
+      ctx.beginPath(); ctx.arc(cx - size*0.65, cy, size*0.25, -Math.PI*0.5, Math.PI*0.5); ctx.stroke();
+      ctx.beginPath(); ctx.arc(cx + size*0.65, cy, size*0.25, Math.PI*0.5, -Math.PI*0.5); ctx.stroke();
+      // Stem + base
+      ctx.fillStyle = color; ctx.fillRect(cx - size*0.08, cy + size*0.4, size*0.16, size*0.35);
+      ctx.beginPath(); ctx.roundRect(cx - size*0.4, cy + size*0.7, size*0.8, size*0.15, 6); ctx.fill();
+      // Star
+      ctx.fillStyle = '#FFF'; ctx.font = `bold ${size*0.5}px sans-serif`; ctx.textAlign = 'center'; ctx.textBaseline = 'middle';
+      ctx.fillText('★', cx, cy - size*0.05);
+      // Eyes
+      ctx.fillStyle = '#000'; ctx.beginPath(); ctx.arc(cx - size*0.2, cy + size*0.15, size*0.07, 0, Math.PI*2); ctx.fill();
+      ctx.beginPath(); ctx.arc(cx + size*0.2, cy + size*0.15, size*0.07, 0, Math.PI*2); ctx.fill();
+      ctx.fillStyle = '#FFF'; ctx.beginPath(); ctx.arc(cx - size*0.17, cy + size*0.12, size*0.03, 0, Math.PI*2); ctx.fill();
+      ctx.beginPath(); ctx.arc(cx + size*0.23, cy + size*0.12, size*0.03, 0, Math.PI*2); ctx.fill();
+    }
+
+    // ===== SHARE AS IMAGE (IG Story 1080x1920) =====
+    function generateShareImage() {
+      const r = results.find(r => score >= r.min && score <= r.max);
+      const pd = getPosterData(score);
+      const canvas = document.getElementById('shareCanvas');
+      const ctx = canvas.getContext('2d');
+      const W = 1080, H = 1920;
+      canvas.width = W;
+      canvas.height = H;
+      const PAD = 56;
+
+      // --- Background ---
+      ctx.fillStyle = pd.bg;
+      ctx.fillRect(0, 0, W, H);
+
+      // --- Decorative scattered elements ---
+      function drawStar(x, y, r, color) {
+        ctx.fillStyle = color; ctx.beginPath();
+        for (let i = 0; i < 5; i++) {
+          const a = (i * 4 * Math.PI / 5) - Math.PI / 2;
+          const method = i === 0 ? 'moveTo' : 'lineTo';
+          ctx[method](x + r * Math.cos(a), y + r * Math.sin(a));
+        }
+        ctx.closePath(); ctx.fill();
+      }
+      function drawSmiley(x, y, size, color) {
+        ctx.fillStyle = color; ctx.beginPath(); ctx.arc(x, y, size, 0, Math.PI*2); ctx.fill();
+        ctx.fillStyle = pd.bg; ctx.beginPath(); ctx.arc(x-size*0.3, y-size*0.15, size*0.15, 0, Math.PI*2); ctx.fill();
+        ctx.beginPath(); ctx.arc(x+size*0.3, y-size*0.15, size*0.15, 0, Math.PI*2); ctx.fill();
+        ctx.strokeStyle = pd.bg; ctx.lineWidth = size*0.12; ctx.lineCap = 'round';
+        ctx.beginPath(); ctx.arc(x, y+size*0.1, size*0.3, 0.2, Math.PI-0.2); ctx.stroke();
+      }
+      // Top-left corner elements
+      drawStar(120, 200, 20, pd.accent);
+      drawStar(80, 350, 12, 'rgba(255,255,255,0.15)');
+      drawSmiley(950, 280, 32, pd.accent);
+      drawStar(980, 420, 16, 'rgba(255,255,255,0.2)');
+      // Scattered dots
+      [140,320,500,700,900,1100,1350,1500].forEach((dy,i) => {
+        const dx = (i % 2 === 0) ? 60 + Math.random()*80 : W - 60 - Math.random()*80;
+        ctx.fillStyle = 'rgba(255,255,255,0.06)'; ctx.beginPath(); ctx.arc(dx, dy, 4 + Math.random()*4, 0, Math.PI*2); ctx.fill();
+      });
+
+      // --- Top info bar ---
+      ctx.font = '500 24px "Noto Sans TC", sans-serif'; ctx.textBaseline = 'top';
+      ctx.fillStyle = 'rgba(255,255,255,0.3)'; ctx.textAlign = 'left';
+      ctx.fillText('2026', PAD, PAD);
+      ctx.fillText('#周杰倫粉絲', PAD, PAD + 34);
+      ctx.fillText('#大調查', PAD, PAD + 68);
+      ctx.textAlign = 'right';
+      ctx.fillText('#JayChou', W - PAD, PAD);
+      ctx.fillText(`Score ${score}/${questions.length}`, W - PAD, PAD + 34);
+
+      // --- Big vertical side text ---
+      ctx.save();
+      ctx.translate(W - 30, H * 0.72);
+      ctx.rotate(-Math.PI / 2);
+      ctx.font = '900 110px "Noto Sans TC", sans-serif';
+      ctx.fillStyle = 'rgba(255,255,255,0.04)';
+      ctx.textAlign = 'center'; ctx.textBaseline = 'middle';
+      ctx.fillText(pd.bigWord, 0, 0);
+      ctx.restore();
+
+      // --- Left vertical text ---
+      ctx.save();
+      ctx.translate(36, H * 0.45);
+      ctx.rotate(-Math.PI / 2);
+      ctx.font = '900 56px "Noto Sans TC", sans-serif';
+      ctx.fillStyle = 'rgba(255,255,255,0.06)';
+      ctx.textAlign = 'center'; ctx.textBaseline = 'middle';
+      ctx.fillText('周杰倫粉絲大調查 (2026)', 0, 0);
+      ctx.restore();
+
+      // --- Big English word at top ---
+      ctx.font = '900 120px "Noto Sans TC", sans-serif';
+      ctx.fillStyle = pd.accent;
+      ctx.textAlign = 'left'; ctx.textBaseline = 'top';
+      ctx.fillText(pd.bigWord, PAD, 180);
+
+      // --- Center frame with mascot ---
+      const frameX = (W - 560) / 2, frameY = 360, frameW = 560, frameH = 520;
+      ctx.fillStyle = 'rgba(255,255,255,0.04)';
+      ctx.beginPath(); ctx.roundRect(frameX, frameY, frameW, frameH, 24); ctx.fill();
+      ctx.strokeStyle = pd.accent; ctx.lineWidth = 3;
+      ctx.beginPath(); ctx.roundRect(frameX, frameY, frameW, frameH, 24); ctx.stroke();
+
+      // Draw mascot inside frame
+      pd.mascotFn(ctx, W/2, frameY + frameH/2 + 10, 130, pd.accent);
+
+      // Deco words near mascot
+      ctx.font = '700 28px "Noto Sans TC", sans-serif'; ctx.fillStyle = pd.accent; ctx.textAlign = 'left';
+      pd.deco.forEach((word, i) => {
+        const dx = (i % 2 === 0) ? frameX + 16 : frameX + frameW - ctx.measureText(word).width - 16;
+        ctx.fillText(word, dx, frameY + 24 + i * 180);
+      });
+
+      // Small smiley next to mascot
+      drawSmiley(frameX + frameW - 60, frameY + frameH - 60, 22, pd.accent);
+
+      // --- Level title (huge) ---
+      const titleY = frameY + frameH + 40;
+      ctx.font = '900 96px "Noto Sans TC", sans-serif';
+      ctx.fillStyle = '#FFFFFF';
+      ctx.textAlign = 'center'; ctx.textBaseline = 'top';
+      ctx.fillText(pd.bigWordCN, W/2, titleY);
+
+      // --- Ticker band ---
+      const tickerY = titleY + 130;
+      ctx.fillStyle = pd.accent;
+      ctx.fillRect(0, tickerY, W, 52);
+      ctx.font = '700 22px "Noto Sans TC", sans-serif';
+      ctx.fillStyle = pd.bg; ctx.textAlign = 'left'; ctx.textBaseline = 'middle';
+      const tickStr = '  · DANCE · DANCE · DANCE · DANCE · DANCE · DANCE · DANCE · DANCE · DANCE · DANCE · DANCE · ';
+      ctx.fillText(tickStr, 0, tickerY + 26);
+
+      // --- Tags section ---
+      const tagsY = tickerY + 80;
+      ctx.font = '700 34px "Noto Sans TC", sans-serif';
+      ctx.textAlign = 'center'; ctx.textBaseline = 'top';
+
+      // Draw tags as scattered bold text
+      const allTags = pd.tags;
+      allTags.forEach((tag, i) => {
+        const ty = tagsY + i * 56;
+        // Tag pill bg
+        const tw = ctx.measureText(tag).width;
+        const px = (W - tw) / 2 - 20;
+        ctx.fillStyle = 'rgba(255,255,255,0.06)';
+        ctx.beginPath(); ctx.roundRect(px, ty - 4, tw + 40, 48, 24); ctx.fill();
+        ctx.fillStyle = pd.accent;
+        ctx.fillText(tag, W/2, ty);
+      });
+
+      // --- Traits as small text ---
+      const traitsY = tagsY + allTags.length * 56 + 30;
+      ctx.font = '500 28px "Noto Sans TC", sans-serif';
+      ctx.fillStyle = 'rgba(255,255,255,0.5)';
+      pd.traits.forEach((trait, i) => {
+        ctx.fillText(trait, W/2, traitsY + i * 46);
+      });
+
+      // --- Bottom section ---
+      // Score display
+      const bottomY = H - 260;
+      ctx.font = '900 48px "Noto Sans TC", sans-serif';
+      ctx.fillStyle = pd.accent; ctx.textAlign = 'center'; ctx.textBaseline = 'top';
+      ctx.fillText(`${score} / ${questions.length}`, W/2, bottomY);
+      ctx.font = '500 24px "Noto Sans TC", sans-serif';
+      ctx.fillStyle = 'rgba(255,255,255,0.3)';
+      ctx.fillText('答對題數', W/2, bottomY + 60);
+
+      // Bottom ticker
+      ctx.fillStyle = pd.accent;
+      ctx.fillRect(0, H - 140, W, 48);
+      ctx.font = '700 20px "Noto Sans TC", sans-serif';
+      ctx.fillStyle = pd.bg; ctx.textAlign = 'left'; ctx.textBaseline = 'middle';
+      const btTicker = '  · 你也來測測看 · 周杰倫粉絲大調查 · @韭點開始 · JAY CHOU QUIZ · fromnineon ·';
+      ctx.fillText(btTicker.repeat(2), 0, H - 116);
+
+      // Brand
+      ctx.font = '700 28px "Noto Sans TC", sans-serif';
+      ctx.fillStyle = 'rgba(255,255,255,0.4)'; ctx.textAlign = 'center'; ctx.textBaseline = 'top';
+      ctx.fillText('by @韭點開始 fromnineon', W/2, H - 76);
+
+      // --- Export (show only, no auto-download) ---
+      canvas.toBlob(blob => {
+        const url = URL.createObjectURL(blob);
+        document.getElementById('shareImg').src = url;
+        window._lastShareBlob = blob;
+      }, 'image/png');
+    }
+
+    function downloadShareImage() {
+      const blob = window._lastShareBlob;
+      if (!blob) return;
+      if (navigator.share && navigator.canShare) {
+        const file = new File([blob], 'jay-quiz-result.png', { type: 'image/png' });
+        if (navigator.canShare({ files: [file] })) {
+          navigator.share({ files: [file], title: '周杰倫粉絲大調查' }).catch(() => {});
+          return;
+        }
+      }
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement('a'); a.href = url; a.download = 'jay-quiz-result.png'; a.click();
+      showToast('圖片已下載！');
+    }
+
+    function shareText() {
+      const r = results.find(r => score >= r.min && score <= r.max);
+      const text = `${r.emoji} 周杰倫粉絲大調查：我答對了 ${score}/${questions.length} 題！\n我的等級是「${r.title}」\n${r.subtitle}\n\n你也來測測 👉 ${window.location.href}\nby @韭點開始`;
+
+      if (navigator.share) {
+        navigator.share({ title: '周杰倫粉絲大調查', text: text }).catch(() => copyToClipboard(text));
+      } else {
+        copyToClipboard(text);
+      }
+    }
+
+    function copyToClipboard(text) {
+      navigator.clipboard.writeText(text).then(() => showToast('已複製到剪貼簿！'));
+    }
+
+    // ===== TEST: Jump to result =====
+    function previewResult(fakeScore) {
+      score = fakeScore;
+      showResult();
+    }
+
+    function showToast(msg) {
+      const toast = document.getElementById('toast');
+      toast.textContent = msg;
+      toast.classList.add('show');
+      setTimeout(() => toast.classList.remove('show'), 2500);
+    }
+  </script>
+</body>
+</html>
