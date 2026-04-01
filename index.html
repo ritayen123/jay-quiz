@@ -1617,9 +1617,37 @@
       ctx.fillText(btTicker.repeat(2), 0, H - 116);
 
       // Brand
+      ctx.fillStyle = 'rgba(255,255,255,0.4)'; ctx.textBaseline = 'middle';
+      const brandY = H - 60;
+      const brandLeft = 'by 韭點開始 ';
+      const brandRight = ' @from_nine_on';
       ctx.font = '700 28px "Noto Sans TC", sans-serif';
-      ctx.fillStyle = 'rgba(255,255,255,0.4)'; ctx.textAlign = 'center'; ctx.textBaseline = 'top';
-      ctx.fillText('by @韭點開始 fromnineon', W/2, H - 76);
+      ctx.textAlign = 'center';
+      const leftW = ctx.measureText(brandLeft).width;
+      const rightW = ctx.measureText(brandRight).width;
+      const igSize = 22;
+      const totalW = leftW + igSize + rightW;
+      const startX = (W - totalW) / 2;
+      // Draw left text
+      ctx.textAlign = 'left';
+      ctx.fillText(brandLeft, startX, brandY);
+      // Draw IG icon (rounded rect + circle + dot)
+      const ix = startX + leftW;
+      const iy = brandY - igSize/2;
+      const r = 5;
+      ctx.strokeStyle = 'rgba(255,255,255,0.4)'; ctx.lineWidth = 2;
+      ctx.beginPath();
+      ctx.moveTo(ix+r, iy); ctx.lineTo(ix+igSize-r, iy); ctx.quadraticCurveTo(ix+igSize, iy, ix+igSize, iy+r);
+      ctx.lineTo(ix+igSize, iy+igSize-r); ctx.quadraticCurveTo(ix+igSize, iy+igSize, ix+igSize-r, iy+igSize);
+      ctx.lineTo(ix+r, iy+igSize); ctx.quadraticCurveTo(ix, iy+igSize, ix, iy+igSize-r);
+      ctx.lineTo(ix, iy+r); ctx.quadraticCurveTo(ix, iy, ix+r, iy);
+      ctx.closePath(); ctx.stroke();
+      ctx.beginPath(); ctx.arc(ix+igSize/2, iy+igSize/2, igSize*0.3, 0, Math.PI*2); ctx.stroke();
+      ctx.beginPath(); ctx.arc(ix+igSize*0.75, iy+igSize*0.25, 2, 0, Math.PI*2); ctx.fillStyle = 'rgba(255,255,255,0.4)'; ctx.fill();
+      // Draw right text
+      ctx.font = '700 28px "Noto Sans TC", sans-serif';
+      ctx.fillStyle = 'rgba(255,255,255,0.4)'; ctx.textAlign = 'left';
+      ctx.fillText(brandRight, ix + igSize, brandY);
 
       // --- Export (show only, no auto-download) ---
       canvas.toBlob(blob => {
