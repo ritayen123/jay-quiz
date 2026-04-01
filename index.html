@@ -437,9 +437,12 @@
       display: flex;
       gap: 10px;
       margin-top: 16px;
+      flex-wrap: wrap;
     }
     .fill-input {
       flex: 1;
+      min-width: 0;
+      width: 100%;
       background: rgba(255,255,255,0.06);
       border: 2px solid rgba(255,255,255,0.15);
       border-radius: 3px;
@@ -701,6 +704,8 @@
       .result-score-box { padding: 16px 20px; }
       .result-buttons { flex-direction: column; align-items: center; }
       .start-stats { gap: 20px; }
+      .fill-wrap { flex-direction: column; }
+      .btn-submit { width: 100%; }
     }
 
     @media (max-width: 380px) {
