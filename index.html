@@ -2,7 +2,7 @@
 <html lang="zh-TW">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
   <title>周杰倫粉絲大調查 | 韭點開始</title>
   <meta name="description" content="你是真杰迷還是路人甲？13 題趣味測驗，空耳歌詞、奶茶冷知識、NFT 事件通通考！由韭點開始製作。" />
   <meta property="og:title" content="周杰倫粉絲大調查 | 韭點開始" />
@@ -11,6 +11,7 @@
   <meta property="og:locale" content="zh_TW" />
   <meta name="twitter:card" content="summary_large_image" />
   <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🎤</text></svg>" />
+  <script src="https://unpkg.com/lucide@latest"></script>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=Noto+Sans+TC:wght@400;500;700;900&display=swap" rel="stylesheet" />
@@ -27,7 +28,7 @@
     }
 
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-    html { scroll-behavior: smooth; }
+    html { scroll-behavior: smooth; -webkit-tap-highlight-color: transparent; }
 
     body {
       font-family: 'Noto Sans TC', sans-serif;
@@ -51,6 +52,7 @@
       background-size: 48px 48px;
       pointer-events: none;
       z-index: 0;
+      will-change: transform;
     }
 
     .bg-glow {
@@ -61,6 +63,7 @@
       transform: translate(-50%, -50%);
       pointer-events: none;
       z-index: 0;
+      will-change: transform;
     }
 
     .pixel-bg {
@@ -69,6 +72,7 @@
       pointer-events: none;
       overflow: hidden;
       z-index: 0;
+      will-change: transform;
     }
     .pixel-block {
       position: absolute;
@@ -90,6 +94,9 @@
       max-width: 680px;
       margin: 0 auto;
       padding: 24px;
+      padding-left: max(24px, env(safe-area-inset-left));
+      padding-right: max(24px, env(safe-area-inset-right));
+      padding-bottom: max(24px, env(safe-area-inset-bottom));
       min-height: 100vh;
       display: flex;
       flex-direction: column;
@@ -102,10 +109,15 @@
     .screen.active { display: flex; flex-direction: column; align-items: center; }
 
     /* ========= START SCREEN ========= */
-    .start-emoji {
-      font-size: 72px;
+    .start-icon {
       margin-bottom: 24px;
       animation: bounce 2s ease-in-out infinite;
+      color: var(--lime);
+    }
+    .start-icon svg {
+      width: 72px;
+      height: 72px;
+      stroke-width: 1.5;
     }
     @keyframes bounce {
       0%, 100% { transform: translateY(0); }
@@ -171,6 +183,10 @@
     .btn-start:hover {
       transform: translateY(-3px);
       box-shadow: 0 6px 24px rgba(170,249,82,0.4);
+    }
+    .btn-start:active {
+      transform: translateY(-1px);
+      box-shadow: 0 2px 12px rgba(170,249,82,0.3);
     }
 
     .brand-tag {
@@ -273,10 +289,17 @@
       transition: all 0.2s;
       text-align: left;
       line-height: 1.5;
+      touch-action: manipulation;
+      -webkit-user-select: none;
+      user-select: none;
     }
     .option-btn:hover:not(.disabled) {
       background: rgba(170,249,82,0.08);
       border-color: rgba(170,249,82,0.3);
+    }
+    .option-btn:active:not(.disabled) {
+      background: rgba(170,249,82,0.15);
+      border-color: rgba(170,249,82,0.5);
     }
     .option-btn .option-letter {
       flex-shrink: 0;
@@ -315,6 +338,10 @@
     .option-img-btn:hover:not(.disabled) {
       border-color: rgba(170,249,82,0.5);
       transform: scale(1.02);
+    }
+    .option-img-btn:active:not(.disabled) {
+      border-color: var(--lime);
+      transform: scale(0.98);
     }
     .option-img-btn img {
       width: 100%;
@@ -425,6 +452,7 @@
     }
     .fill-input:focus {
       border-color: var(--lime);
+      box-shadow: 0 0 0 3px rgba(170,249,82,0.15);
     }
     .fill-input::placeholder {
       color: rgba(255,255,255,0.25);
@@ -456,6 +484,10 @@
     .btn-submit:hover {
       transform: translateY(-2px);
       box-shadow: 0 4px 16px rgba(170,249,82,0.4);
+    }
+    .btn-submit:active:not(:disabled) {
+      transform: translateY(0);
+      box-shadow: 0 2px 8px rgba(170,249,82,0.3);
     }
     .btn-submit:disabled {
       opacity: 0.4;
@@ -489,6 +521,10 @@
     .btn-next:hover {
       transform: translateY(-2px);
       box-shadow: 0 4px 16px rgba(170,249,82,0.4);
+    }
+    .btn-next:active {
+      transform: translateY(0);
+      box-shadow: 0 2px 8px rgba(170,249,82,0.3);
     }
 
     /* ========= RESULT SCREEN ========= */
@@ -539,6 +575,9 @@
       transform: translateY(-2px);
       box-shadow: 0 4px 16px rgba(241,185,225,0.4);
     }
+    .btn-share:active {
+      transform: translateY(0);
+    }
 
     .btn-retry {
       display: inline-flex;
@@ -578,6 +617,9 @@
       transform: translateY(-2px);
       box-shadow: 0 6px 24px rgba(170,249,82,0.4);
     }
+    .btn-ig:active {
+      transform: translateY(0);
+    }
 
     .result-brand {
       margin-top: 16px;
@@ -589,41 +631,6 @@
       text-decoration: none;
     }
     .result-brand a:hover { text-decoration: underline; }
-
-    /* ========= TEST PANEL (remove before deploy) ========= */
-    .test-panel {
-      margin-top: 40px;
-      padding: 20px;
-      border: 1px dashed rgba(241,185,225,0.3);
-      border-radius: 4px;
-      display: flex;
-      flex-direction: column;
-      gap: 10px;
-      width: 100%;
-      max-width: 380px;
-    }
-    .test-label {
-      font-size: 12px;
-      color: var(--pink);
-      text-align: center;
-      margin-bottom: 4px;
-    }
-    .test-btn {
-      background: rgba(241,185,225,0.1);
-      border: 1px solid rgba(241,185,225,0.25);
-      color: var(--white);
-      padding: 12px 16px;
-      border-radius: 3px;
-      font-family: 'Noto Sans TC', sans-serif;
-      font-size: 14px;
-      cursor: pointer;
-      transition: all 0.2s;
-      text-align: left;
-    }
-    .test-btn:hover {
-      background: rgba(241,185,225,0.2);
-      border-color: var(--pink);
-    }
 
     /* ========= TOAST ========= */
     .toast {
@@ -649,12 +656,30 @@
 
     /* ========= RESPONSIVE ========= */
     @media (max-width: 600px) {
-      .container { padding: 16px; }
+      .container { padding: 16px; padding-left: max(16px, env(safe-area-inset-left)); padding-right: max(16px, env(safe-area-inset-right)); }
       .question-card { padding: 24px 18px; }
       .option-btn { padding: 12px 14px; font-size: 14px; }
       .result-score-box { padding: 16px 20px; }
       .result-buttons { flex-direction: column; align-items: center; }
       .start-stats { gap: 20px; }
+    }
+
+    @media (max-width: 380px) {
+      .container { padding: 12px; }
+      .question-card { padding: 18px 14px; }
+      .option-btn { padding: 10px 12px; font-size: 13px; gap: 10px; }
+      .btn-start { padding: 14px 36px; font-size: 16px; }
+      .fill-input { font-size: 16px; padding: 12px 14px; }
+      .btn-submit { padding: 12px 18px; font-size: 15px; }
+      .share-preview-wrap { max-width: 100%; }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+      }
     }
   </style>
 </head>
@@ -669,27 +694,18 @@
 
     <!-- ===== START SCREEN ===== -->
     <div class="screen active" id="startScreen">
-      <div class="start-emoji">🎤</div>
+      <div class="start-icon"><i data-lucide="mic" ></i></div>
       <h1 class="start-title">
         <span class="accent">周杰倫</span><br>
         <span class="accent-teal">粉絲大調查</span>
       </h1>
       <p class="start-desc">
         空耳歌詞、奶茶冷知識、NFT 被盜事件、比特幣風波⋯⋯<br>
-        24 道題目，測測你是真杰迷還是路人甲！
+        23 道題目，測測你是真杰迷還是路人甲！
       </p>
-      <button class="btn-start" onclick="startQuiz()">開始測驗 →</button>
+      <button class="btn-start" onclick="startQuiz()">開始測驗 <i data-lucide="arrow-right" style="width:20px;height:20px"></i></button>
       <div class="brand-tag">
         Made by <a href="https://www.instagram.com/from_nine_on" target="_blank" rel="noopener">@韭點開始</a>
-      </div>
-      <!-- TEST: Preview all 5 result levels (remove before deploy) -->
-      <div class="test-panel">
-        <div class="test-label">🔧 測試模式：預覽五種結果</div>
-        <button class="test-btn" onclick="previewResult(3)">😅 滷蛋大師 (0-5)</button>
-        <button class="test-btn" onclick="previewResult(8)">🎙️ 倫到你才唱 (6-10)</button>
-        <button class="test-btn" onclick="previewResult(14)">🧋 資深杰迷 (11-17)</button>
-        <button class="test-btn" onclick="previewResult(19)">👑 哎唷不錯喔 (18-21)</button>
-        <button class="test-btn" onclick="previewResult(23)">🏆 周董都沒你懂 (22-24)</button>
       </div>
     </div>
 
@@ -720,12 +736,12 @@
       <div id="sharePreview" class="share-preview-wrap">
         <img id="shareImg" alt="分享圖片" />
       </div>
-      <div class="share-hint">長按圖片可儲存 📱</div>
+      <div class="share-hint">長按圖片可儲存 <i data-lucide="smartphone" style="width:14px;height:14px;display:inline-block;vertical-align:middle"></i></div>
       <div class="result-buttons">
-        <button class="btn-share" onclick="downloadShareImage()">💾 下載圖片</button>
-        <button class="btn-share" style="background:var(--teal)" onclick="shareText()">📋 複製文字分享</button>
-        <button class="btn-retry" onclick="retryQuiz()">🔄 再測一次</button>
-        <a class="btn-ig" href="https://www.instagram.com/from_nine_on" target="_blank" rel="noopener">追蹤韭點開始 IG</a>
+        <button class="btn-share" onclick="downloadShareImage()"><i data-lucide="download" style="width:18px;height:18px"></i> 下載圖片</button>
+        <button class="btn-share" style="background:var(--teal)" onclick="shareText()"><i data-lucide="clipboard-copy" style="width:18px;height:18px"></i> 複製文字分享</button>
+        <button class="btn-retry" onclick="retryQuiz()"><i data-lucide="refresh-cw" style="width:18px;height:18px"></i> 再測一次</button>
+        <a class="btn-ig" href="https://www.instagram.com/from_nine_on" target="_blank" rel="noopener"><i data-lucide="instagram" style="width:18px;height:18px"></i> 追蹤韭點開始 IG</a>
       </div>
       <div class="result-brand">
         一個關於周杰倫的粉絲測驗 by <a href="https://fromnineon.com" target="_blank" rel="noopener">韭點開始 fromnineon</a>
@@ -737,6 +753,9 @@
   <div class="toast" id="toast">已複製到剪貼簿！</div>
 
   <script>
+    // ===== INIT LUCIDE ICONS =====
+    lucide.createIcons();
+
     // ===== PIXEL BACKGROUND =====
     (function() {
       const bg = document.getElementById('pixelBg');
@@ -778,12 +797,6 @@
         options: ['蕭敬騰', '林俊傑', '陳奕迅', '五月天阿信'],
         answer: 1,
         explain: '周杰倫帶林俊傑 JJ 去喝珍奶並發 IG，JJ 粉絲擔心他的體重管理，登上微博熱搜。'
-      },
-      {
-        q: '導演劉偉強第一次聽周杰倫的歌，反應是什麼？',
-        options: ['太好聽了', '聽不懂他在唱什麼', '馬上決定用他', '覺得他應該去當 DJ'],
-        answer: 1,
-        explain: '劉偉強拍《頭文字D》時，別人推薦周杰倫很紅，但他根本聽不懂歌詞在唱什麼。後來周杰倫靠做功課的飄移手勢保住了男一。'
       },
       {
         q: '周杰倫當初為什麼要開 Instagram？原因超好笑——',
@@ -910,11 +923,11 @@
 
     // ===== RESULTS =====
     const results = [
-      { min: 0,  max: 5,  emoji: '😅', title: '滷蛋大師', subtitle: '你確定聽過周杰倫嗎？建議先從《晴天》聽起，不然連空耳都沒資格。' },
-      { min: 6,  max: 10, emoji: '🎙️', title: '倫到你才唱', subtitle: '至少知道幾首主打歌，但冷知識這塊⋯⋯你可能只是在 KTV 亂唱的等級。' },
-      { min: 11, max: 17, emoji: '🧋', title: '資深杰迷', subtitle: '不錯喔，真的有在聽！奶茶知識和空耳都難不倒你，周董應該會請你喝一杯 machi machi。' },
-      { min: 18, max: 21, emoji: '👑', title: '哎唷不錯喔', subtitle: '你是不是住在周杰倫家隔壁？連 NFT 被偷和比特幣風波都瞭若指掌。' },
-      { min: 22, max: 24, emoji: '🏆', title: '周董都沒你懂', subtitle: '請問方文山是你嗎？這種程度已經可以出書了。建議直接應徵杰威爾音樂。' }
+      { min: 0,  max: 5,  icon: 'egg', title: '滷蛋大師', subtitle: '你確定聽過周杰倫嗎？建議先從《晴天》聽起，不然連空耳都沒資格。' },
+      { min: 6,  max: 10, icon: 'mic', title: '倫到你才唱', subtitle: '至少知道幾首主打歌，但冷知識這塊⋯⋯你可能只是在 KTV 亂唱的等級。' },
+      { min: 11, max: 16, icon: 'cup-soda', title: '資深杰迷', subtitle: '不錯喔，真的有在聽！奶茶知識和空耳都難不倒你，周董應該會請你喝一杯 machi machi。' },
+      { min: 17, max: 20, icon: 'crown', title: '哎唷不錯喔', subtitle: '你是不是住在周杰倫家隔壁？連 NFT 被偷和比特幣風波都瞭若指掌。' },
+      { min: 21, max: 23, icon: 'trophy', title: '周董都沒你懂', subtitle: '請問方文山是你嗎？這種程度已經可以出書了。建議直接應徵杰威爾音樂。' }
     ];
 
     // ===== STATE =====
@@ -967,7 +980,7 @@
         wrap.className = 'options';
         wrap.innerHTML = `
           <div class="fill-wrap">
-            <input type="text" class="fill-input" id="fillInput" placeholder="輸入答案⋯" autocomplete="off" />
+            <input type="text" class="fill-input" id="fillInput" placeholder="輸入答案⋯" autocomplete="off" autocapitalize="off" autocorrect="off" spellcheck="false" enterkeyhint="done" />
             <button class="btn-submit" id="btnFillSubmit" onclick="submitFill()">送出</button>
           </div>
           <div class="fill-answer-reveal" id="fillReveal"></div>
@@ -1026,7 +1039,7 @@
       exp.className = 'explanation show';
 
       const btnNext = document.getElementById('btnNext');
-      btnNext.textContent = currentQ < questions.length - 1 ? '下一題 →' : '看結果 🎉';
+      btnNext.textContent = currentQ < questions.length - 1 ? '下一題 →' : '看結果';
       btnNext.className = 'btn-next show';
     }
 
@@ -1054,7 +1067,7 @@
       exp.className = 'explanation show';
 
       const btnNext = document.getElementById('btnNext');
-      btnNext.textContent = currentQ < questions.length - 1 ? '下一題 →' : '看結果 🎉';
+      btnNext.textContent = currentQ < questions.length - 1 ? '下一題 →' : '看結果';
       btnNext.className = 'btn-next show';
     }
 
@@ -1080,15 +1093,15 @@
 
     // ===== POSTER DATA PER LEVEL =====
     const posterData = [
-      { // 0-3 滷蛋大師
+      { // 0-5 滷蛋大師
         bg: '#2A2A3E', accent: '#8888AA', highlight: '#FFFFFF',
         bigWord: '#BEGINNER', bigWordCN: '滷蛋大師',
-        tags: ['#周董含滷蛋你考試掛蛋', '#聽歌從不看詞', '#只會唱副歌', '#以為方文山是山名', '#空耳免疫體質'],
+        tags: ['#周董含滷蛋你考試掛蛋', '#聽歌從不看詞', '#只會唱副歌', '#以為方文山是山名'],
         traits: ['去KTV都是當分母', '覺得雙截棍是武器', '不用麻煩了不用麻煩了', '聽到前奏完全沒反應'],
         deco: [],
         mascotFn: drawMascotConfused
       },
-      { // 4-6 倫到你才唱
+      { // 6-10 倫到你才唱
         bg: '#1A0840', accent: '#F1B9E1', highlight: '#FFFFFF',
         bigWord: '#KARAOKE', bigWordCN: '倫到你才唱',
         tags: ['#七里香亂背', '#副歌達人', '#偶爾走音', '#奶茶只喝五十嵐'],
@@ -1096,7 +1109,7 @@
         deco: [],
         mascotFn: drawMascotMic
       },
-      { // 7-10 資深杰迷
+      { // 11-16 資深杰迷
         bg: '#002B7A', accent: '#5CE1FF', highlight: '#FFFFFF',
         bigWord: '#SUPER FAN', bigWordCN: '資深杰迷',
         tags: ['#空耳倒背如流', '#machi常客', '#演唱會必到', '#方文山精神導師'],
@@ -1104,7 +1117,7 @@
         deco: [],
         mascotFn: drawMascotBubbleTea
       },
-      { // 11-12 哎唷不錯喔
+      { // 17-20 哎唷不錯喔
         bg: '#1A0A3E', accent: '#FFD700', highlight: '#FFFFFF',
         bigWord: '#JAY CHOU?!', bigWordCN: '哎唷不錯喔',
         tags: ['#NFT被盜都知道', '#比特幣風波追蹤', '#場次如數家珍', '#小行星編號背得出'],
@@ -1112,7 +1125,7 @@
         deco: [],
         mascotFn: drawMascotCrown
       },
-      { // 13-14 周董都沒你懂
+      { // 21-23 周董都沒你懂
         bg: '#003D14', accent: '#AAF952', highlight: '#FFFFFF',
         bigWord: '#LEGEND', bigWordCN: '周董都沒你懂',
         tags: ['#方文山本人', '#歌詞正反都能唱', '#活字典', '#周杰倫宇宙'],
@@ -1125,8 +1138,8 @@
     function getPosterData(s) {
       if (s <= 5) return posterData[0];
       if (s <= 10) return posterData[1];
-      if (s <= 17) return posterData[2];
-      if (s <= 21) return posterData[3];
+      if (s <= 16) return posterData[2];
+      if (s <= 20) return posterData[3];
       return posterData[4];
     }
 
@@ -1365,35 +1378,14 @@
       ctx.fillText('#JayChou', W - PAD, PAD);
       ctx.fillText(`Score ${score}/${questions.length}`, W - PAD, PAD + 34);
 
-      // --- Big vertical side text ---
-      ctx.save();
-      ctx.translate(W - 30, H * 0.72);
-      ctx.rotate(-Math.PI / 2);
-      ctx.font = '900 110px "Noto Sans TC", sans-serif';
-      ctx.fillStyle = 'rgba(255,255,255,0.04)';
-      ctx.textAlign = 'center'; ctx.textBaseline = 'middle';
-      ctx.fillText(pd.bigWord, 0, 0);
-      ctx.restore();
-
-
       // --- Big English word at top ---
-      ctx.font = '900 120px "Noto Sans TC", sans-serif';
+      ctx.font = '900 100px "Noto Sans TC", sans-serif';
       ctx.fillStyle = pd.accent;
-      ctx.textAlign = 'left'; ctx.textBaseline = 'top';
-      ctx.fillText(pd.bigWord, PAD, 180);
-
-      // --- Left vertical text ---
-      ctx.save();
-      ctx.translate(36, H * 0.45);
-      ctx.rotate(-Math.PI / 2);
-      ctx.font = '900 56px "Noto Sans TC", sans-serif';
-      ctx.fillStyle = 'rgba(255,255,255,0.06)';
-      ctx.textAlign = 'center'; ctx.textBaseline = 'middle';
-      ctx.fillText('周杰倫粉絲大調查', 0, 0);
-      ctx.restore();
+      ctx.textAlign = 'center'; ctx.textBaseline = 'top';
+      ctx.fillText(pd.bigWord, W/2, 160);
 
       // --- Center frame with mascot ---
-      const frameX = (W - 560) / 2, frameY = 360, frameW = 560, frameH = 520;
+      const frameX = (W - 560) / 2, frameY = 320, frameW = 560, frameH = 520;
       ctx.fillStyle = 'rgba(255,255,255,0.04)';
       ctx.beginPath(); ctx.roundRect(frameX, frameY, frameW, frameH, 24); ctx.fill();
       ctx.strokeStyle = pd.accent; ctx.lineWidth = 3;
@@ -1481,30 +1473,49 @@
 
       // --- Export (show only, no auto-download) ---
       canvas.toBlob(blob => {
-        const url = URL.createObjectURL(blob);
-        document.getElementById('shareImg').src = url;
+        if (!blob) { showToast('圖片生成失敗，請重試'); return; }
         window._lastShareBlob = blob;
+        try {
+          const url = URL.createObjectURL(blob);
+          document.getElementById('shareImg').src = url;
+        } catch(e) {
+          // Fallback for in-app browsers that block blob URLs
+          const reader = new FileReader();
+          reader.onload = () => { document.getElementById('shareImg').src = reader.result; };
+          reader.readAsDataURL(blob);
+        }
       }, 'image/png');
     }
 
     function downloadShareImage() {
       const blob = window._lastShareBlob;
       if (!blob) return;
-      if (navigator.share && navigator.canShare) {
-        const file = new File([blob], 'jay-quiz-result.png', { type: 'image/png' });
-        if (navigator.canShare({ files: [file] })) {
-          navigator.share({ files: [file], title: '周杰倫粉絲大調查' }).catch(() => {});
-          return;
+      // Try Web Share API (works on native Safari/Chrome)
+      try {
+        if (navigator.share && navigator.canShare) {
+          const file = new File([blob], 'jay-quiz-result.png', { type: 'image/png' });
+          if (navigator.canShare({ files: [file] })) {
+            navigator.share({ files: [file], title: '周杰倫粉絲大調查' }).catch(() => {});
+            return;
+          }
         }
+      } catch(e) {}
+      // Try <a download> (works in normal browsers, blocked in IG/LINE)
+      try {
+        const url = URL.createObjectURL(blob);
+        const a = document.createElement('a');
+        a.href = url; a.download = 'jay-quiz-result.png'; a.click();
+        setTimeout(() => URL.revokeObjectURL(url), 5000);
+        showToast('圖片已下載！');
+      } catch(e) {
+        // In-app browser fallback: prompt long-press
+        showToast('請長按上方圖片來儲存');
       }
-      const url = URL.createObjectURL(blob);
-      const a = document.createElement('a'); a.href = url; a.download = 'jay-quiz-result.png'; a.click();
-      showToast('圖片已下載！');
     }
 
     function shareText() {
       const r = results.find(r => score >= r.min && score <= r.max);
-      const text = `${r.emoji} 周杰倫粉絲大調查：我答對了 ${score}/${questions.length} 題！\n我的等級是「${r.title}」\n${r.subtitle}\n\n你也來測測 👉 ${window.location.href}\nby @韭點開始`;
+      const text = `周杰倫粉絲大調查：我答對了 ${score}/${questions.length} 題！\n我的等級是「${r.title}」\n${r.subtitle}\n\n你也來測測 → ${window.location.href}\nby @韭點開始`;
 
       if (navigator.share) {
         navigator.share({ title: '周杰倫粉絲大調查', text: text }).catch(() => copyToClipboard(text));
@@ -1514,7 +1525,21 @@
     }
 
     function copyToClipboard(text) {
-      navigator.clipboard.writeText(text).then(() => showToast('已複製到剪貼簿！'));
+      if (navigator.clipboard && navigator.clipboard.writeText) {
+        navigator.clipboard.writeText(text)
+          .then(() => showToast('已複製到剪貼簿！'))
+          .catch(() => fallbackCopy(text));
+      } else {
+        fallbackCopy(text);
+      }
+    }
+    function fallbackCopy(text) {
+      const ta = document.createElement('textarea');
+      ta.value = text; ta.style.cssText = 'position:fixed;opacity:0';
+      document.body.appendChild(ta); ta.select();
+      try { document.execCommand('copy'); showToast('已複製到剪貼簿！'); }
+      catch(e) { showToast('複製失敗，請手動複製'); }
+      document.body.removeChild(ta);
     }
 
     // ===== TEST: Jump to result =====
