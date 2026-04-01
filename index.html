@@ -1028,7 +1028,7 @@
         wrap.className = 'options';
         wrap.innerHTML = `
           <div class="fill-wrap">
-            <input type="text" class="fill-input" id="fillInput" placeholder="輸入答案⋯" autocomplete="off" autocapitalize="off" autocorrect="off" spellcheck="false" enterkeyhint="done" />
+            <input type="text" class="fill-input" id="fillInput" placeholder="輸入答案（${q.answer.length}個字）" autocomplete="off" autocapitalize="off" autocorrect="off" spellcheck="false" enterkeyhint="done" maxlength="${q.answer.length + 5}" />
             <button class="btn-submit" id="btnFillSubmit" onclick="submitFill()">送出</button>
           </div>
           <div class="fill-answer-reveal" id="fillReveal"></div>
