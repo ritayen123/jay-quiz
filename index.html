@@ -1487,17 +1487,10 @@
         }
         ctx.closePath(); ctx.fill();
       }
-      function drawSmiley(x, y, size, color) {
-        ctx.fillStyle = color; ctx.beginPath(); ctx.arc(x, y, size, 0, Math.PI*2); ctx.fill();
-        ctx.fillStyle = pd.bg; ctx.beginPath(); ctx.arc(x-size*0.3, y-size*0.15, size*0.15, 0, Math.PI*2); ctx.fill();
-        ctx.beginPath(); ctx.arc(x+size*0.3, y-size*0.15, size*0.15, 0, Math.PI*2); ctx.fill();
-        ctx.strokeStyle = pd.bg; ctx.lineWidth = size*0.12; ctx.lineCap = 'round';
-        ctx.beginPath(); ctx.arc(x, y+size*0.1, size*0.3, 0.2, Math.PI-0.2); ctx.stroke();
-      }
       // Top-left corner elements
       drawStar(120, 200, 20, pd.accent);
       drawStar(80, 350, 12, 'rgba(255,255,255,0.15)');
-      drawSmiley(950, 280, 32, pd.accent);
+      drawStar(950, 280, 32, pd.accent);
       drawStar(980, 420, 16, 'rgba(255,255,255,0.2)');
       // Scattered dots
       [140,320,500,700,900,1100,1350,1500].forEach((dy,i) => {
@@ -1561,7 +1554,7 @@
       }
 
       // Small smiley next to mascot
-      drawSmiley(frameX + frameW - 60, frameY + frameH - 60, 22, pd.accent);
+      drawStar(frameX + frameW - 60, frameY + frameH - 60, 22, pd.accent);
 
       // --- Level title (huge) ---
       const titleY = frameY + frameH + 40;
