@@ -745,7 +745,7 @@
       </h1>
       <p class="start-desc">
         空耳歌詞、奶茶冷知識、NFT 被盜事件、比特幣風波⋯⋯<br>
-        39 道題目，測測你是真杰迷還是路人甲！
+        37 道題目，測測你是真杰迷還是路人甲！
       </p>
       <button class="btn-start" onclick="startQuiz()">開始測驗 <i data-lucide="arrow-right" style="width:20px;height:20px"></i></button>
       <div class="brand-tag">
@@ -754,11 +754,11 @@
       <!-- TEST: Preview all 5 result levels -->
       <div class="test-panel">
         <div class="test-label"><i data-lucide="wrench" style="width:14px;height:14px;display:inline-block;vertical-align:middle"></i> 測試模式：預覽五種結果</div>
-        <button class="test-btn" onclick="previewResult(4)"><i data-lucide="egg" style="width:16px;height:16px;display:inline-block;vertical-align:middle"></i> 滷蛋大師 (0-8)</button>
-        <button class="test-btn" onclick="previewResult(13)"><i data-lucide="mic" style="width:16px;height:16px;display:inline-block;vertical-align:middle"></i> 倫到你才唱 (9-17)</button>
-        <button class="test-btn" onclick="previewResult(23)"><i data-lucide="cup-soda" style="width:16px;height:16px;display:inline-block;vertical-align:middle"></i> 資深杰迷 (18-28)</button>
-        <button class="test-btn" onclick="previewResult(32)"><i data-lucide="crown" style="width:16px;height:16px;display:inline-block;vertical-align:middle"></i> 哎唷不錯喔 (29-35)</button>
-        <button class="test-btn" onclick="previewResult(38)"><i data-lucide="trophy" style="width:16px;height:16px;display:inline-block;vertical-align:middle"></i> 周董都沒你懂 (36-39)</button>
+        <button class="test-btn" onclick="previewResult(4)"><i data-lucide="egg" style="width:16px;height:16px;display:inline-block;vertical-align:middle"></i> 滷蛋大師 (0-7)</button>
+        <button class="test-btn" onclick="previewResult(12)"><i data-lucide="mic" style="width:16px;height:16px;display:inline-block;vertical-align:middle"></i> 倫到你才唱 (8-16)</button>
+        <button class="test-btn" onclick="previewResult(21)"><i data-lucide="cup-soda" style="width:16px;height:16px;display:inline-block;vertical-align:middle"></i> 資深杰迷 (17-26)</button>
+        <button class="test-btn" onclick="previewResult(30)"><i data-lucide="crown" style="width:16px;height:16px;display:inline-block;vertical-align:middle"></i> 哎唷不錯喔 (27-33)</button>
+        <button class="test-btn" onclick="previewResult(36)"><i data-lucide="trophy" style="width:16px;height:16px;display:inline-block;vertical-align:middle"></i> 周董都沒你懂 (34-37)</button>
       </div>
     </div>
 
@@ -942,12 +942,6 @@
         explain: '仔細聽開頭，周杰倫在唸「ㄅㄆㄇㄈㄉㄊㄋㄌㄍㄎㄏ⋯⋯」，把注音符號融進音樂裡，只有他想得到這種操作。'
       },
       {
-        q: '歌曲《星晴》開頭的跑車引擎聲，是借用誰的車子錄製的？',
-        options: ['吳宗憲', '劉畊宏', '林志穎', '周杰倫自己'],
-        answer: 0,
-        explain: '〈星晴〉開頭那段帥氣的引擎聲，據說是借吳宗憲的車子錄的。當時剛出道的周杰倫哪買得起跑車，只好借老闆的。'
-      },
-      {
         q: '《東風破》MV 中，周杰倫教女主角寫書法，他在紙上寫了什麼字？',
         options: ['杰', '愛', '屌', '愁'],
         answer: 2,
@@ -964,12 +958,6 @@
         options: ['頭文字D', '不能說的秘密', '天台', '大灌籃'],
         answer: 1,
         explain: '《不能說的秘密》2007 年上映，在母校淡江中學取景，主演桂綸鎂和黃秋生。周杰倫第一次當導演就拿下金馬獎最佳視覺效果，票房破億。'
-      },
-      {
-        q: '在好萊塢電影《乘風破浪》中，周杰倫飾演的角色叫什麼名字？',
-        options: ['Jay', 'Kato', 'Ken', 'Bruce'],
-        answer: 1,
-        explain: '在 2011 年《乘風破浪》（The Green Hornet）中，周杰倫飾演青蜂俠的日本助手 Kato，搭檔賽乘．羅根，是華語歌手打入好萊塢的代表作。'
       },
       {
         q: '周杰倫曾公開透露，他私底下有一個特殊的穿衣習慣是什麼？',
@@ -1072,11 +1060,11 @@
 
     // ===== RESULTS =====
     const results = [
-      { min: 0,  max: 8,  icon: 'egg', title: '滷蛋大師', subtitle: '你確定聽過周杰倫嗎？建議先從《晴天》聽起，不然連空耳都沒資格。' },
-      { min: 9,  max: 17, icon: 'mic', title: '倫到你才唱', subtitle: '至少知道幾首主打歌，但冷知識這塊⋯⋯你可能只是在 KTV 亂唱的等級。' },
-      { min: 18, max: 28, icon: 'cup-soda', title: '資深杰迷', subtitle: '不錯喔，真的有在聽！奶茶知識和空耳都難不倒你，周董應該會請你喝一杯 machi machi。' },
-      { min: 29, max: 35, icon: 'crown', title: '哎唷不錯喔', subtitle: '你是不是住在周杰倫家隔壁？連 NFT 被偷和比特幣風波都瞭若指掌。' },
-      { min: 36, max: 39, icon: 'trophy', title: '周董都沒你懂', subtitle: '請問方文山是你嗎？這種程度已經可以出書了。建議直接應徵杰威爾音樂。' }
+      { min: 0,  max: 7,  icon: 'egg', title: '滷蛋大師', subtitle: '你確定聽過周杰倫嗎？建議先從《晴天》聽起，不然連空耳都沒資格。' },
+      { min: 8,  max: 16, icon: 'mic', title: '倫到你才唱', subtitle: '至少知道幾首主打歌，但冷知識這塊⋯⋯你可能只是在 KTV 亂唱的等級。' },
+      { min: 17, max: 26, icon: 'cup-soda', title: '資深杰迷', subtitle: '不錯喔，真的有在聽！奶茶知識和空耳都難不倒你，周董應該會請你喝一杯 machi machi。' },
+      { min: 27, max: 33, icon: 'crown', title: '哎唷不錯喔', subtitle: '你是不是住在周杰倫家隔壁？連 NFT 被偷和比特幣風波都瞭若指掌。' },
+      { min: 34, max: 37, icon: 'trophy', title: '周董都沒你懂', subtitle: '請問方文山是你嗎？這種程度已經可以出書了。建議直接應徵杰威爾音樂。' }
     ];
 
     // ===== STATE =====
@@ -1242,7 +1230,7 @@
 
     // ===== POSTER DATA PER LEVEL =====
     const posterData = [
-      { // 0-8 滷蛋大師
+      { // 0-7 滷蛋大師
         bg: '#2A2A3E', accent: '#8888AA', highlight: '#FFFFFF',
         bigWord: '#BEGINNER', bigWordCN: '滷蛋大師',
         tags: ['#周董含滷蛋你考試掛蛋', '#聽歌從不看詞', '#只會唱副歌', '#以為方文山是山名'],
@@ -1250,7 +1238,7 @@
         deco: [],
         mascotFn: drawMascotConfused
       },
-      { // 9-17 倫到你才唱
+      { // 8-16 倫到你才唱
         bg: '#1A0840', accent: '#F1B9E1', highlight: '#FFFFFF',
         bigWord: '#KARAOKE', bigWordCN: '倫到你才唱',
         tags: ['#七里香亂背', '#副歌達人', '#偶爾走音', '#奶茶只喝五十嵐'],
@@ -1258,7 +1246,7 @@
         deco: [],
         mascotFn: drawMascotMic
       },
-      { // 18-28 資深杰迷
+      { // 17-26 資深杰迷
         bg: '#002B7A', accent: '#5CE1FF', highlight: '#FFFFFF',
         bigWord: '#SUPER FAN', bigWordCN: '資深杰迷',
         tags: ['#空耳倒背如流', '#machi常客', '#演唱會必到', '#方文山精神導師'],
@@ -1266,7 +1254,7 @@
         deco: [],
         mascotFn: drawMascotBubbleTea
       },
-      { // 29-35 哎唷不錯喔
+      { // 27-33 哎唷不錯喔
         bg: '#1A0A3E', accent: '#FFD700', highlight: '#FFFFFF',
         bigWord: '#JAY CHOU?!', bigWordCN: '哎唷不錯喔',
         tags: ['#NFT被盜都知道', '#比特幣風波追蹤', '#場次如數家珍', '#小行星編號背得出'],
@@ -1274,7 +1262,7 @@
         deco: [],
         mascotFn: drawMascotCrown
       },
-      { // 36-39 周董都沒你懂
+      { // 34-37 周董都沒你懂
         bg: '#003D14', accent: '#AAF952', highlight: '#FFFFFF',
         bigWord: '#LEGEND', bigWordCN: '周董都沒你懂',
         tags: ['#方文山本人', '#歌詞正反都能唱', '#活字典', '#周杰倫宇宙'],
@@ -1285,10 +1273,10 @@
     ];
 
     function getPosterData(s) {
-      if (s <= 8) return posterData[0];
-      if (s <= 17) return posterData[1];
-      if (s <= 28) return posterData[2];
-      if (s <= 35) return posterData[3];
+      if (s <= 7) return posterData[0];
+      if (s <= 16) return posterData[1];
+      if (s <= 26) return posterData[2];
+      if (s <= 33) return posterData[3];
       return posterData[4];
     }
 
