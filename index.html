@@ -632,6 +632,45 @@
     }
     .result-brand a:hover { text-decoration: underline; }
 
+    /* ========= TEST PANEL ========= */
+    .test-panel {
+      margin-top: 40px;
+      padding: 20px;
+      border: 1px dashed rgba(241,185,225,0.3);
+      border-radius: 4px;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      width: 100%;
+      max-width: 380px;
+    }
+    .test-label {
+      font-size: 12px;
+      color: var(--pink);
+      text-align: center;
+      margin-bottom: 4px;
+    }
+    .test-btn {
+      background: rgba(241,185,225,0.1);
+      border: 1px solid rgba(241,185,225,0.25);
+      color: var(--white);
+      padding: 12px 16px;
+      border-radius: 3px;
+      font-family: 'Noto Sans TC', sans-serif;
+      font-size: 14px;
+      cursor: pointer;
+      transition: all 0.2s;
+      text-align: left;
+      touch-action: manipulation;
+    }
+    .test-btn:hover {
+      background: rgba(241,185,225,0.2);
+      border-color: var(--pink);
+    }
+    .test-btn:active {
+      background: rgba(241,185,225,0.3);
+    }
+
     /* ========= TOAST ========= */
     .toast {
       position: fixed;
@@ -706,6 +745,15 @@
       <button class="btn-start" onclick="startQuiz()">開始測驗 <i data-lucide="arrow-right" style="width:20px;height:20px"></i></button>
       <div class="brand-tag">
         Made by <a href="https://www.instagram.com/from_nine_on" target="_blank" rel="noopener">@韭點開始</a>
+      </div>
+      <!-- TEST: Preview all 5 result levels -->
+      <div class="test-panel">
+        <div class="test-label"><i data-lucide="wrench" style="width:14px;height:14px;display:inline-block;vertical-align:middle"></i> 測試模式：預覽五種結果</div>
+        <button class="test-btn" onclick="previewResult(3)"><i data-lucide="egg" style="width:16px;height:16px;display:inline-block;vertical-align:middle"></i> 滷蛋大師 (0-5)</button>
+        <button class="test-btn" onclick="previewResult(8)"><i data-lucide="mic" style="width:16px;height:16px;display:inline-block;vertical-align:middle"></i> 倫到你才唱 (6-10)</button>
+        <button class="test-btn" onclick="previewResult(13)"><i data-lucide="cup-soda" style="width:16px;height:16px;display:inline-block;vertical-align:middle"></i> 資深杰迷 (11-16)</button>
+        <button class="test-btn" onclick="previewResult(18)"><i data-lucide="crown" style="width:16px;height:16px;display:inline-block;vertical-align:middle"></i> 哎唷不錯喔 (17-20)</button>
+        <button class="test-btn" onclick="previewResult(22)"><i data-lucide="trophy" style="width:16px;height:16px;display:inline-block;vertical-align:middle"></i> 周董都沒你懂 (21-23)</button>
       </div>
     </div>
 
