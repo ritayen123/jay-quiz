@@ -1,41 +1,12 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 300 320" width="300" height="320">
-  <!-- Tiny feet -->
-  <ellipse cx="105" cy="275" rx="22" ry="12" fill="#8888AA"/>
-  <ellipse cx="195" cy="275" rx="22" ry="12" fill="#8888AA"/>
-
-  <!-- Body -->
-  <circle cx="150" cy="150" r="110" fill="#8888AA"/>
-
-  <!-- Inner glow -->
-  <circle cx="128" cy="122" r="60" fill="rgba(255,255,255,0.12)"/>
-
-  <!-- Eyes - whites -->
-  <circle cx="119" cy="140" r="18" fill="#FFF"/>
-  <circle cx="181" cy="140" r="18" fill="#FFF"/>
-
-  <!-- Eyes - pupils -->
-  <circle cx="119" cy="142" r="15" fill="#1a1a2e"/>
-  <circle cx="181" cy="142" r="15" fill="#1a1a2e"/>
-
-  <!-- Eyes - big highlight -->
-  <circle cx="124" cy="138" r="7" fill="#FFF"/>
-  <circle cx="186" cy="138" r="7" fill="#FFF"/>
-
-  <!-- Eyes - small highlight -->
-  <circle cx="115" cy="146" r="3" fill="#FFF"/>
-  <circle cx="177" cy="146" r="3" fill="#FFF"/>
-
-  <!-- Blush -->
-  <ellipse cx="96" cy="156" rx="14" ry="9" fill="rgba(200,160,220,0.4)"/>
-  <ellipse cx="204" cy="156" rx="14" ry="9" fill="rgba(200,160,220,0.4)"/>
-
-  <!-- Wobbly mouth ~ -->
-  <path d="M128,180 Q139,173 150,180 Q161,187 172,180" fill="none" stroke="#1a1a2e" stroke-width="5" stroke-linecap="round"/>
-
-  <!-- Sweat drop -->
-  <path d="M210,58 Q220,95 210,100 Q200,95 210,58Z" fill="#88CCEE"/>
-
-  <!-- Question marks -->
-  <text x="84" y="50" font-family="Noto Sans TC, sans-serif" font-weight="bold" font-size="50" fill="rgba(255,255,255,0.6)" text-anchor="middle">?</text>
-  <text x="117" y="18" font-family="Noto Sans TC, sans-serif" font-weight="bold" font-size="33" fill="rgba(255,255,255,0.35)" text-anchor="middle">?</text>
+<svg width="300" height="320" viewBox="0 0 300 320" fill="none" xmlns="http://www.w3.org/2000/svg">
+<path d="M146.849 56.4346C201.297 56.4346 245.436 56.4342 245.436 81.3525C245.436 94.6029 232.955 100.807 213.08 103.712C232.955 106.617 245.436 112.821 245.437 126.071C245.437 139.321 232.957 145.524 213.084 148.43C232.957 151.335 245.436 157.54 245.437 170.789C245.437 184.04 232.954 190.243 213.077 193.148C232.954 196.053 245.436 202.258 245.437 215.509C245.437 240.427 201.297 240.428 146.849 240.428C92.4006 240.428 48.2617 240.427 48.2617 215.509C48.2619 202.258 60.7438 196.053 80.6201 193.148C60.7437 190.243 48.2617 184.04 48.2617 170.789C48.2618 157.54 60.7408 151.335 80.6133 148.43C60.7409 145.524 48.2617 139.321 48.2617 126.071C48.2618 112.821 60.7421 106.617 80.6162 103.712C60.7419 100.807 48.2617 94.6027 48.2617 81.3525C48.2617 56.4342 92.4005 56.4346 146.849 56.4346Z" fill="#9B5DE5"/>
+<circle cx="139.91" cy="78.5932" r="6.93888" fill="white"/>
+<circle cx="142.344" cy="77.7126" r="4.50463" fill="black"/>
+<circle cx="158.584" cy="78.5932" r="6.93888" fill="white"/>
+<circle cx="161.019" cy="77.7126" r="4.50463" fill="black"/>
+<path d="M140.169 92.8517C141.031 91.1257 144.082 87.6738 149.384 87.6738C154.687 87.6738 156.496 89.6069 156.737 90.5734" stroke="black" stroke-width="1.65396" stroke-linecap="round"/>
+<path d="M8.55762 153.136C9.86235 145.525 25.6488 129.261 78.3566 125.086" stroke="#DEC8F8" stroke-width="1.65396" stroke-linecap="round"/>
+<path d="M221.644 125.086C258.106 118.145 282.353 113.425 291.443 97.0361" stroke="#DEC8F8" stroke-width="1.65396" stroke-linecap="round"/>
+<path d="M119.812 234.146V262.153L129.301 263.565" stroke="#DEC8F8" stroke-width="1.65396" stroke-linecap="round"/>
+<path d="M176.05 234.146V262.153L185.539 263.565" stroke="#DEC8F8" stroke-width="1.65396" stroke-linecap="round"/>
 </svg>
