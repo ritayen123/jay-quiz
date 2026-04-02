@@ -845,7 +845,7 @@
       <div class="result-buttons">
         <div class="result-buttons-row">
           <button class="btn-share" onclick="downloadShareImage()"><i data-lucide="download" style="width:16px;height:16px"></i> 下載圖片</button>
-          <button class="btn-share" style="background:var(--teal)" onclick="shareText()"><i data-lucide="clipboard-copy" style="width:16px;height:16px"></i> 複製文字</button>
+          <button class="btn-share" style="background:var(--teal)" onclick="shareToIGStory()"><i data-lucide="instagram" style="width:16px;height:16px"></i> 限時動態</button>
         </div>
         <div class="result-buttons-row">
           <button class="btn-retry" onclick="retryQuiz()"><i data-lucide="refresh-cw" style="width:16px;height:16px"></i> 再測一次</button>
@@ -1779,6 +1779,32 @@
         // In-app browser fallback: prompt long-press
         showToast('請長按上方圖片來儲存');
       }
+    }
+
+    function shareToIGStory() {
+      const blob = window._lastShareBlob;
+      if (!blob) { showToast('圖片尚未生成，請稍後再試'); return; }
+      const file = new File([blob], 'jay-quiz-result.png', { type: 'image/png' });
+
+      // 1. Try Web Share API with file (opens native share → IG Story)
+      try {
+        if (navigator.share && navigator.canShare && navigator.canShare({ files: [file] })) {
+          navigator.share({
+            files: [file],
+            title: '周杰倫粉絲大調查',
+            text: '你也來測測你是真杰粉還是跟風仔！'
+          }).catch(() => {});
+          return;
+        }
+      } catch(e) {}
+
+      // 2. Fallback: try instagram://story-camera deep link
+      const igUrl = 'instagram://story-camera';
+      window.location.href = igUrl;
+      // If deep link fails (not on mobile / no IG), show toast after delay
+      setTimeout(() => {
+        showToast('請先下載圖片，再到 IG 限時動態上傳分享');
+      }, 1500);
     }
 
     function shareText() {
