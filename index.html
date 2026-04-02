@@ -592,24 +592,31 @@
 
     .result-buttons {
       display: flex;
-      gap: 12px;
-      flex-wrap: wrap;
-      justify-content: center;
+      flex-direction: column;
+      gap: 10px;
+      width: 100%;
+      max-width: 360px;
       margin-bottom: 32px;
+    }
+    .result-buttons-row {
+      display: flex;
+      gap: 10px;
     }
 
     .btn-share {
+      flex: 1;
       display: inline-flex;
       align-items: center;
+      justify-content: center;
       gap: 8px;
       background: var(--pink);
       color: var(--black);
       border: none;
-      padding: 12px 28px;
+      padding: 14px 16px;
       font-family: 'Noto Sans TC', sans-serif;
-      font-size: 15px;
+      font-size: 14px;
       font-weight: 700;
-      border-radius: 2px;
+      border-radius: 4px;
       cursor: pointer;
       transition: transform 0.15s, box-shadow 0.15s;
     }
@@ -622,17 +629,19 @@
     }
 
     .btn-retry {
+      flex: 1;
       display: inline-flex;
       align-items: center;
+      justify-content: center;
       gap: 8px;
       background: transparent;
       color: var(--white);
       border: 1px solid rgba(255,255,255,0.2);
-      padding: 12px 28px;
+      padding: 14px 16px;
       font-family: 'Noto Sans TC', sans-serif;
-      font-size: 15px;
+      font-size: 14px;
       font-weight: 500;
-      border-radius: 2px;
+      border-radius: 4px;
       cursor: pointer;
       transition: all 0.2s;
     }
@@ -642,17 +651,18 @@
     }
 
     .btn-ig {
-      display: inline-flex;
+      display: flex;
       align-items: center;
+      justify-content: center;
       gap: 8px;
       background: var(--lime);
       color: var(--black);
       text-decoration: none;
-      padding: 12px 28px;
+      padding: 14px 16px;
       font-family: 'Noto Sans TC', sans-serif;
-      font-size: 15px;
+      font-size: 14px;
       font-weight: 700;
-      border-radius: 2px;
+      border-radius: 4px;
       transition: transform 0.15s, box-shadow 0.15s;
     }
     .btn-ig:hover {
@@ -741,7 +751,6 @@
       .question-card { padding: 24px 18px; }
       .option-btn { padding: 12px 14px; font-size: 14px; }
       .result-score-box { padding: 16px 20px; }
-      .result-buttons { flex-direction: column; align-items: center; }
       .start-tags { gap: 6px; }
       .fill-wrap { flex-direction: column; }
       .btn-submit { width: 100%; }
@@ -834,10 +843,14 @@
       </div>
       <div class="share-hint">長按圖片可儲存 <i data-lucide="smartphone" style="width:14px;height:14px;display:inline-block;vertical-align:middle"></i></div>
       <div class="result-buttons">
-        <button class="btn-share" onclick="downloadShareImage()"><i data-lucide="download" style="width:18px;height:18px"></i> 下載圖片</button>
-        <button class="btn-share" style="background:var(--teal)" onclick="shareText()"><i data-lucide="clipboard-copy" style="width:18px;height:18px"></i> 複製文字分享</button>
-        <button class="btn-retry" onclick="retryQuiz()"><i data-lucide="refresh-cw" style="width:18px;height:18px"></i> 再測一次</button>
-        <a class="btn-ig" href="https://www.instagram.com/from_nine_on" target="_blank" rel="noopener"><i data-lucide="instagram" style="width:18px;height:18px"></i> 追蹤韭點開始 IG</a>
+        <div class="result-buttons-row">
+          <button class="btn-share" onclick="downloadShareImage()"><i data-lucide="download" style="width:16px;height:16px"></i> 下載圖片</button>
+          <button class="btn-share" style="background:var(--teal)" onclick="shareText()"><i data-lucide="clipboard-copy" style="width:16px;height:16px"></i> 複製文字</button>
+        </div>
+        <div class="result-buttons-row">
+          <button class="btn-retry" onclick="retryQuiz()"><i data-lucide="refresh-cw" style="width:16px;height:16px"></i> 再測一次</button>
+        </div>
+        <a class="btn-ig" href="https://www.instagram.com/from_nine_on" target="_blank" rel="noopener"><i data-lucide="instagram" style="width:16px;height:16px"></i> 追蹤韭點開始 IG</a>
       </div>
       <div class="result-brand">
         一個關於周杰倫的粉絲測驗 by <a href="https://fromnineon.com" target="_blank" rel="noopener">韭點開始 fromnineon</a>
