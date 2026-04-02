@@ -4,9 +4,9 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
   <title>周杰倫粉絲大調查 | 韭點開始</title>
-  <meta name="description" content="你是真杰迷還是路人甲？13 題趣味測驗，空耳歌詞、奶茶冷知識、NFT 事件通通考！由韭點開始製作。" />
+  <meta name="description" content="你是真杰迷還是路人甲？38 題趣味測驗，空耳歌詞、奶茶冷知識、NFT 事件通通考！由韭點開始製作。" />
   <meta property="og:title" content="周杰倫粉絲大調查 | 韭點開始" />
-  <meta property="og:description" content="你是真杰迷還是路人甲？13 題趣味測驗立刻挑戰！" />
+  <meta property="og:description" content="你是真杰迷還是路人甲？38 題趣味測驗立刻挑戰！" />
   <meta property="og:type" content="website" />
   <meta property="og:locale" content="zh_TW" />
   <meta name="twitter:card" content="summary_large_image" />
@@ -402,6 +402,39 @@
       .options.image-grid { gap: 8px; }
     }
 
+    .sort-images {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 10px;
+      margin-bottom: 16px;
+    }
+    .sort-img-item {
+      position: relative;
+      border-radius: 4px;
+      overflow: hidden;
+      border: 2px solid rgba(255,255,255,0.15);
+      aspect-ratio: 1;
+    }
+    .sort-img-item img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+    .sort-img-item .sort-letter {
+      position: absolute;
+      top: 8px; left: 8px;
+      width: 28px; height: 28px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: rgba(0,0,0,0.7);
+      border-radius: 2px;
+      font-family: 'Press Start 2P', monospace;
+      font-size: 10px;
+      color: var(--white);
+    }
+
     .option-btn.correct {
       background: rgba(1,169,77,0.15);
       border-color: var(--correct);
@@ -766,9 +799,9 @@
         <div class="test-label"><i data-lucide="wrench" style="width:14px;height:14px;display:inline-block;vertical-align:middle"></i> 測試模式：預覽五種結果</div>
         <button class="test-btn" onclick="previewResult(4)"><i data-lucide="egg" style="width:16px;height:16px;display:inline-block;vertical-align:middle"></i> 滷蛋大師 (0-7)</button>
         <button class="test-btn" onclick="previewResult(12)"><i data-lucide="mic" style="width:16px;height:16px;display:inline-block;vertical-align:middle"></i> 倫到你才唱 (8-16)</button>
-        <button class="test-btn" onclick="previewResult(21)"><i data-lucide="cup-soda" style="width:16px;height:16px;display:inline-block;vertical-align:middle"></i> 資深杰迷 (17-26)</button>
-        <button class="test-btn" onclick="previewResult(30)"><i data-lucide="crown" style="width:16px;height:16px;display:inline-block;vertical-align:middle"></i> 哎唷不錯喔 (27-33)</button>
-        <button class="test-btn" onclick="previewResult(36)"><i data-lucide="trophy" style="width:16px;height:16px;display:inline-block;vertical-align:middle"></i> 周董都沒你懂 (34-37)</button>
+        <button class="test-btn" onclick="previewResult(22)"><i data-lucide="cup-soda" style="width:16px;height:16px;display:inline-block;vertical-align:middle"></i> 資深杰迷 (17-27)</button>
+        <button class="test-btn" onclick="previewResult(31)"><i data-lucide="crown" style="width:16px;height:16px;display:inline-block;vertical-align:middle"></i> 哎唷不錯喔 (28-34)</button>
+        <button class="test-btn" onclick="previewResult(37)"><i data-lucide="trophy" style="width:16px;height:16px;display:inline-block;vertical-align:middle"></i> 周董都沒你懂 (35-38)</button>
       </div>
     </div>
 
@@ -1054,6 +1087,20 @@
         explain: '「你髮如雪 淒美了離別」，方文山以白髮意象寫盡離愁，搭配周杰倫的旋律成為中國風經典。'
       },
       {
+        q: '請將下列圖片中的杰倫，按照時間排序（年份從遠到近）',
+        type: 'image-sort',
+        images: [
+          { img: '2024.jpg', label: 'A' },
+          { img: '2007.jpg', label: 'B' },
+          { img: '2004.jpg', label: 'C' },
+          { img: '2013.jpg', label: 'D' }
+        ],
+        options: ['C → B → D → A', 'B → C → A → D', 'C → D → B → A', 'D → B → C → A'],
+        answer: 0,
+        noShuffle: true,
+        explain: 'C 是 2004 年無與倫比演唱會、B 是 2007 年世界巡迴演唱會、D 是 2013 年魔天倫演唱會、A 是 2024 年嘉年華演唱會。從長髮殺馬特到成熟男人，杰倫的造型就是一部華語流行史。'
+      },
+      {
         q: '以下四張照片，哪一個才是真正的周杰倫？',
         type: 'image',
         options: [
@@ -1072,9 +1119,9 @@
     const results = [
       { min: 0,  max: 7,  icon: 'egg', title: '滷蛋大師', subtitle: '你確定聽過周杰倫嗎？建議先從《晴天》聽起，不然連空耳都沒資格。' },
       { min: 8,  max: 16, icon: 'mic', title: '倫到你才唱', subtitle: '至少知道幾首主打歌，但冷知識這塊⋯⋯你可能只是在 KTV 亂唱的等級。' },
-      { min: 17, max: 26, icon: 'cup-soda', title: '資深杰迷', subtitle: '不錯喔，真的有在聽！奶茶知識和空耳都難不倒你，周董應該會請你喝一杯 machi machi。' },
-      { min: 27, max: 33, icon: 'crown', title: '哎唷不錯喔', subtitle: '你是不是住在周杰倫家隔壁？連 NFT 被偷和比特幣風波都瞭若指掌。' },
-      { min: 34, max: 37, icon: 'trophy', title: '周董都沒你懂', subtitle: '請問方文山是你嗎？這種程度已經可以出書了。建議直接應徵杰威爾音樂。' }
+      { min: 17, max: 27, icon: 'cup-soda', title: '資深杰迷', subtitle: '不錯喔，真的有在聽！奶茶知識和空耳都難不倒你，周董應該會請你喝一杯 machi machi。' },
+      { min: 28, max: 34, icon: 'crown', title: '哎唷不錯喔', subtitle: '你是不是住在周杰倫家隔壁？連 NFT 被偷和比特幣風波都瞭若指掌。' },
+      { min: 35, max: 38, icon: 'trophy', title: '周董都沒你懂', subtitle: '請問方文山是你嗎？這種程度已經可以出書了。建議直接應徵杰威爾音樂。' }
     ];
 
     // ===== STATE =====
@@ -1135,6 +1182,26 @@
         const input = document.getElementById('fillInput');
         input.addEventListener('keydown', e => { if (e.key === 'Enter') submitFill(); });
         input.focus();
+      } else if (q.type === 'image-sort') {
+        wrap.className = 'options';
+        // Image grid (display only)
+        const grid = document.createElement('div');
+        grid.className = 'sort-images';
+        q.images.forEach((img, i) => {
+          const item = document.createElement('div');
+          item.className = 'sort-img-item';
+          item.innerHTML = `<span class="sort-letter">${letters[i]}</span><img src="${img.img}" alt="${img.label}">`;
+          grid.appendChild(item);
+        });
+        wrap.appendChild(grid);
+        // Text options
+        q.options.forEach((opt, i) => {
+          const btn = document.createElement('button');
+          btn.className = 'option-btn';
+          btn.innerHTML = `<span class="option-letter">${letters[i]}</span><span>${opt}</span>`;
+          btn.onclick = () => selectAnswer(i);
+          wrap.appendChild(btn);
+        });
       } else if (q.type === 'image') {
         wrap.className = 'options image-grid';
         q.options.forEach((opt, i) => {
@@ -1285,8 +1352,8 @@
     function getPosterData(s) {
       if (s <= 7) return posterData[0];
       if (s <= 16) return posterData[1];
-      if (s <= 26) return posterData[2];
-      if (s <= 33) return posterData[3];
+      if (s <= 27) return posterData[2];
+      if (s <= 34) return posterData[3];
       return posterData[4];
     }
 
