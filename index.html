@@ -1410,53 +1410,56 @@
 
     // ===== MASCOT DRAWING FUNCTIONS (KAWAII) =====
     function drawMascotConfused(ctx, cx, cy, size, color) {
-      // SVG viewBox 300x320, center ~150,148, scale to fit size
-      const s = size / 100; // scale factor
+      // SVG viewBox 300x320, centered ~148,150
+      const s = size / 120;
       // Legs
-      ctx.strokeStyle = '#DEC8F8'; ctx.lineWidth = 1.65 * s; ctx.lineCap = 'round';
-      ctx.beginPath(); ctx.moveTo(cx - s*27, cy + s*86); ctx.lineTo(cx - s*27, cy + s*114); ctx.lineTo(cx - s*17.5, cy + s*115.5); ctx.stroke();
-      ctx.beginPath(); ctx.moveTo(cx + s*29, cy + s*86); ctx.lineTo(cx + s*29, cy + s*114); ctx.lineTo(cx + s*38.5, cy + s*115.5); ctx.stroke();
-      // Whiskers
-      ctx.beginPath(); ctx.moveTo(cx - s*68.5, cy - s*23); ctx.quadraticCurveTo(cx - s*120, cy - s*30, cx - s*138, cy + s*5); ctx.stroke();
-      ctx.beginPath(); ctx.moveTo(cx + s*74.6, cy - s*23); ctx.quadraticCurveTo(cx + s*108, cy - s*30, cx + s*144, cy - s*51); ctx.stroke();
-      // Body (4-segment caterpillar)
+      ctx.strokeStyle = '#1a1a2e'; ctx.lineWidth = 2.56 * s; ctx.lineCap = 'round';
+      ctx.beginPath(); ctx.moveTo(cx - s*23, cy + s*100); ctx.lineTo(cx - s*23, cy + s*137); ctx.lineTo(cx - s*10.5, cy + s*139); ctx.stroke();
+      ctx.beginPath(); ctx.moveTo(cx + s*19, cy + s*100); ctx.lineTo(cx + s*19, cy + s*137); ctx.lineTo(cx + s*31.8, cy + s*139); ctx.stroke();
+      // Body (egg/blob)
       ctx.fillStyle = color;
       ctx.beginPath();
-      // Top of head
-      const bx = cx - s*3; const by = cy - s*92;
-      ctx.moveTo(bx, by);
-      // Right side going down
-      ctx.bezierCurveTo(bx + s*54, by, bx + s*98.6, by, bx + s*98.6, by + s*25);
-      ctx.bezierCurveTo(bx + s*98.6, by + s*38, bx + s*86, by + s*44.4, bx + s*66.2, by + s*47.3);
-      ctx.bezierCurveTo(bx + s*86, by + s*50.2, bx + s*98.6, by + s*56.4, bx + s*98.6, by + s*69.6);
-      ctx.bezierCurveTo(bx + s*98.6, by + s*82.9, bx + s*86, by + s*89.1, bx + s*66.2, by + s*92);
-      ctx.bezierCurveTo(bx + s*86, by + s*94.9, bx + s*98.6, by + s*101.1, bx + s*98.6, by + s*114.4);
-      ctx.bezierCurveTo(bx + s*98.6, by + s*127.6, bx + s*86, by + s*133.8, bx + s*66.2, by + s*136.7);
-      ctx.bezierCurveTo(bx + s*86, by + s*139.6, bx + s*98.6, by + s*145.8, bx + s*98.6, by + s*159.1);
-      ctx.bezierCurveTo(bx + s*98.6, by + s*184, bx + s*54.4, by + s*184, bx, by + s*184);
-      // Left side going up
-      ctx.bezierCurveTo(bx - s*54.4, by + s*184, bx - s*98.6, by + s*184, bx - s*98.6, by + s*159.1);
-      ctx.bezierCurveTo(bx - s*98.6, by + s*145.8, bx - s*86, by + s*139.6, bx - s*66.2, by + s*136.7);
-      ctx.bezierCurveTo(bx - s*86, by + s*133.8, bx - s*98.6, by + s*127.6, bx - s*98.6, by + s*114.4);
-      ctx.bezierCurveTo(bx - s*98.6, by + s*101.1, bx - s*86, by + s*94.9, bx - s*66.2, by + s*92);
-      ctx.bezierCurveTo(bx - s*86, by + s*89.1, bx - s*98.6, by + s*82.9, bx - s*98.6, by + s*69.6);
-      ctx.bezierCurveTo(bx - s*98.6, by + s*56.4, bx - s*86, by + s*50.2, bx - s*66.2, by + s*47.3);
-      ctx.bezierCurveTo(bx - s*86, by + s*44.4, bx - s*98.6, by + s*38, bx - s*98.6, by + s*25);
-      ctx.bezierCurveTo(bx - s*98.6, by, bx - s*54.4, by, bx, by);
+      ctx.moveTo(cx + s*88, cy - s*0.9);
+      ctx.bezierCurveTo(cx + s*102, cy + s*103, cx + s*41.7, cy + s*114.4, cx - s*9, cy + s*114.4);
+      ctx.bezierCurveTo(cx - s*68.5, cy + s*114.4, cx - s*103, cy + s*71.5, cx - s*88.4, cy - s*12.9);
+      ctx.bezierCurveTo(cx - s*77, cy - s*78.8, cx - s*46.3, cy - s*121.9, cx - s*0.9, cy - s*121.9);
+      ctx.bezierCurveTo(cx + s*48.4, cy - s*121.9, cx + s*80.8, cy - s*54.2, cx + s*88, cy - s*0.9);
       ctx.closePath(); ctx.fill();
+      // Belly circle
+      ctx.fillStyle = '#FF8FD2';
+      ctx.beginPath(); ctx.arc(cx + s*0.3, cy + s*38.5, s*55.1, 0, Math.PI*2); ctx.fill();
+      // Eyelash marks - left side
+      ctx.strokeStyle = '#FF8FD2'; ctx.lineWidth = 2.56 * s;
+      for (let i = 0; i < 3; i++) {
+        ctx.beginPath();
+        ctx.moveTo(cx - s*(64.1 - i*7.5), cy - s*40);
+        ctx.lineTo(cx - s*(58.4 - i*7.5), cy - s*45.5);
+        ctx.stroke();
+      }
+      // Eyelash marks - right side
+      for (let i = 0; i < 3; i++) {
+        ctx.beginPath();
+        ctx.moveTo(cx + s*(21.4 + i*7.5), cy - s*40);
+        ctx.lineTo(cx + s*(27.1 + i*7.5), cy - s*45.5);
+        ctx.stroke();
+      }
+      // Arms (crossed lines)
+      ctx.strokeStyle = '#1a1a2e'; ctx.lineWidth = 2.56 * s;
+      ctx.beginPath(); ctx.moveTo(cx - s*56.6, cy - s*6.8); ctx.quadraticCurveTo(cx - s*20, cy + s*5, cx + s*0.6, cy + s*15); ctx.stroke();
+      ctx.beginPath(); ctx.moveTo(cx + s*49.9, cy - s*6.8); ctx.quadraticCurveTo(cx + s*20, cy + s*3, cx + s*10.8, cy + s*15); ctx.stroke();
       // Eyes
       ctx.fillStyle = '#FFF';
-      ctx.beginPath(); ctx.arc(cx - s*10, cy - s*69.4, s*6.94, 0, Math.PI*2); ctx.fill();
-      ctx.beginPath(); ctx.arc(cx + s*8.7, cy - s*69.4, s*6.94, 0, Math.PI*2); ctx.fill();
+      ctx.beginPath(); ctx.arc(cx - s*24.4, cy - s*52.2, s*9.2, 0, Math.PI*2); ctx.fill();
+      ctx.beginPath(); ctx.arc(cx + s*0.3, cy - s*52.2, s*9.2, 0, Math.PI*2); ctx.fill();
       ctx.fillStyle = '#1a1a2e';
-      ctx.beginPath(); ctx.arc(cx - s*7.6, cy - s*70.3, s*4.5, 0, Math.PI*2); ctx.fill();
-      ctx.beginPath(); ctx.arc(cx + s*11.2, cy - s*70.3, s*4.5, 0, Math.PI*2); ctx.fill();
+      ctx.beginPath(); ctx.arc(cx - s*26.7, cy - s*49.6, s*5.97, 0, Math.PI*2); ctx.fill();
+      ctx.beginPath(); ctx.arc(cx - s*2, cy - s*49.6, s*5.97, 0, Math.PI*2); ctx.fill();
       // Mouth
-      ctx.strokeStyle = '#1a1a2e'; ctx.lineWidth = s*1.65; ctx.lineCap = 'round';
+      ctx.strokeStyle = '#1a1a2e'; ctx.lineWidth = 2.56 * s; ctx.lineCap = 'round';
       ctx.beginPath();
-      ctx.moveTo(cx - s*9.8, cy - s*55.2);
-      ctx.quadraticCurveTo(cx - s*5.9, cy - s*60.3, cx - s*0.6, cy - s*60.3);
-      ctx.quadraticCurveTo(cx + s*4.7, cy - s*60.3, cx + s*6.7, cy - s*57.4);
+      ctx.moveTo(cx - s*18.1, cy - s*35.9);
+      ctx.quadraticCurveTo(cx - s*7, cy - s*40.3, cx - s*5.2, cy - s*37);
+      ctx.quadraticCurveTo(cx - s*3.4, cy - s*33.7, cx + s*2.1, cy - s*31.3);
       ctx.stroke();
     }
 
