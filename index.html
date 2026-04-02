@@ -1464,27 +1464,63 @@
     }
 
     function drawMascotMic(ctx, cx, cy, size, color) {
-      ctx.fillStyle = 'rgba(255,255,255,0.2)';
-      ctx.beginPath(); ctx.roundRect(cx - size*0.12, cy + size*0.35, size*0.24, size*0.65, size*0.1); ctx.fill();
-      ctx.strokeStyle = color; ctx.lineWidth = size*0.04;
-      ctx.beginPath(); ctx.roundRect(cx - size*0.12, cy + size*0.35, size*0.24, size*0.65, size*0.1); ctx.stroke();
-      ctx.fillStyle = color;
-      ctx.beginPath(); ctx.arc(cx, cy - size*0.1, size*0.65, 0, Math.PI*2); ctx.fill();
-      ctx.fillStyle = 'rgba(255,255,255,0.15)';
-      ctx.beginPath(); ctx.arc(cx - size*0.15, cy - size*0.3, size*0.35, 0, Math.PI*2); ctx.fill();
-      drawKawaiiEyes(ctx, cx, cy - size*0.15, size*0.7);
-      drawKawaiiBlush(ctx, cx, cy - size*0.15, size*0.7, 'rgba(255,180,200,0.4)');
+      // SVG viewBox 300x320, centered ~143,160
+      const s = size / 110;
+      // Body (cone/skirt shape)
+      ctx.fillStyle = '#76B0E2';
+      ctx.beginPath();
+      ctx.moveTo(cx + s*56.5, cy + s*89.7);
+      ctx.lineTo(cx - s*13.8, cy + s*101.1);
+      ctx.lineTo(cx - s*40.4, cy - s*5.1);
+      ctx.lineTo(cx + s*46.8, cy - s*19.4);
+      ctx.closePath(); ctx.fill();
+      // Skirt bottom ellipse
+      ctx.save();
+      ctx.translate(cx + s*20.9, cy + s*95.4);
+      ctx.rotate(-9.32 * Math.PI / 180);
+      ctx.fillStyle = '#76B0E2';
+      ctx.beginPath(); ctx.ellipse(0, 0, s*35.2, s*7, 0, 0, Math.PI*2); ctx.fill();
+      ctx.restore();
+      // Head circle
+      ctx.fillStyle = '#C4E0F8';
+      ctx.beginPath(); ctx.arc(cx - s*3, cy - s*51.7, s*59.6, 0, Math.PI*2); ctx.fill();
+      // Plaid pattern on head (clipped)
+      ctx.save();
+      ctx.beginPath(); ctx.arc(cx - s*3, cy - s*51.7, s*59.6, 0, Math.PI*2); ctx.clip();
+      ctx.strokeStyle = '#B4D9F9'; ctx.lineWidth = s*4;
+      for (let i = 0; i < 8; i++) {
+        ctx.beginPath(); ctx.moveTo(cx - s*92 + i*s*14, cy - s*33.6); ctx.lineTo(cx - s*21.3 + i*s*14, cy - s*137.5); ctx.stroke();
+      }
+      for (let i = 0; i < 8; i++) {
+        ctx.beginPath(); ctx.moveTo(cx - s*24.8 + i*s*14, cy - s*137.7); ctx.lineTo(cx + s*79.8 + i*s*14, cy - s*67); ctx.stroke();
+      }
+      ctx.restore();
+      // Belt top arc
+      ctx.strokeStyle = '#76B0E2'; ctx.lineWidth = s*10.8; ctx.lineCap = 'butt';
+      ctx.beginPath(); ctx.arc(cx - s*3, cy - s*51.7, s*66, 0.45, Math.PI - 0.45); ctx.stroke();
+      // Belt bottom arc
+      ctx.beginPath(); ctx.arc(cx - s*3, cy - s*51.7, s*66, Math.PI + 0.45, -0.45); ctx.stroke();
+      // Legs
+      ctx.strokeStyle = '#1a1a2e'; ctx.lineWidth = s*2.56; ctx.lineCap = 'round';
+      ctx.beginPath(); ctx.moveTo(cx + s*0.7, cy + s*95.4); ctx.lineTo(cx + s*0.7, cy + s*132.5); ctx.lineTo(cx + s*13.3, cy + s*134.4); ctx.stroke();
+      ctx.beginPath(); ctx.moveTo(cx + s*41.7, cy + s*91.1); ctx.lineTo(cx + s*66, cy + s*119.1); ctx.lineTo(cx + s*76.7, cy + s*112.3); ctx.stroke();
+      // Arms
+      ctx.beginPath(); ctx.moveTo(cx - s*24.2, cy + s*18.8); ctx.quadraticCurveTo(cx - s*50, cy + s*10, cx - s*81.4, cy - s*3); ctx.stroke();
+      ctx.beginPath(); ctx.moveTo(cx + s*39.8, cy + s*5.8); ctx.quadraticCurveTo(cx + s*60, cy - s*5, cx + s*84.8, cy - s*29.2); ctx.stroke();
+      // Eyes
+      ctx.fillStyle = '#FFF';
+      ctx.beginPath(); ctx.arc(cx - s*24.2, cy - s*64.2, s*9.2, 0, Math.PI*2); ctx.fill();
+      ctx.beginPath(); ctx.arc(cx + s*0.5, cy - s*64.2, s*9.2, 0, Math.PI*2); ctx.fill();
       ctx.fillStyle = '#1a1a2e';
-      ctx.beginPath(); ctx.arc(cx, cy + size*0.12, size*0.15, 0, Math.PI); ctx.fill();
-      ctx.fillStyle = '#FF8899';
-      ctx.beginPath(); ctx.arc(cx, cy + size*0.2, size*0.08, 0, Math.PI); ctx.fill();
-      ctx.font = `${size*0.3}px sans-serif`; ctx.fillStyle = 'rgba(255,255,255,0.5)';
-      ctx.textAlign = 'center'; ctx.textBaseline = 'middle';
-      ctx.fillText('\u266A', cx + size*0.7, cy - size*0.55);
-      ctx.font = `${size*0.22}px sans-serif`; ctx.fillStyle = 'rgba(255,255,255,0.35)';
-      ctx.fillText('\u266B', cx + size*0.9, cy - size*0.25);
-      ctx.fillStyle = '#FFF'; ctx.font = `${size*0.2}px sans-serif`;
-      ctx.fillText('\u2728', cx - size*0.75, cy - size*0.5);
+      ctx.beginPath(); ctx.arc(cx - s*26.5, cy - s*61.6, s*5.97, 0, Math.PI*2); ctx.fill();
+      ctx.beginPath(); ctx.arc(cx - s*1.8, cy - s*61.6, s*5.97, 0, Math.PI*2); ctx.fill();
+      // Mouth (open smile with tongue)
+      ctx.fillStyle = '#1a1a2e';
+      ctx.beginPath();
+      ctx.moveTo(cx - s*8.5, cy - s*40.1);
+      ctx.quadraticCurveTo(cx - s*3, cy - s*36.5, cx + s*4.5, cy - s*40.8);
+      ctx.quadraticCurveTo(cx + s*5.4, cy - s*48.6, cx - s*8.5, cy - s*40.1);
+      ctx.fill();
     }
 
     function drawMascotBubbleTea(ctx, cx, cy, size, color) {
