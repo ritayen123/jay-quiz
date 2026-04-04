@@ -1408,12 +1408,11 @@
           a: answerStr
         });
         const url = SHEET_URL + '?' + params.toString();
-        alert('DEBUG: 送出中，answers=' + answerStr.length + '題, score=' + score);
         const img = document.createElement('img');
         img.style.cssText = 'position:absolute;width:1px;height:1px;opacity:0';
         img.src = url;
         document.body.appendChild(img);
-      } catch(e) { alert('ERROR: ' + e.message); }
+      } catch(e) {}
     }
 
     function retryQuiz() {
