@@ -882,7 +882,7 @@
     })();
 
     // ===== QUIZ DATA =====
-    const questions = [
+    const allQuestions = [
       // Q1 選擇
       {
         q: '「再給我兩份蔥，讓我把雞翼煎成餅」原本是哪首歌的歌詞？',
@@ -1178,14 +1178,15 @@
         explain: '周杰倫本人說過：「你們講到我都懷疑自己是真假了。」網友笑稱周杰倫在模仿大賽只拿第三名，因為長得像他的人多到可以申請少數民族。'
       }
     ];
+    let questions = [];
 
     // ===== RESULTS =====
     const results = [
-      { min: 0,  max: 7,  icon: 'egg', title: '滷蛋大師', subtitle: '你確定聽過周杰倫嗎？建議先從《晴天》聽起，不然連空耳都沒資格。' },
-      { min: 8,  max: 16, icon: 'mic', title: '倫到你才唱', subtitle: '至少知道幾首主打歌，但冷知識這塊⋯⋯你可能只是在 KTV 亂唱的等級。' },
-      { min: 17, max: 27, icon: 'cup-soda', title: '資深杰迷', subtitle: '不錯喔，真的有在聽！奶茶知識和空耳都難不倒你，周董應該會請你喝一杯 machi machi。' },
-      { min: 28, max: 35, icon: 'crown', title: '哎唷不錯喔', subtitle: '你是不是住在周杰倫家隔壁？連 NFT 被偷和比特幣風波都瞭若指掌。' },
-      { min: 36, max: 39, icon: 'trophy', title: '周董都沒你懂', subtitle: '請問方文山是你嗎？這種程度已經可以出書了。建議直接應徵杰威爾音樂。' }
+      { min: 0,  max: 2,  icon: 'egg', title: '滷蛋大師', subtitle: '你確定聽過周杰倫嗎？建議先從《晴天》聽起，不然連空耳都沒資格。' },
+      { min: 3,  max: 6,  icon: 'mic', title: '倫到你才唱', subtitle: '至少知道幾首主打歌，但冷知識這塊⋯⋯你可能只是在 KTV 亂唱的等級。' },
+      { min: 7,  max: 10, icon: 'cup-soda', title: '資深杰迷', subtitle: '不錯喔，真的有在聽！奶茶知識和空耳都難不倒你，周董應該會請你喝一杯 machi machi。' },
+      { min: 11, max: 13, icon: 'crown', title: '哎唷不錯喔', subtitle: '你是不是住在周杰倫家隔壁？連 NFT 被偷和比特幣風波都瞭若指掌。' },
+      { min: 14, max: 15, icon: 'trophy', title: '周董都沒你懂', subtitle: '請問方文山是你嗎？這種程度已經可以出書了。建議直接應徵杰威爾音樂。' }
     ];
 
     // ===== STATE =====
@@ -1196,12 +1197,27 @@
 
     // ===== SHUFFLE =====
     function shuffleQuestions() {
-      // 1. 隨機打亂題目順序
+      // 1. 必出題 (Q3,Q4,Q7,Q21,Q27,Q37,Q39 → 0-based: 2,3,6,20,26,36,38)
+      const mustIndices = [2, 3, 6, 20, 26, 36, 38];
+      const must = mustIndices.map(i => JSON.parse(JSON.stringify(allQuestions[i])));
+      const pool = allQuestions
+        .filter((_, i) => !mustIndices.includes(i))
+        .map(q => JSON.parse(JSON.stringify(q)));
+
+      // 2. 從剩餘題庫隨機抽 8 題
+      for (let i = pool.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [pool[i], pool[j]] = [pool[j], pool[i]];
+      }
+      questions = [...must, ...pool.slice(0, 8)];
+
+      // 3. 打亂 15 題順序
       for (let i = questions.length - 1; i > 0; i--) {
         const j = Math.floor(Math.random() * (i + 1));
         [questions[i], questions[j]] = [questions[j], questions[i]];
       }
-      // 2. 確保沒有連續兩題填空
+
+      // 4. 確保沒有連續兩題填空
       for (let i = 1; i < questions.length; i++) {
         if (questions[i].type === 'fill' && questions[i - 1].type === 'fill') {
           for (let j = i + 1; j < questions.length; j++) {
@@ -1212,7 +1228,8 @@
           }
         }
       }
-      // 3. 隨機打亂每題的選項順序
+
+      // 5. 隨機打亂每題的選項順序
       questions.forEach(q => {
         if (q.noShuffle || q.type === 'fill') return;
         const correctText = q.type === 'image' ? q.options[q.answer].img : q.options[q.answer];
