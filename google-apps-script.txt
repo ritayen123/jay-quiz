@@ -1,0 +1,29 @@
+function doGet(e) {
+  var sheet = SpreadsheetApp.getActiveSpreadsheet().getActiveSheet();
+
+  var time = e.parameter.t;
+  var score = e.parameter.s;
+  var total = e.parameter.n;
+  var result = e.parameter.r;
+  var answerStr = e.parameter.a;
+
+  if (sheet.getLastRow() === 0) {
+    var headers = ['時間', '總分', '結果'];
+    for (var i = 0; i < answerStr.length; i++) {
+      headers.push('Q' + (i + 1));
+    }
+    sheet.appendRow(headers);
+  }
+
+  var row = [time, score + '/' + total, result];
+  for (var i = 0; i < answerStr.length; i++) {
+    row.push(answerStr[i] === '1' ? '✅' : '❌');
+  }
+  sheet.appendRow(row);
+
+  return ContentService.createTextOutput('OK');
+}
+
+function test() {
+  Logger.log('OK');
+}
