@@ -1630,7 +1630,7 @@
       // Score display (動態位置：traits 結束後留空間，但不超過 ticker 上方)
       const traitsEnd = traitsY + pd.traits.length * 46 + 40;
       const tickerTop = H - 140;
-      const bottomY = Math.min(traitsEnd, tickerTop - 180);
+      const bottomY = Math.min(traitsEnd, tickerTop - 220);
       ctx.font = '900 96px "Noto Sans TC", sans-serif';
       ctx.fillStyle = pd.accent; ctx.textAlign = 'center'; ctx.textBaseline = 'top';
       ctx.fillText(`${score} / ${questions.length}`, W/2, bottomY);
