@@ -16,6 +16,22 @@
   <meta name="twitter:title" content="周杰倫粉絲大調查 | 韭點開始" />
   <meta name="twitter:description" content="你是真杰粉還是跟風仔？15 題趣味測驗立刻挑戰！" />
   <link rel="canonical" href="https://jay.fromnineon.com/" />
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Quiz",
+    "name": "周杰倫粉絲大調查",
+    "description": "你是真杰粉還是跟風仔？15 題趣味測驗，空耳歌詞、奶茶冷知識、NFT 事件通通考！",
+    "url": "https://jay.fromnineon.com/",
+    "author": {
+      "@type": "Organization",
+      "name": "韭點開始 fromnineon",
+      "url": "https://fromnineon.com"
+    },
+    "inLanguage": "zh-TW",
+    "numberOfQuestions": 15
+  }
+  </script>
   <!-- Google Analytics -->
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-K318HMNR62"></script>
   <script>
@@ -25,7 +41,6 @@
     gtag('config', 'G-K318HMNR62');
   </script>
   <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🎤</text></svg>" />
-  <script src="https://unpkg.com/lucide@latest"></script>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=Noto+Sans+TC:wght@400;500;700;900&display=swap" rel="stylesheet" />
@@ -698,44 +713,6 @@
     }
     .result-brand a:hover { text-decoration: underline; }
 
-    /* ========= TEST PANEL ========= */
-    .test-panel {
-      margin-top: 40px;
-      padding: 20px;
-      border: 1px dashed rgba(241,185,225,0.3);
-      border-radius: 4px;
-      display: flex;
-      flex-direction: column;
-      gap: 10px;
-      width: 100%;
-      max-width: 380px;
-    }
-    .test-label {
-      font-size: 12px;
-      color: var(--pink);
-      text-align: center;
-      margin-bottom: 4px;
-    }
-    .test-btn {
-      background: rgba(241,185,225,0.1);
-      border: 1px solid rgba(241,185,225,0.25);
-      color: var(--white);
-      padding: 12px 16px;
-      border-radius: 3px;
-      font-family: 'Noto Sans TC', sans-serif;
-      font-size: 14px;
-      cursor: pointer;
-      transition: all 0.2s;
-      text-align: left;
-      touch-action: manipulation;
-    }
-    .test-btn:hover {
-      background: rgba(241,185,225,0.2);
-      border-color: var(--pink);
-    }
-    .test-btn:active {
-      background: rgba(241,185,225,0.3);
-    }
 
     /* ========= TOAST ========= */
     .toast {
@@ -813,18 +790,9 @@
         <span class="start-tag">#周董冷知識</span>
         <span class="start-tag">#歌詞大考驗</span>
       </div>
-      <button class="btn-start" onclick="startQuiz()">開始測驗 <i data-lucide="arrow-right" style="width:20px;height:20px"></i></button>
+      <button class="btn-start" onclick="startQuiz()">開始測驗 <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="display:inline-block;vertical-align:middle"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></button>
       <div class="brand-tag">
         Made by <a href="https://www.instagram.com/from_nine_on" target="_blank" rel="noopener">@韭點開始</a>
-      </div>
-      <!-- TEST: Preview all 5 result levels -->
-      <div class="test-panel">
-        <div class="test-label"><i data-lucide="wrench" style="width:14px;height:14px;display:inline-block;vertical-align:middle"></i> 測試模式：預覽五種結果</div>
-        <button class="test-btn" onclick="previewResult(1)"><i data-lucide="egg" style="width:16px;height:16px;display:inline-block;vertical-align:middle"></i> 滷蛋大師 (0-2)</button>
-        <button class="test-btn" onclick="previewResult(5)"><i data-lucide="mic" style="width:16px;height:16px;display:inline-block;vertical-align:middle"></i> 倫到你才唱 (3-6)</button>
-        <button class="test-btn" onclick="previewResult(8)"><i data-lucide="cup-soda" style="width:16px;height:16px;display:inline-block;vertical-align:middle"></i> 資深杰迷 (7-10)</button>
-        <button class="test-btn" onclick="previewResult(12)"><i data-lucide="crown" style="width:16px;height:16px;display:inline-block;vertical-align:middle"></i> 哎唷不錯喔 (11-13)</button>
-        <button class="test-btn" onclick="previewResult(15)"><i data-lucide="trophy" style="width:16px;height:16px;display:inline-block;vertical-align:middle"></i> 周董都沒你懂 (14-15)</button>
       </div>
     </div>
 
@@ -855,14 +823,14 @@
       <div id="sharePreview" class="share-preview-wrap">
         <img id="shareImg" alt="分享圖片" />
       </div>
-      <div class="share-hint">長按圖片可儲存 <i data-lucide="smartphone" style="width:14px;height:14px;display:inline-block;vertical-align:middle"></i></div>
+      <div class="share-hint">長按圖片可儲存 <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="display:inline-block;vertical-align:middle"><rect width="14" height="20" x="5" y="2" rx="2" ry="2"/><path d="M12 18h.01"/></svg></div>
       <div class="result-buttons">
         <div class="result-buttons-row">
           <button class="btn-share" style="background:var(--teal);color:#000" onclick="shareToIGStory()"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#000" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="display:inline-block;vertical-align:middle"><rect width="20" height="20" x="2" y="2" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" x2="17.51" y1="6.5" y2="6.5"/></svg> 轉發到 IG</button>
-          <button class="btn-retry" onclick="retryQuiz()"><i data-lucide="refresh-cw" style="width:16px;height:16px"></i> 再測一次</button>
+          <button class="btn-retry" onclick="retryQuiz()"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="display:inline-block;vertical-align:middle"><path d="M3 12a9 9 0 0 1 9-9 9.75 9.75 0 0 1 6.74 2.74L21 8"/><path d="M21 3v5h-5"/><path d="M21 12a9 9 0 0 1-9 9 9.75 9.75 0 0 1-6.74-2.74L3 16"/><path d="M3 21v-5h5"/></svg> 再測一次</button>
         </div>
         <div style="text-align:center;font-size:13px;color:rgba(255,255,255,0.5);margin:-4px 0 8px;padding:0 20px;line-height:1.5">不服結果？再測一次還有更多隱藏題等你挑戰！</div>
-        <a class="btn-ig" href="https://www.instagram.com/from_nine_on" target="_blank" rel="noopener" onclick="gtag('event','ig_follow_click')"><i data-lucide="instagram" style="width:16px;height:16px"></i> 追蹤韭點開始 IG</a>
+        <a class="btn-ig" href="https://www.instagram.com/from_nine_on" target="_blank" rel="noopener" onclick="gtag('event','ig_follow_click')"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="display:inline-block;vertical-align:middle"><rect width="20" height="20" x="2" y="2" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" x2="17.51" y1="6.5" y2="6.5"/></svg> 追蹤韭點開始 IG</a>
       </div>
       <div class="result-brand">
         一個關於周杰倫的粉絲測驗 by <a href="https://fromnineon.com" target="_blank" rel="noopener">韭點開始 fromnineon</a>
@@ -874,9 +842,6 @@
   <div class="toast" id="toast">已複製到剪貼簿！</div>
 
   <script>
-    // ===== INIT LUCIDE ICONS =====
-    lucide.createIcons();
-
     // ===== PIXEL BACKGROUND =====
     (function() {
       const bg = document.getElementById('pixelBg');
@@ -1797,13 +1762,6 @@
       try { document.execCommand('copy'); showToast('已複製到剪貼簿！'); }
       catch(e) { showToast('複製失敗，請手動複製'); }
       document.body.removeChild(ta);
-    }
-
-    // ===== TEST: Jump to result =====
-    function previewResult(fakeScore) {
-      score = fakeScore;
-      questions = allQuestions.slice(0, 15);
-      showResult();
     }
 
     function showToast(msg) {
