@@ -4,12 +4,26 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
   <title>周杰倫粉絲大調查 | 韭點開始</title>
-  <meta name="description" content="你是真杰迷還是路人甲？39 題趣味測驗，空耳歌詞、奶茶冷知識、NFT 事件通通考！由韭點開始製作。" />
+  <meta name="description" content="你是真杰粉還是跟風仔？15 題趣味測驗，空耳歌詞、奶茶冷知識、NFT 事件通通考！" />
   <meta property="og:title" content="周杰倫粉絲大調查 | 韭點開始" />
-  <meta property="og:description" content="你是真杰迷還是路人甲？39 題趣味測驗立刻挑戰！" />
+  <meta property="og:description" content="你是真杰粉還是跟風仔？15 題趣味測驗立刻挑戰！" />
   <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://jay-quiz-tan.vercel.app/" />
+  <meta property="og:image" content="https://jay-quiz-tan.vercel.app/og-image.png" />
   <meta property="og:locale" content="zh_TW" />
+  <meta property="og:site_name" content="韭點開始 fromnineon" />
   <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="周杰倫粉絲大調查 | 韭點開始" />
+  <meta name="twitter:description" content="你是真杰粉還是跟風仔？15 題趣味測驗立刻挑戰！" />
+  <link rel="canonical" href="https://jay-quiz-tan.vercel.app/" />
+  <!-- Google Analytics -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-K318HMNR62"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-K318HMNR62');
+  </script>
   <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🎤</text></svg>" />
   <script src="https://unpkg.com/lucide@latest"></script>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -848,7 +862,7 @@
           <button class="btn-retry" onclick="retryQuiz()"><i data-lucide="refresh-cw" style="width:16px;height:16px"></i> 再測一次</button>
         </div>
         <div style="text-align:center;font-size:13px;color:rgba(255,255,255,0.5);margin:-4px 0 8px;padding:0 20px;line-height:1.5">不服結果？再測一次還有更多隱藏題等你挑戰！</div>
-        <a class="btn-ig" href="https://www.instagram.com/from_nine_on" target="_blank" rel="noopener"><i data-lucide="instagram" style="width:16px;height:16px"></i> 追蹤韭點開始 IG</a>
+        <a class="btn-ig" href="https://www.instagram.com/from_nine_on" target="_blank" rel="noopener" onclick="gtag('event','ig_follow_click')"><i data-lucide="instagram" style="width:16px;height:16px"></i> 追蹤韭點開始 IG</a>
       </div>
       <div class="result-brand">
         一個關於周杰倫的粉絲測驗 by <a href="https://fromnineon.com" target="_blank" rel="noopener">韭點開始 fromnineon</a>
@@ -1252,6 +1266,7 @@
       shuffleQuestions();
       showScreen('quizScreen');
       renderQuestion();
+      gtag('event', 'quiz_start');
     }
 
     function renderQuestion() {
@@ -1404,6 +1419,12 @@
     function showResult() {
       document.getElementById('progressFill').style.width = '100%';
       showScreen('resultScreen');
+      const resultTitle = results.find(r => score >= r.min && score <= r.max)?.title || '';
+      gtag('event', 'quiz_complete', {
+        score: score,
+        total: questions.length,
+        result_title: resultTitle
+      });
       submitToSheet();
       // Auto-generate poster image
       setTimeout(() => generateShareImage(), 100);
@@ -1431,6 +1452,7 @@
     }
 
     function retryQuiz() {
+      gtag('event', 'retry_click');
       startQuiz();
     }
 
@@ -1722,6 +1744,7 @@
     }
 
     function shareToIGStory() {
+      gtag('event', 'share_click', { method: 'ig_story' });
       const blob = window._lastShareBlob;
       if (!blob) { showToast('圖片尚未生成，請稍後再試'); return; }
       const file = new File([blob], 'jay-quiz-result.png', { type: 'image/png' });
