@@ -1749,7 +1749,7 @@
 
     function shareText() {
       const r = results.find(r => score >= r.min && score <= r.max);
-      const text = `周杰倫粉絲大調查：我答對了 ${score}/${questions.length} 題！\n我的等級是「${r.title}」\n${r.subtitle}\n\n你也來測測 → ${window.location.href}\nby @韭點開始`;
+      const text = `你是真杰粉還是跟風仔？來測測https://lihi1.me/uBCFo！也要記得追蹤韭點開始IGhttps://lihi1.me/uAyDD 😎`;
 
       if (navigator.share) {
         navigator.share({ title: '周杰倫粉絲大調查', text: text }).catch(() => copyToClipboard(text));
