@@ -806,11 +806,11 @@
       <!-- TEST: Preview all 5 result levels -->
       <div class="test-panel">
         <div class="test-label"><i data-lucide="wrench" style="width:14px;height:14px;display:inline-block;vertical-align:middle"></i> 測試模式：預覽五種結果</div>
-        <button class="test-btn" onclick="previewResult(4)"><i data-lucide="egg" style="width:16px;height:16px;display:inline-block;vertical-align:middle"></i> 滷蛋大師 (0-7)</button>
-        <button class="test-btn" onclick="previewResult(12)"><i data-lucide="mic" style="width:16px;height:16px;display:inline-block;vertical-align:middle"></i> 倫到你才唱 (8-16)</button>
-        <button class="test-btn" onclick="previewResult(22)"><i data-lucide="cup-soda" style="width:16px;height:16px;display:inline-block;vertical-align:middle"></i> 資深杰迷 (17-27)</button>
-        <button class="test-btn" onclick="previewResult(32)"><i data-lucide="crown" style="width:16px;height:16px;display:inline-block;vertical-align:middle"></i> 哎唷不錯喔 (28-35)</button>
-        <button class="test-btn" onclick="previewResult(38)"><i data-lucide="trophy" style="width:16px;height:16px;display:inline-block;vertical-align:middle"></i> 周董都沒你懂 (36-39)</button>
+        <button class="test-btn" onclick="previewResult(1)"><i data-lucide="egg" style="width:16px;height:16px;display:inline-block;vertical-align:middle"></i> 滷蛋大師 (0-2)</button>
+        <button class="test-btn" onclick="previewResult(5)"><i data-lucide="mic" style="width:16px;height:16px;display:inline-block;vertical-align:middle"></i> 倫到你才唱 (3-6)</button>
+        <button class="test-btn" onclick="previewResult(8)"><i data-lucide="cup-soda" style="width:16px;height:16px;display:inline-block;vertical-align:middle"></i> 資深杰迷 (7-10)</button>
+        <button class="test-btn" onclick="previewResult(12)"><i data-lucide="crown" style="width:16px;height:16px;display:inline-block;vertical-align:middle"></i> 哎唷不錯喔 (11-13)</button>
+        <button class="test-btn" onclick="previewResult(15)"><i data-lucide="trophy" style="width:16px;height:16px;display:inline-block;vertical-align:middle"></i> 周董都沒你懂 (14-15)</button>
       </div>
     </div>
 
@@ -1439,7 +1439,7 @@
 
     // ===== POSTER DATA PER LEVEL =====
     const posterData = [
-      { // 0-7 滷蛋大師
+      { // 0-2 滷蛋大師
         bg: '#2A2A3E', accent: '#8888AA', highlight: '#FFFFFF',
         bigWord: '#BEGINNER', bigWordCN: '滷蛋大師',
         tags: ['#周董含滷蛋你考試掛蛋', '#聽歌從不看詞', '#只會唱副歌', '#以為方文山是山名'],
@@ -1447,7 +1447,7 @@
         deco: [],
         mascotSvg: 'mascot-1-confused.svg'
       },
-      { // 8-16 倫到你才唱
+      { // 3-6 倫到你才唱
         bg: '#1A0840', accent: '#F1B9E1', highlight: '#FFFFFF',
         bigWord: '#KARAOKE', bigWordCN: '倫到你才唱',
         tags: ['#歌詞全靠體感', '#七里香亂背', '#副歌達人', '#偶爾走音'],
@@ -1455,7 +1455,7 @@
         deco: [],
         mascotSvg: 'mascot-2-mic.svg'
       },
-      { // 17-26 資深杰迷
+      { // 7-10 資深杰迷
         bg: '#002B7A', accent: '#5CE1FF', highlight: '#FFFFFF',
         bigWord: '#SUPER FAN', bigWordCN: '資深杰迷',
         tags: ['#空耳倒背如流', '#machi常客', '#演唱會必到', '#方文山精神導師'],
@@ -1463,7 +1463,7 @@
         deco: [],
         mascotSvg: 'mascot-3-bubbletea.svg'
       },
-      { // 27-33 哎唷不錯喔
+      { // 11-13 哎唷不錯喔
         bg: '#1A0A3E', accent: '#FFD700', highlight: '#FFFFFF',
         bigWord: '#JAY CHOU?!', bigWordCN: '哎唷不錯喔',
         tags: ['#好想嫁/娶周杰倫', '#NFT被盜都知道', '#比特幣風波追蹤', '#小行星編號背得出'],
@@ -1471,7 +1471,7 @@
         deco: [],
         mascotSvg: 'mascot-4-crown.svg'
       },
-      { // 34-37 周董都沒你懂
+      { // 14-15 周董都沒你懂
         bg: '#003D14', accent: '#AAF952', highlight: '#FFFFFF',
         bigWord: '#LEGEND', bigWordCN: '周董都沒你懂',
         tags: ['#周董看到你都會怕', '#歌詞正反都能唱', '#活字典', '#周杰倫宇宙'],
@@ -1482,10 +1482,10 @@
     ];
 
     function getPosterData(s) {
-      if (s <= 7) return posterData[0];
-      if (s <= 16) return posterData[1];
-      if (s <= 27) return posterData[2];
-      if (s <= 35) return posterData[3];
+      if (s <= 2) return posterData[0];
+      if (s <= 6) return posterData[1];
+      if (s <= 10) return posterData[2];
+      if (s <= 13) return posterData[3];
       return posterData[4];
     }
 
