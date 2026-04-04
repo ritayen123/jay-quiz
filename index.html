@@ -1732,7 +1732,7 @@
           navigator.share({
             files: [file],
             title: '周杰倫粉絲大調查',
-            text: '你是真杰粉還是跟風仔？來測測https://lihi1.me/uBCFo！也要記得追蹤韭點開始\nIG https://lihi1.me/uAyDD 😎'
+            text: '你是真杰粉還是跟風仔？來測測https://lihi1.me/uBCFo 也要記得追蹤韭點開始\nIG https://lihi1.me/uAyDD 😎'
           }).catch(() => {});
           return;
         }
@@ -1749,7 +1749,7 @@
 
     function shareText() {
       const r = results.find(r => score >= r.min && score <= r.max);
-      const text = `你是真杰粉還是跟風仔？來測測https://lihi1.me/uBCFo！也要記得追蹤韭點開始\nIG https://lihi1.me/uAyDD 😎`;
+      const text = `你是真杰粉還是跟風仔？來測測https://lihi1.me/uBCFo 也要記得追蹤韭點開始\nIG https://lihi1.me/uAyDD 😎`;
 
       if (navigator.share) {
         navigator.share({ title: '周杰倫粉絲大調查', text: text }).catch(() => copyToClipboard(text));
