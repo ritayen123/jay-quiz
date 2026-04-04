@@ -1627,16 +1627,16 @@
       });
 
       // --- Bottom section ---
-      // Score display (動態位置：traits 結束後留空間，但不超過 ticker 上方)
-      const traitsEnd = traitsY + pd.traits.length * 46 + 40;
+      // Score display (從 ticker 往上固定位置)
       const tickerTop = H - 140;
-      const bottomY = Math.min(traitsEnd, tickerTop - 220);
+      const scoreSubY = tickerTop - 50;  // 答對題數
+      const scoreY = scoreSubY - 120;     // 分數
       ctx.font = '900 96px "Noto Sans TC", sans-serif';
       ctx.fillStyle = pd.accent; ctx.textAlign = 'center'; ctx.textBaseline = 'top';
-      ctx.fillText(`${score} / ${questions.length}`, W/2, bottomY);
+      ctx.fillText(`${score} / ${questions.length}`, W/2, scoreY);
       ctx.font = '500 32px "Noto Sans TC", sans-serif';
       ctx.fillStyle = 'rgba(255,255,255,0.3)';
-      ctx.fillText('答對題數', W/2, bottomY + 110);
+      ctx.fillText('答對題數', W/2, scoreSubY);
 
       // Bottom ticker
       ctx.fillStyle = pd.accent;
