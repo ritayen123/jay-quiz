@@ -1629,8 +1629,8 @@
       // --- Bottom section ---
       // Score display (從 ticker 往上固定位置)
       const tickerTop = H - 140;
-      const scoreSubY = tickerTop - 50;  // 答對題數
-      const scoreY = scoreSubY - 120;     // 分數
+      const scoreSubY = tickerTop - 100;  // 答對題數
+      const scoreY = scoreSubY - 130;     // 分數
       ctx.font = '900 96px "Noto Sans TC", sans-serif';
       ctx.fillStyle = pd.accent; ctx.textAlign = 'center'; ctx.textBaseline = 'top';
       ctx.fillText(`${score} / ${questions.length}`, W/2, scoreY);
