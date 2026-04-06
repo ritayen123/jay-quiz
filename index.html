@@ -1159,11 +1159,11 @@
 
     // ===== RESULTS =====
     const results = [
-      { min: 0,  max: 2,  icon: 'egg', title: '滷蛋大師', subtitle: '你確定聽過周杰倫嗎？建議先從《晴天》聽起，不然連空耳都沒資格。' },
-      { min: 3,  max: 6,  icon: 'mic', title: '倫到你才唱', subtitle: '至少知道幾首主打歌，但冷知識這塊⋯⋯你可能只是在 KTV 亂唱的等級。' },
-      { min: 7,  max: 10, icon: 'cup-soda', title: '資深杰迷', subtitle: '不錯喔，真的有在聽！奶茶知識和空耳都難不倒你，周董應該會請你喝一杯 machi machi。' },
-      { min: 11, max: 13, icon: 'crown', title: '哎唷不錯喔', subtitle: '你是不是住在周杰倫家隔壁？連 NFT 被偷和比特幣風波都瞭若指掌。' },
-      { min: 14, max: 15, icon: 'trophy', title: '周董都沒你懂', subtitle: '請問方文山是你嗎？這種程度已經可以出書了。建議直接應徵杰威爾音樂。' }
+      { min: 0,  max: 4,  icon: 'egg', title: '滷蛋大師', subtitle: '你確定聽過周杰倫嗎？建議先從《晴天》聽起，不然連空耳都沒資格。' },
+      { min: 5,  max: 8,  icon: 'mic', title: '倫到你才唱', subtitle: '至少知道幾首主打歌，但冷知識這塊⋯⋯你可能只是在 KTV 亂唱的等級。' },
+      { min: 9,  max: 12, icon: 'cup-soda', title: '資深杰迷', subtitle: '不錯喔，真的有在聽！奶茶知識和空耳都難不倒你，周董應該會請你喝一杯 machi machi。' },
+      { min: 13, max: 14, icon: 'crown', title: '哎唷不錯喔', subtitle: '你是不是住在周杰倫家隔壁？連 NFT 被偷和比特幣風波都瞭若指掌。' },
+      { min: 15, max: 15, icon: 'trophy', title: '周董都沒你懂', subtitle: '請問方文山是你嗎？這種程度已經可以出書了。建議直接應徵杰威爾音樂。' }
     ];
 
     // ===== STATE =====
@@ -1423,7 +1423,7 @@
 
     // ===== POSTER DATA PER LEVEL =====
     const posterData = [
-      { // 0-2 滷蛋大師
+      { // 0-4 滷蛋大師
         bg: '#2A2A3E', accent: '#8888AA', highlight: '#FFFFFF',
         bigWord: '#BEGINNER', bigWordCN: '滷蛋大師',
         tags: ['#周董含滷蛋你考試掛蛋', '#聽歌從不看詞', '#只會唱副歌', '#以為方文山是山名'],
@@ -1431,7 +1431,7 @@
         deco: [],
         mascotSvg: 'mascot-1-confused.svg'
       },
-      { // 3-6 倫到你才唱
+      { // 5-8 倫到你才唱
         bg: '#1A0840', accent: '#F1B9E1', highlight: '#FFFFFF',
         bigWord: '#KARAOKE', bigWordCN: '倫到你才唱',
         tags: ['#歌詞全靠體感', '#七里香亂背', '#副歌達人', '#偶爾走音'],
@@ -1439,7 +1439,7 @@
         deco: [],
         mascotSvg: 'mascot-2-mic.svg'
       },
-      { // 7-10 資深杰迷
+      { // 9-12 資深杰迷
         bg: '#002B7A', accent: '#5CE1FF', highlight: '#FFFFFF',
         bigWord: '#SUPER FAN', bigWordCN: '資深杰迷',
         tags: ['#空耳倒背如流', '#machi常客', '#演唱會必到', '#方文山精神導師'],
@@ -1447,7 +1447,7 @@
         deco: [],
         mascotSvg: 'mascot-3-bubbletea.svg'
       },
-      { // 11-13 哎唷不錯喔
+      { // 13-14 哎唷不錯喔
         bg: '#1A0A3E', accent: '#FFD700', highlight: '#FFFFFF',
         bigWord: '#JAY CHOU?!', bigWordCN: '哎唷不錯喔',
         tags: ['#好想嫁/娶周杰倫', '#NFT被盜都知道', '#比特幣風波追蹤', '#小行星編號背得出'],
@@ -1455,7 +1455,7 @@
         deco: [],
         mascotSvg: 'mascot-4-crown.svg'
       },
-      { // 14-15 周董都沒你懂
+      { // 15 周董都沒你懂
         bg: '#003D14', accent: '#AAF952', highlight: '#FFFFFF',
         bigWord: '#LEGEND', bigWordCN: '周董都沒你懂',
         tags: ['#周董看到你都會怕', '#歌詞正反都能唱', '#活字典', '#周杰倫宇宙'],
@@ -1466,10 +1466,10 @@
     ];
 
     function getPosterData(s) {
-      if (s <= 2) return posterData[0];
-      if (s <= 6) return posterData[1];
-      if (s <= 10) return posterData[2];
-      if (s <= 13) return posterData[3];
+      if (s <= 4) return posterData[0];
+      if (s <= 8) return posterData[1];
+      if (s <= 12) return posterData[2];
+      if (s <= 14) return posterData[3];
       return posterData[4];
     }
 
