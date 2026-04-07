@@ -716,6 +716,43 @@
     .result-brand a:hover { text-decoration: underline; }
 
 
+    /* ========= SPONSOR BANNER ========= */
+    .sponsor-banner {
+      display: block;
+      width: 100%;
+      max-width: 520px;
+      margin: 20px auto;
+      border-radius: 12px;
+      overflow: hidden;
+      text-decoration: none;
+    }
+    .sponsor-banner img {
+      width: 100%;
+      height: auto;
+      display: block;
+    }
+    .sponsor-banner .sponsor-placeholder {
+      width: 100%;
+      aspect-ratio: 6 / 1;
+      background: rgba(255,255,255,0.04);
+      border: 1px dashed rgba(255,255,255,0.15);
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: rgba(255,255,255,0.25);
+      font-size: 13px;
+      letter-spacing: 0.05em;
+    }
+    .sponsor-label {
+      text-align: center;
+      font-size: 10px;
+      color: rgba(255,255,255,0.2);
+      margin-top: 4px;
+      letter-spacing: 0.1em;
+    }
+    #quizBanner { display: none; }
+
     /* ========= TOAST ========= */
     .toast {
       position: fixed;
@@ -793,6 +830,11 @@
         <span class="start-tag">#歌詞大考驗</span>
       </div>
       <button class="btn-start" onclick="startQuiz()">開始測驗 <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="display:inline-block;vertical-align:middle"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></button>
+      <!-- Sponsor Banner: 開始畫面 -->
+      <a class="sponsor-banner" id="startBanner" href="#" target="_blank" rel="noopener sponsored" onclick="gtag('event','sponsor_click',{position:'start'})">
+        <div class="sponsor-placeholder">贊助商 Banner 1200 x 200</div>
+      </a>
+      <div class="sponsor-label">AD</div>
       <div class="brand-tag">
         Made by <a href="https://www.instagram.com/from_nine_on" target="_blank" rel="noopener">@韭點開始</a>
       </div>
@@ -815,6 +857,11 @@
         <div class="options" id="optionsWrap"></div>
         <div class="explanation" id="explanation"></div>
       </div>
+      <!-- Sponsor Banner: 答題中（第 8 題後顯示） -->
+      <a class="sponsor-banner" id="quizBanner" href="#" target="_blank" rel="noopener sponsored" onclick="gtag('event','sponsor_click',{position:'quiz'})">
+        <div class="sponsor-placeholder">贊助商 Banner 1200 x 200</div>
+      </a>
+      <div class="sponsor-label" id="quizBannerLabel" style="display:none">AD</div>
       <button class="btn-next" id="btnNext" onclick="nextQuestion()">下一題 →</button>
     </div>
 
@@ -1292,6 +1339,13 @@
       answered = false;
       const q = questions[currentQ];
       const letters = ['A', 'B', 'C', 'D'];
+
+      // 第 8 題答完後顯示贊助 banner（currentQ === 8 代表正在顯示第 9 題）
+      const qBanner = document.getElementById('quizBanner');
+      const qLabel = document.getElementById('quizBannerLabel');
+      const showAd = currentQ === 8;
+      qBanner.style.display = showAd ? 'block' : 'none';
+      qLabel.style.display = showAd ? 'block' : 'none';
 
       document.getElementById('progressText').textContent = `Q${currentQ + 1} / ${questions.length}`;
       document.getElementById('scoreText').textContent = `答對 ${score} 題`;
