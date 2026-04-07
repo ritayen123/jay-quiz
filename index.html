@@ -1176,31 +1176,45 @@
 
     // ===== SHUFFLE =====
     function shuffleQuestions() {
-      // 連動題組 (0-based index): Q10+Q11, Q13+Q14
+      // 連動題組 (0-based index): 抽到其中一題則整組出現，但非必出
       const pairs = [[9, 10], [12, 13]];
       const pairIndices = new Set(pairs.flat());
 
       // 1. 必出題 (Q3,Q4,Q7,Q21,Q27,Q37,Q39 → 0-based: 2,3,6,20,26,36,38)
       const mustIndices = [2, 3, 6, 20, 26, 36, 38];
-      const allMust = new Set([...mustIndices, ...pairIndices]);
       const must = mustIndices.map(i => JSON.parse(JSON.stringify(allQuestions[i])));
 
-      // 2. 連動題組：標記 _pairId，從剩餘池排除
-      const pairQuestions = pairs.map((pair, pid) =>
-        pair.map(i => { const q = JSON.parse(JSON.stringify(allQuestions[i])); q._pairId = pid; return q; })
-      );
+      // 2. 建立隨機池：排除必出題和連動題，連動題組視為整組加入池中
+      const pool = [];
+      pairs.forEach((pair, pid) => {
+        pool.push({ _isPair: true, _pairId: pid, items: pair.map(i => JSON.parse(JSON.stringify(allQuestions[i]))) });
+      });
+      allQuestions.forEach((q, i) => {
+        if (mustIndices.includes(i) || pairIndices.has(i)) return;
+        pool.push(JSON.parse(JSON.stringify(q)));
+      });
 
-      const pool = allQuestions
-        .filter((_, i) => !allMust.has(i))
-        .map(q => JSON.parse(JSON.stringify(q)));
-
-      // 3. 從剩餘題庫隨機抽題（扣掉必出 7 + 連動 4 = 11，需再抽 4 題）
+      // 3. 打亂池，抽到 15 題為止（連動題組算 2 題）
       for (let i = pool.length - 1; i > 0; i--) {
         const j = Math.floor(Math.random() * (i + 1));
         [pool[i], pool[j]] = [pool[j], pool[i]];
       }
-      const need = 15 - must.length - pairQuestions.flat().length;
-      questions = [...must, ...pairQuestions.flat(), ...pool.slice(0, need)];
+      const extra = [];
+      let need = 15 - must.length;
+      for (const item of pool) {
+        if (need <= 0) break;
+        if (item._isPair) {
+          if (need >= 2) {
+            item.items.forEach(q => { q._pairId = item._pairId; extra.push(q); });
+            need -= 2;
+          }
+          // need === 1 時跳過整組，不拆開
+        } else {
+          extra.push(item);
+          need--;
+        }
+      }
+      questions = [...must, ...extra];
 
       // 4. 打亂 15 題順序（連動題組暫時視為單題）
       for (let i = questions.length - 1; i > 0; i--) {
