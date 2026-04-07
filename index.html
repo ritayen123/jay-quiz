@@ -1176,27 +1176,65 @@
 
     // ===== SHUFFLE =====
     function shuffleQuestions() {
+      // 連動題組 (0-based index): Q10+Q11, Q13+Q14
+      const pairs = [[9, 10], [12, 13]];
+      const pairIndices = new Set(pairs.flat());
+
       // 1. 必出題 (Q3,Q4,Q7,Q21,Q27,Q37,Q39 → 0-based: 2,3,6,20,26,36,38)
       const mustIndices = [2, 3, 6, 20, 26, 36, 38];
+      const allMust = new Set([...mustIndices, ...pairIndices]);
       const must = mustIndices.map(i => JSON.parse(JSON.stringify(allQuestions[i])));
+
+      // 2. 連動題組：標記 _pairId，從剩餘池排除
+      const pairQuestions = pairs.map((pair, pid) =>
+        pair.map(i => { const q = JSON.parse(JSON.stringify(allQuestions[i])); q._pairId = pid; return q; })
+      );
+
       const pool = allQuestions
-        .filter((_, i) => !mustIndices.includes(i))
+        .filter((_, i) => !allMust.has(i))
         .map(q => JSON.parse(JSON.stringify(q)));
 
-      // 2. 從剩餘題庫隨機抽 8 題
+      // 3. 從剩餘題庫隨機抽題（扣掉必出 7 + 連動 4 = 11，需再抽 4 題）
       for (let i = pool.length - 1; i > 0; i--) {
         const j = Math.floor(Math.random() * (i + 1));
         [pool[i], pool[j]] = [pool[j], pool[i]];
       }
-      questions = [...must, ...pool.slice(0, 8)];
+      const need = 15 - must.length - pairQuestions.flat().length;
+      questions = [...must, ...pairQuestions.flat(), ...pool.slice(0, need)];
 
-      // 3. 打亂 15 題順序
+      // 4. 打亂 15 題順序（連動題組暫時視為單題）
       for (let i = questions.length - 1; i > 0; i--) {
         const j = Math.floor(Math.random() * (i + 1));
         [questions[i], questions[j]] = [questions[j], questions[i]];
       }
 
-      // 4. 確保沒有連續兩題填空
+      // 5. 確保連動題組相鄰且順序正確
+      pairs.forEach((_, pid) => {
+        const idxs = [];
+        questions.forEach((q, i) => { if (q._pairId === pid) idxs.push(i); });
+        if (idxs.length === 2) {
+          // 把第二題搬到第一題後面
+          const first = Math.min(idxs[0], idxs[1]);
+          const second = Math.max(idxs[0], idxs[1]);
+          if (second !== first + 1) {
+            const [moved] = questions.splice(second, 1);
+            questions.splice(first + 1, 0, moved);
+          }
+          // 確保順序正確（原始 pair[0] 在前）
+          const a = questions.findIndex(q => q._pairId === pid);
+          if (a >= 0 && a + 1 < questions.length) {
+            const qA = questions[a], qB = questions[a + 1];
+            // pair 第一題的題目文字對應 allQuestions[pairs[pid][0]]
+            if (qA.q !== allQuestions[pairs[pid][0]].q) {
+              [questions[a], questions[a + 1]] = [questions[a + 1], questions[a]];
+            }
+          }
+        }
+      });
+      // 清除臨時標記
+      questions.forEach(q => delete q._pairId);
+
+      // 6. 確保沒有連續兩題填空
       for (let i = 1; i < questions.length; i++) {
         if (questions[i].type === 'fill' && questions[i - 1].type === 'fill') {
           for (let j = i + 1; j < questions.length; j++) {
