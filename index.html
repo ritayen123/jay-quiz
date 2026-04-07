@@ -15,6 +15,7 @@
   <meta name="twitter:card" content="summary_large_image" />
   <meta name="twitter:title" content="周杰倫粉絲大調查 | 韭點開始" />
   <meta name="twitter:description" content="你是真杰粉還是跟風仔？15 題趣味測驗立刻挑戰！" />
+  <meta name="twitter:image" content="https://jay.fromnineon.com/og-image.png" />
   <link rel="canonical" href="https://jay.fromnineon.com/" />
   <script type="application/ld+json">
   {
@@ -81,7 +82,6 @@
       background-size: 48px 48px;
       pointer-events: none;
       z-index: 0;
-      will-change: transform;
     }
 
     .bg-glow {
@@ -92,7 +92,6 @@
       transform: translate(-50%, -50%);
       pointer-events: none;
       z-index: 0;
-      will-change: transform;
     }
 
     .pixel-bg {
@@ -101,7 +100,6 @@
       pointer-events: none;
       overflow: hidden;
       z-index: 0;
-      will-change: transform;
     }
     .pixel-block {
       position: absolute;
@@ -254,7 +252,7 @@
       justify-content: space-between;
       margin-bottom: 8px;
       font-size: 13px;
-      color: rgba(255,255,255,0.5);
+      color: rgba(255,255,255,0.6);
     }
     .progress-info .current {
       font-family: 'Press Start 2P', monospace;
@@ -656,6 +654,10 @@
     .btn-share:active {
       transform: translateY(0);
     }
+    .btn-share:disabled {
+      opacity: 0.5;
+      cursor: wait;
+    }
 
     .btn-retry {
       flex: 1;
@@ -800,7 +802,7 @@
     <div class="screen" id="quizScreen" style="display:none">
       <div class="progress-bar-wrap">
         <div class="progress-info">
-          <span class="current" id="progressText">Q1 / 13</span>
+          <span class="current" id="progressText">Q1 / 15</span>
           <span id="scoreText">答對 0 題</span>
         </div>
         <div class="progress-track">
@@ -826,10 +828,10 @@
       <div class="share-hint">長按圖片可儲存 <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="display:inline-block;vertical-align:middle"><rect width="14" height="20" x="5" y="2" rx="2" ry="2"/><path d="M12 18h.01"/></svg></div>
       <div class="result-buttons">
         <div class="result-buttons-row">
-          <button class="btn-share" style="background:var(--teal);color:#000" onclick="shareToIGStory()"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#000" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="display:inline-block;vertical-align:middle"><rect width="20" height="20" x="2" y="2" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" x2="17.51" y1="6.5" y2="6.5"/></svg> 轉發到 IG</button>
+          <button class="btn-share" id="btnShare" style="background:var(--teal);color:#000" onclick="shareToIGStory()"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#000" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="display:inline-block;vertical-align:middle"><rect width="20" height="20" x="2" y="2" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" x2="17.51" y1="6.5" y2="6.5"/></svg> 轉發到 IG</button>
           <button class="btn-retry" onclick="retryQuiz()"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="display:inline-block;vertical-align:middle"><path d="M3 12a9 9 0 0 1 9-9 9.75 9.75 0 0 1 6.74 2.74L21 8"/><path d="M21 3v5h-5"/><path d="M21 12a9 9 0 0 1-9 9 9.75 9.75 0 0 1-6.74-2.74L3 16"/><path d="M3 21v-5h5"/></svg> 再測一次</button>
         </div>
-        <div style="text-align:center;font-size:13px;color:rgba(255,255,255,0.5);margin:-4px 0 8px;padding:0 20px;line-height:1.5">不服結果？再測一次還有更多隱藏題等你挑戰！</div>
+        <div style="text-align:center;font-size:13px;color:rgba(255,255,255,0.6);margin:-4px 0 8px;padding:0 20px;line-height:1.5">不服結果？再測一次還有更多隱藏題等你挑戰！</div>
         <a class="btn-ig" href="https://www.instagram.com/from_nine_on" target="_blank" rel="noopener" onclick="gtag('event','ig_follow_click')"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="display:inline-block;vertical-align:middle"><rect width="20" height="20" x="2" y="2" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" x2="17.51" y1="6.5" y2="6.5"/></svg> 追蹤韭點開始 IG</a>
       </div>
       <div class="result-brand">
@@ -878,7 +880,7 @@
       {
         q: '〈青花瓷〉歌詞填空：「天青色等___，而我在等你」',
         type: 'fill',
-        answer: '煙雨',
+        answer: '煙雨', acceptAlso: ['烟雨'],
         explain: '方文山的經典詞：「天青色等煙雨，而我在等你」，用雨後天青釉色的意象比喻等待。'
       },
       // Q4 選擇
@@ -899,7 +901,7 @@
       {
         q: '〈晴天〉歌詞填空：「故事的小黃花，從出生那年就___」',
         type: 'fill',
-        answer: '飄著',
+        answer: '飄著', acceptAlso: ['飘着'],
         explain: '「故事的小黃花，從出生那年就飄著」，周杰倫 2003 年的經典開場白，聽到前奏就哭的那種。'
       },
       // Q7 選擇
@@ -1060,7 +1062,7 @@
       {
         q: '〈龍捲風〉歌詞填空：「愛情來的太快就像___」',
         type: 'fill',
-        answer: '龍捲風',
+        answer: '龍捲風', acceptAlso: ['龙卷风'],
         explain: '「愛情來的太快就像龍捲風」，2000 年的經典，也是周杰倫最早期的代表作之一。'
       },
       // Q28 選擇
@@ -1123,7 +1125,7 @@
       {
         q: '〈髮如雪〉歌詞填空：「你髮如雪 淒美了___」',
         type: 'fill',
-        answer: '離別',
+        answer: '離別', acceptAlso: ['离别'],
         explain: '「你髮如雪 淒美了離別」，方文山以白髮意象寫盡離愁，搭配周杰倫的旋律成為中國風經典。'
       },
       // Q37 選擇
@@ -1313,7 +1315,9 @@
       answered = true;
 
       const q = questions[currentQ];
-      const correct = userAns === q.answer;
+      const normalize = s => s.replace(/\s/g, '').toLowerCase();
+      const correct = normalize(userAns) === normalize(q.answer) ||
+        (q.acceptAlso && q.acceptAlso.some(a => normalize(userAns) === normalize(a)));
       if (correct) score++;
 
       answers.push({ q: q.q, correct, userAnswer: userAns });
@@ -1391,8 +1395,13 @@
         result_title: resultTitle
       });
       submitToSheet();
-      // Auto-generate poster image
-      setTimeout(() => generateShareImage(), 100);
+      // Auto-generate poster image (disable share btn until ready)
+      const shareBtn = document.getElementById('btnShare');
+      if (shareBtn) shareBtn.disabled = true;
+      setTimeout(async () => {
+        await generateShareImage();
+        if (shareBtn) shareBtn.disabled = false;
+      }, 100);
     }
 
     // ===== GOOGLE SHEET 串接 =====
@@ -1471,6 +1480,20 @@
       if (s <= 12) return posterData[2];
       if (s <= 14) return posterData[3];
       return posterData[4];
+    }
+
+    // ===== roundRect polyfill (Safari < 16, older Firefox) =====
+    if (!CanvasRenderingContext2D.prototype.roundRect) {
+      CanvasRenderingContext2D.prototype.roundRect = function(x, y, w, h, r) {
+        if (typeof r === 'number') r = [r, r, r, r];
+        const [tl, tr, br, bl] = r;
+        this.moveTo(x + tl, y);
+        this.lineTo(x + w - tr, y); this.arcTo(x + w, y, x + w, y + tr, tr);
+        this.lineTo(x + w, y + h - br); this.arcTo(x + w, y + h, x + w - br, y + h, br);
+        this.lineTo(x + bl, y + h); this.arcTo(x, y + h, x, y + h - bl, bl);
+        this.lineTo(x, y + tl); this.arcTo(x, y, x + tl, y, tl);
+        this.closePath();
+      };
     }
 
     // ===== SHARE AS IMAGE (IG Story 1080x1920) =====
@@ -1682,31 +1705,6 @@
       }, 'image/png');
     }
 
-    function downloadShareImage() {
-      const blob = window._lastShareBlob;
-      if (!blob) return;
-      // Try Web Share API (works on native Safari/Chrome)
-      try {
-        if (navigator.share && navigator.canShare) {
-          const file = new File([blob], 'jay-quiz-result.png', { type: 'image/png' });
-          if (navigator.canShare({ files: [file] })) {
-            navigator.share({ files: [file], title: '周杰倫粉絲大調查' }).catch(() => {});
-            return;
-          }
-        }
-      } catch(e) {}
-      // Try <a download> (works in normal browsers, blocked in IG/LINE)
-      try {
-        const url = URL.createObjectURL(blob);
-        const a = document.createElement('a');
-        a.href = url; a.download = 'jay-quiz-result.png'; a.click();
-        setTimeout(() => URL.revokeObjectURL(url), 5000);
-        showToast('圖片已下載！');
-      } catch(e) {
-        // In-app browser fallback: prompt long-press
-        showToast('請長按上方圖片來儲存');
-      }
-    }
 
     function shareToIGStory() {
       gtag('event', 'share_click', { method: 'ig_story' });
