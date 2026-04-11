@@ -738,6 +738,22 @@
       opacity: 1;
     }
 
+    /* ========= SPONSOR BANNER ========= */
+    .sponsor-banner {
+      display: none;
+      width: 100%;
+      max-width: 580px;
+      margin: 16px auto 0;
+      border-radius: 4px;
+      overflow: hidden;
+    }
+    .sponsor-banner a { display: block; }
+    .sponsor-banner img {
+      width: 100%;
+      height: auto;
+      display: block;
+    }
+
     /* ========= RESPONSIVE ========= */
     @media (max-width: 600px) {
       .container { padding: 16px; padding-left: max(16px, env(safe-area-inset-left)); padding-right: max(16px, env(safe-area-inset-right)); }
@@ -816,6 +832,11 @@
         <div class="explanation" id="explanation"></div>
       </div>
       <button class="btn-next" id="btnNext" onclick="nextQuestion()">下一題 →</button>
+      <div class="sponsor-banner" id="sponsorBanner">
+        <a href="https://www.gate.com/share/AgNFUFhd" target="_blank" rel="noopener" onclick="gtag('event','sponsor_click',{position:'quiz',question_number:currentQ+1})">
+          <img src="sponsor-banner.png" alt="Sponsor" />
+        </a>
+      </div>
     </div>
 
     <!-- ===== RESULT SCREEN ===== -->
@@ -1350,6 +1371,15 @@
       document.getElementById('explanation').className = 'explanation';
       document.getElementById('explanation').textContent = '';
       document.getElementById('btnNext').className = 'btn-next';
+
+      // Sponsor banner: show from Q2 onwards (currentQ >= 1, 0-based)
+      const banner = document.getElementById('sponsorBanner');
+      if (currentQ >= 1) {
+        banner.style.display = 'block';
+        gtag('event', 'sponsor_impression', { position: 'quiz', question_number: currentQ + 1 });
+      } else {
+        banner.style.display = 'none';
+      }
     }
 
     function submitFill() {
