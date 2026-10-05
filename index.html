@@ -738,6 +738,15 @@
       opacity: 1;
     }
 
+    /* ========= 線上課程入口（2026-10）========= */
+    .course-card { display: flex; align-items: center; gap: 12px; width: calc(100% - 40px); max-width: 400px; margin: 14px auto 0; background: rgba(255,255,255,.06); border: 1px solid rgba(170,249,82,.5); border-radius: 8px; padding: 12px 14px; text-decoration: none; color: #fff; text-align: left; }
+    .course-emoji { font-size: 24px; line-height: 1; }
+    .course-body { flex: 1; min-width: 0; }
+    .course-kicker { font-size: 10px; font-weight: 700; letter-spacing: 1px; color: var(--lime); }
+    .course-name { font-size: 14px; font-weight: 700; margin-top: 2px; }
+    .course-desc { font-size: 11px; color: rgba(255,255,255,.6); margin-top: 2px; }
+    .course-cta { font-size: 11px; font-weight: 700; background: var(--lime); color: #000; border-radius: 999px; padding: 6px 10px; white-space: nowrap; }
+
     /* ========= RESPONSIVE ========= */
     @media (max-width: 600px) {
       .container { padding: 16px; padding-left: max(16px, env(safe-area-inset-left)); padding-right: max(16px, env(safe-area-inset-right)); }
@@ -833,6 +842,16 @@
         </div>
         <div style="text-align:center;font-size:13px;color:rgba(255,255,255,0.6);margin:-4px 0 8px;padding:0 20px;line-height:1.5">不服結果？再測一次還有更多隱藏題等你挑戰！</div>
         <a class="btn-ig" href="https://www.instagram.com/from_nine_on" target="_blank" rel="noopener" onclick="gtag('event','ig_follow_click')"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="display:inline-block;vertical-align:middle"><rect width="20" height="20" x="2" y="2" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" x2="17.51" y1="6.5" y2="6.5"/></svg> 追蹤韭點開始 IG</a>
+        <a class="course-card" href="https://www.pressplay.cc/project/D682DE63B2B56ADE51A81AEC7E568201/about?utm_source=jay&amp;utm_medium=site&amp;utm_campaign=crypto_course_2611&amp;utm_content=result" target="_blank" rel="noopener"
+           onclick="gtag('event', 'course_click', { site: 'jay', position: 'result' })">
+          <div class="course-emoji">📚</div>
+          <div class="course-body">
+            <div class="course-kicker" data-course-kicker="韭點開始線上課程・開賣中">韭點開始出課了・11/1 開賣</div>
+            <div class="course-name">加密貨幣入門課</div>
+            <div class="course-desc">區塊鏈知識 × 低風險理財 × 金融防詐</div>
+          </div>
+          <div class="course-cta" data-course-cta="立即報名">搶先追蹤</div>
+        </a>
       </div>
       <div class="result-brand">
         歡迎標記 <a href="https://www.instagram.com/from_nine_on" target="_blank" rel="noopener">@from_nine_on</a> !
@@ -1814,5 +1833,13 @@
       setTimeout(() => toast.classList.remove('show'), 2500);
     }
   </script>
+<script>
+/* 線上課程入口：11/1 00:00（台灣）起自動切成開賣文字 */
+(function(){
+  if (Date.now() < Date.parse('2026-11-01T00:00:00+08:00')) return;
+  document.querySelectorAll('[data-course-kicker]').forEach(function(e){ e.textContent = e.getAttribute('data-course-kicker'); });
+  document.querySelectorAll('[data-course-cta]').forEach(function(e){ e.textContent = e.getAttribute('data-course-cta'); });
+})();
+</script>
 </body>
 </html>
