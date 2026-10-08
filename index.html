@@ -747,6 +747,16 @@
     .course-desc { font-size: 11px; color: rgba(255,255,255,.6); margin-top: 2px; }
     .course-cta { font-size: 11px; font-weight: 700; background: var(--lime); color: #000; border-radius: 999px; padding: 6px 10px; white-space: nowrap; }
 
+    /* ========= 延伸閱讀：導流到韭點開始部落格（2026-10）========= */
+    .blog-links { width: 100%; max-width: 360px; margin: 0 auto; text-align: left; }
+    .blog-links.is-footer { margin-top: 28px; }
+    .blog-links-label { font-size: 12px; font-weight: 700; letter-spacing: 1px; color: rgba(255,255,255,.5); text-align: center; margin-bottom: 8px; }
+    .blog-links-list { background: rgba(255,255,255,.04); border: 1px solid rgba(255,255,255,.12); border-radius: 8px; overflow: hidden; }
+    .blog-link { display: block; padding: 11px 14px; font-size: 13px; line-height: 1.5; color: rgba(255,255,255,.85); text-decoration: none; border-bottom: 1px solid rgba(255,255,255,.08); }
+    .blog-link:hover { background: rgba(132,210,221,.1); color: #fff; }
+    .blog-link-more { display: block; padding: 10px 14px; font-size: 12px; font-weight: 700; color: var(--lime); text-decoration: none; text-align: right; }
+    .blog-link-more:hover { text-decoration: underline; }
+
     /* ========= RESPONSIVE ========= */
     @media (max-width: 600px) {
       .container { padding: 16px; padding-left: max(16px, env(safe-area-inset-left)); padding-right: max(16px, env(safe-area-inset-right)); }
@@ -805,6 +815,16 @@
       <div class="brand-tag">
         Made by <a href="https://www.instagram.com/from_nine_on" target="_blank" rel="noopener">@韭點開始</a> · <a href="https://fromnineon.com/" target="_blank" rel="noopener">官網</a>
       </div>
+      <!-- 延伸閱讀：導流到韭點開始部落格 -->
+      <nav class="blog-links is-footer" aria-label="韭點開始部落格">
+        <div class="blog-links-label">延伸閱讀・韭點開始部落格</div>
+        <div class="blog-links-list">
+          <a class="blog-link" href="https://fromnineon.com/blog/crypto/what-is-cryptocurrency/" onclick="gtag('event', 'blog_click', { site: 'jay', slug: 'crypto/what-is-cryptocurrency', position: 'home_footer' })">加密貨幣是什麼？區塊鏈、比特幣、以太坊一次看懂</a>
+          <a class="blog-link" href="https://fromnineon.com/blog/crypto/crypto-scams/" onclick="gtag('event', 'blog_click', { site: 'jay', slug: 'crypto/crypto-scams', position: 'home_footer' })">虛擬貨幣詐騙手法：常見7種怎麼認、怎麼報案、能不能追回</a>
+          <a class="blog-link" href="https://fromnineon.com/blog/crypto/" onclick="gtag('event', 'blog_click', { site: 'jay', slug: 'crypto', position: 'home_footer' })">加密貨幣新手入門：照這個順序學，少走很多冤枉路</a>
+          <a class="blog-link-more" href="https://fromnineon.com/blog/" onclick="gtag('event', 'blog_click', { site: 'jay', slug: 'blog', position: 'home_footer' })">看更多文章 →</a>
+        </div>
+      </nav>
     </div>
 
     <!-- ===== QUIZ SCREEN ===== -->
@@ -853,6 +873,16 @@
           <div class="course-cta" data-course-cta="立即報名">搶先追蹤</div>
         </a>
       </div>
+      <!-- 延伸閱讀：導流到韭點開始部落格 -->
+      <nav class="blog-links" aria-label="韭點開始部落格">
+        <div class="blog-links-label">延伸閱讀・韭點開始部落格</div>
+        <div class="blog-links-list">
+          <a class="blog-link" href="https://fromnineon.com/blog/crypto/what-is-cryptocurrency/" onclick="gtag('event', 'blog_click', { site: 'jay', slug: 'crypto/what-is-cryptocurrency', position: 'result' })">加密貨幣是什麼？區塊鏈、比特幣、以太坊一次看懂</a>
+          <a class="blog-link" href="https://fromnineon.com/blog/crypto/crypto-scams/" onclick="gtag('event', 'blog_click', { site: 'jay', slug: 'crypto/crypto-scams', position: 'result' })">虛擬貨幣詐騙手法：常見7種怎麼認、怎麼報案、能不能追回</a>
+          <a class="blog-link" href="https://fromnineon.com/blog/crypto/" onclick="gtag('event', 'blog_click', { site: 'jay', slug: 'crypto', position: 'result' })">加密貨幣新手入門：照這個順序學，少走很多冤枉路</a>
+          <a class="blog-link-more" href="https://fromnineon.com/blog/" onclick="gtag('event', 'blog_click', { site: 'jay', slug: 'blog', position: 'result' })">看更多文章 →</a>
+        </div>
+      </nav>
       <div class="result-brand">
         歡迎標記 <a href="https://www.instagram.com/from_nine_on" target="_blank" rel="noopener">@from_nine_on</a> !
       </div>
